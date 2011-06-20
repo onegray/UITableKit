@@ -6,6 +6,9 @@
 //
 
 #import "TKTextViewCell.h"
+#import "TKTheme.h"
+#import "TKCellView.h"
+
 
 @implementation TKTextViewCell
 @synthesize text;

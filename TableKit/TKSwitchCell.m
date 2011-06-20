@@ -6,6 +6,8 @@
 //
 
 #import "TKSwitchCell.h"
+#import "TKTheme.h"
+#import "TKSwitchCellView.h"
 
 
 @implementation TKSwitchCell
@@ -33,25 +35,28 @@
     [super dealloc];
 }
 
+-(void) updateViewInTableView:(UITableView*)tableView
+{
+	TKSwitchCellView* cell = (TKSwitchCellView*)[self lookupCellViewInTableView:tableView];
+	[cell updateWithTitle:title state:state];
+}
+
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
     static NSString* cellId = @"TKSwitchCellId";
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    TKSwitchCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if(!cell)
 	{
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:cellId] autorelease];
-        
-        UISwitch* switchBtn = [[[UISwitch alloc] initWithFrame:CGRectMake(200, 9, 40, 20)] autorelease];
-        switchBtn.tag = 100;
-        [cell addSubview:switchBtn];
+		TKTheme* theme = [TKTheme themeForTableView:tableView];
+        cell = [theme switchCellViewWithReuseId:cellId];
     }
+	
+	cell.owner = self;
+	[cell.switchBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
+	[cell.switchBtn addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];
 
-    cell.textLabel.text = title;
-    UISwitch* switchBtn = (UISwitch*)[cell viewWithTag:100];
-    [switchBtn removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-	[switchBtn addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];
-    [switchBtn setOn:state];
+	[cell updateWithTitle:title state:state];
     
     return cell;
 }

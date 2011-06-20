@@ -6,6 +6,8 @@
 //
 
 #import "TKTextFieldCell.h"
+#import "TKTheme.h"
+#import "TKTextFieldCellView.h"
 
 @implementation TKTextFieldCell
 @synthesize delegate;
@@ -34,24 +36,28 @@
     [super dealloc];
 }
 
+-(void) updateViewInTableView:(UITableView*)tableView
+{
+	TKTextFieldCellView* cell = (TKTextFieldCellView*)[self lookupCellViewInTableView:tableView];
+	[cell updateWithText:text placeholder:placeholder];
+}
+
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
     static NSString* cellId = @"TKTextFieldCellId";
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    TKTextFieldCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if(!cell)
 	{
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] autorelease];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UITextField* tf = [[[UITextField alloc] initWithFrame:CGRectMake(30, 12, 270, 40)] autorelease];
-        tf.tag = 100;
-        [cell addSubview:tf];
+		TKTheme* theme = [TKTheme themeForTableView:tableView];
+        cell = [theme textFieldCellViewWithReuseId:cellId];
     }
 
-    UITextField* tf = (UITextField*)[cell viewWithTag:100];
-	tf.delegate = (id)self;
-    tf.text = text;
-    tf.placeholder = placeholder;
+	cell.owner = self;
+	cell.textField.delegate = (id)self;
+
+	[cell updateWithText:text placeholder:placeholder];
+	
     return cell;
 }
 

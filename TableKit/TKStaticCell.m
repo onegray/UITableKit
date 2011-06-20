@@ -6,6 +6,8 @@
 //
 
 #import "TKStaticCell.h"
+#import "TKTheme.h"
+#import "TKStaticCellView.h"
 
 @implementation TKStaticCell
 @synthesize title;
@@ -31,16 +33,25 @@
     [super dealloc];
 }
 
+-(void) updateViewInTableView:(UITableView*)tableView
+{
+	TKStaticCellView* cell = (TKStaticCellView*)[self lookupCellViewInTableView:tableView];
+	[cell updateWithText:title];
+}
+
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
     static NSString* cellId = @"TKStaticCellId";
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    TKStaticCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if(!cell)
 	{
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] autorelease];
+		TKTheme* theme = [TKTheme themeForTableView:tableView];
+        cell = [theme staticCellViewWithReuseId:cellId];
     }
-    cell.textLabel.text = title;
+    
+	cell.owner = self;
+	[cell updateWithText:title];
 
     return cell;
 }

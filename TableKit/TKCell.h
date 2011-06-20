@@ -7,13 +7,18 @@
 
 #import <Foundation/Foundation.h>
 
+@class TKCellView;
 
 @interface TKCell : NSObject
 {
+
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView;
 -(CGFloat) cellHeight;
+
+-(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView;
+-(void) updateViewInTableView:(UITableView*)tableView;
 
 -(void) tableViewDidSelectCell:(UITableView*)tableView;
 

@@ -6,6 +6,8 @@
 //
 
 #import "TKActionCell.h"
+#import "TKActionCellView.h"
+#import "TKTheme.h"
 
 @implementation TKActionCell
 @synthesize title;
@@ -33,17 +35,25 @@
     [super dealloc];
 }
 
+-(void) updateViewInTableView:(UITableView*)tableView
+{
+	TKActionCellView* cell = (TKActionCellView*)[self lookupCellViewInTableView:tableView];
+    [cell updateWithTitle:title];
+}
+
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
     static NSString* cellId = @"TKActionCellId";
 
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    TKActionCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if(!cell)
 	{
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] autorelease];
+		TKTheme* theme = [TKTheme themeForTableView:tableView];
+        cell = [theme actionCellViewWithReuseId:cellId];
     }
 
-    cell.textLabel.text = title;
+	cell.owner = self;
+    [cell updateWithTitle:title];
     
 	return cell;
 }
