@@ -57,6 +57,7 @@
 	[cell.switchBtn addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];
 
 	[cell updateWithTitle:title state:state];
+	[self applyAttributesToCellView:cell];
     
     return cell;
 }

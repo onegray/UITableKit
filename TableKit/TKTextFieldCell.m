@@ -8,6 +8,7 @@
 #import "TKTextFieldCell.h"
 #import "TKTheme.h"
 #import "TKTextFieldCellView.h"
+#import "TKCellAttribute.h"
 
 @implementation TKTextFieldCell
 @synthesize delegate;
@@ -57,6 +58,7 @@
 	cell.textField.delegate = (id)self;
 
 	[cell updateWithText:text placeholder:placeholder];
+	[self applyAttributesToCellView:cell];
 	
     return cell;
 }
@@ -85,4 +87,26 @@
 	}
 }
 
+
+-(void) setKeyboardType:(UIKeyboardType)keyboardType
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setKeyboardType:) scalarValue:keyboardType];
+	attr.accessor = @selector(textField);
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setFont:(UIFont*)font
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setFont:) object:font];
+	attr.accessor = @selector(textField);
+	[self addAttribute:attr];
+	[attr release];
+}
+
 @end
+
+
+
+
+

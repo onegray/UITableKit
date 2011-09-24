@@ -54,6 +54,7 @@
 
 	cell.owner = self;
     [cell updateWithTitle:title];
+	[self applyAttributesToCellView:cell];
     
 	return cell;
 }

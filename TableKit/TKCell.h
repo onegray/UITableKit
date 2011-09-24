@@ -8,10 +8,11 @@
 #import <Foundation/Foundation.h>
 
 @class TKCellView;
+@class TKCellAttribute;
 
 @interface TKCell : NSObject
 {
-
+	NSMutableArray* attributes;
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView;
@@ -21,5 +22,11 @@
 -(void) updateViewInTableView:(UITableView*)tableView;
 
 -(void) tableViewDidSelectCell:(UITableView*)tableView;
+
+-(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType;
+-(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle;
+
+-(void) addAttribute:(TKCellAttribute*)attribute;
+-(void) applyAttributesToCellView:(TKCellView*)cellView;
 
 @end

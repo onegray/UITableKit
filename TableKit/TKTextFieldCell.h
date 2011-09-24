@@ -21,11 +21,14 @@
 	id<TKTextFieldCellDelegate> delegate;
 }
 
-+(TKTextFieldCell*) cellWithText:(NSString*)text placeholder:(NSString*)placeholder;
--(id) initWithText:(NSString*)text placeholder:(NSString*)placeholder;
-
 @property (nonatomic, assign) id<TKTextFieldCellDelegate> delegate;
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* placeholder;
+
++(TKTextFieldCell*) cellWithText:(NSString*)text placeholder:(NSString*)placeholder;
+-(id) initWithText:(NSString*)text placeholder:(NSString*)placeholder;
+
+-(void) setKeyboardType:(UIKeyboardType)keyboardType;
+-(void) setFont:(UIFont*)font;
 
 @end

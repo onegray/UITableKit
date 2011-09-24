@@ -8,11 +8,13 @@
 #import "TKCell.h"
 #import "TKCellView.h"
 #import "TKTheme.h"
+#import "TKCellAttribute.h"
 
 @implementation TKCell
 
 -(void) dealloc 
 {
+	[attributes release];
 	[super dealloc];
 }
 
@@ -52,4 +54,48 @@
 	
 }
 
+
+-(void) addAttribute:(TKCellAttribute*)attr
+{
+	if(attributes==nil)
+	{
+		attributes = [[NSMutableArray alloc] initWithCapacity:1];
+	}
+	else
+	{
+		[attributes removeObject:attr];
+	}
+	[attributes addObject:attr];
+}
+
+-(void) applyAttributesToCellView:(TKCellView*)cellView
+{
+	for(TKCellAttribute* attr in attributes)
+	{
+		[attr apply:cellView];
+	}
+}
+
+-(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setAccessoryType:) scalarValue:accessoryType];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setSelectionStyle:) scalarValue:selectionStyle];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+
 @end
+
+
+
+
+
+
+
