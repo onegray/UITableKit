@@ -8,6 +8,7 @@
 #import "TKStaticCell.h"
 #import "TKTheme.h"
 #import "TKStaticCellView.h"
+#import "TKCellAttribute.h"
 
 @implementation TKStaticCell
 @synthesize title;
@@ -57,4 +58,29 @@
     return cell;
 }
 
+
+-(void) setFont:(UIFont*)font
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) selector:@selector(setFont:) value:font];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setTextColor:(UIColor*)color
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) selector:@selector(setTextColor:) value:color];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+
+
 @end
+
+
+
+
+
+
+
+

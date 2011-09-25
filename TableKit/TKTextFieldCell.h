@@ -30,5 +30,6 @@
 
 -(void) setKeyboardType:(UIKeyboardType)keyboardType;
 -(void) setFont:(UIFont*)font;
+-(void) setTextColor:(UIColor*)color;
 
 @end

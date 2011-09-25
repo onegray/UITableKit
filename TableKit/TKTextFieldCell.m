@@ -90,19 +90,25 @@
 
 -(void) setKeyboardType:(UIKeyboardType)keyboardType
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setKeyboardType:) scalarValue:keyboardType];
-	attr.accessor = @selector(textField);
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textField) selector:@selector(setKeyboardType:) value:keyboardType];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setFont:(UIFont*)font
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setFont:) object:font];
-	attr.accessor = @selector(textField);
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textField) selector:@selector(setFont:) value:font];
 	[self addAttribute:attr];
 	[attr release];
 }
+
+-(void) setTextColor:(UIColor*)color
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textField) selector:@selector(setTextColor:) value:color];
+	[self addAttribute:attr];
+	[attr release];
+}
+
 
 @end
 

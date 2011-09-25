@@ -32,20 +32,33 @@
 
 @implementation TKCellObjectAttribute
 
--(id) initWithSelector:(SEL)sel object:(NSObject*)obj
+-(id) initWithSelector:(SEL)sel value:(NSObject*)value
 {
 	self = [super init];
 	if(self) 
 	{
 		selector = sel;
-		object = [obj retain];
+		objectValue = [value retain];
 	}
 	return self;
 }
 
+-(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(NSObject*)value
+{
+	self = [super init];
+	if(self) 
+	{
+		accessor = acr;
+		selector = sel;
+		objectValue = [value retain];
+	}
+	return self;
+}
+
+
 -(void) dealloc
 {
-	[object release];
+	[objectValue release];
 	[super dealloc];
 }
 
@@ -58,18 +71,30 @@
 	}
 	
 	NSAssert([target respondsToSelector:selector], @"Unresponded TKCellAttribute selector");
-	[target performSelector:selector withObject:object];
+	[target performSelector:selector withObject:objectValue];
 }
 
 @end
 
 @implementation TKCellScalarAttribute
 
--(id) initWithSelector:(SEL)sel scalarValue:(int)value
+-(id) initWithSelector:(SEL)sel value:(int)value
 {
 	self = [super init];
 	if(self) 
 	{
+		selector = sel;
+		scalarValue = value;
+	}
+	return self;
+}
+
+-(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(int)value
+{
+	self = [super init];
+	if(self) 
+	{
+		accessor = acr;
 		selector = sel;
 		scalarValue = value;
 	}

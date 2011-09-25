@@ -7,8 +7,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class TKCellView;
-
 @interface TKCellAttribute : NSObject
 {
 	SEL selector;
@@ -23,10 +21,12 @@
 
 @interface TKCellObjectAttribute : TKCellAttribute
 {
-	NSObject* object;
+	NSObject* objectValue;
 }
 
--(id) initWithSelector:(SEL)sel object:(NSObject*)obj;
+-(id) initWithSelector:(SEL)sel value:(NSObject*)value;
+-(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(NSObject*)value;
+
 -(void) apply:(id)target;
 
 @end
@@ -37,7 +37,9 @@
 	int scalarValue;
 }
 
--(id) initWithSelector:(SEL)sel scalarValue:(int)value;
+-(id) initWithSelector:(SEL)sel value:(int)value;
+-(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(int)value;
+
 -(void) apply:(id)target;
 
 @end

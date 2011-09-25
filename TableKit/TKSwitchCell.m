@@ -8,6 +8,7 @@
 #import "TKSwitchCell.h"
 #import "TKTheme.h"
 #import "TKSwitchCellView.h"
+#import "TKCellAttribute.h"
 
 
 @implementation TKSwitchCell
@@ -69,6 +70,20 @@
 	{
         [delegate switchCell:self didSwitchState:[sender isOn]];
     }
+}
+
+-(void) setFont:(UIFont*)font
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) selector:@selector(setFont:) value:font];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setTextColor:(UIColor*)color
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) selector:@selector(setTextColor:) value:color];
+	[self addAttribute:attr];
+	[attr release];
 }
 
 

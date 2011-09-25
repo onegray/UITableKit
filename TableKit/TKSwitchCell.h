@@ -22,11 +22,14 @@
 	id<TKSwitchCellDelegate> delegate;
 }
 
-+(TKSwitchCell*) cellWithTitle:(NSString*)title state:(BOOL)state;
--(id) initWithTitle:(NSString*)title state:(BOOL)state;
-
 @property (nonatomic, assign) id<TKSwitchCellDelegate> delegate;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, assign) BOOL state;
+
++(TKSwitchCell*) cellWithTitle:(NSString*)title state:(BOOL)state;
+-(id) initWithTitle:(NSString*)title state:(BOOL)state;
+
+-(void) setFont:(UIFont*)font;
+-(void) setTextColor:(UIColor*)color;
 
 @end

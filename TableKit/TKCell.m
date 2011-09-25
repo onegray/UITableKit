@@ -78,14 +78,14 @@
 
 -(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setAccessoryType:) scalarValue:accessoryType];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setAccessoryType:) value:accessoryType];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setSelectionStyle:) scalarValue:selectionStyle];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setSelectionStyle:) value:selectionStyle];
 	[self addAttribute:attr];
 	[attr release];
 }

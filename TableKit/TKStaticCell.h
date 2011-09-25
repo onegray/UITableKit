@@ -18,4 +18,7 @@
 +(TKStaticCell*) cellWithTitle:(NSString*)title;
 -(id) initWithTitle:(NSString*)title;
 
+-(void) setFont:(UIFont*)font;
+-(void) setTextColor:(UIColor*)color;
+
 @end
