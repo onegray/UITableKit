@@ -14,11 +14,15 @@
     NSString* placeholder;
     CGFloat cellHeight;
 }
+@property (nonatomic, retain) NSString* text;
+@property (nonatomic, assign) CGFloat cellHeight;
 
 +(TKTextViewCell*) cellWithText:(NSString*)text;
 -(id) initWithText:(NSString*)text;
 
-@property (nonatomic, retain) NSString* text;
-@property (nonatomic, assign) CGFloat cellHeight;
+-(void) setKeyboardType:(UIKeyboardType)keyboardType;
+-(void) setFont:(UIFont*)font;
+-(void) setTextColor:(UIColor*)color;
+-(void) setBackgroundColor:(UIColor*)color;
 
 @end

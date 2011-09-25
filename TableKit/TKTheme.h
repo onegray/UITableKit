@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class TKCellView, TKStaticCellView, TKActionCellView, TKTextFieldCellView, TKSwitchCellView;
+@class TKCellView, TKStaticCellView, TKActionCellView, TKTextFieldCellView, TKSwitchCellView, TKTextViewCellView;
 
 @interface TKTheme : NSObject
 {
@@ -20,6 +20,7 @@
 -(TKActionCellView*) actionCellViewWithReuseId:(NSString*)reuseId;
 -(TKTextFieldCellView*) textFieldCellViewWithReuseId:(NSString*)reuseId;
 -(TKSwitchCellView*) switchCellViewWithReuseId:(NSString*)reuseId;
+-(TKTextViewCellView*) textViewCellViewWithReuseId:(NSString*)reuseId;
 
 
 @end

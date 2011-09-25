@@ -8,7 +8,8 @@
 #import "TKTextViewCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
-
+#import "TKTextViewCellView.h"
+#import "TKCellAttribute.h"
 
 @implementation TKTextViewCell
 @synthesize text;
@@ -40,22 +41,19 @@
 {
     static NSString* cellId = @"TKTextViewCellId";
     
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
+    TKTextViewCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
     if(!cell)
 	{
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId] autorelease];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        UITextView* tv = [[[UITextView alloc] initWithFrame:CGRectMake(30, 10, 270, cellHeight-20)] autorelease];
-		tv.autocapitalizationType = UITextAutocapitalizationTypeNone;
-		tv.keyboardType = UIKeyboardTypeDefault;
-		tv.backgroundColor = [UIColor clearColor];
-        tv.tag = 100;
-        [cell addSubview:tv];
+		TKTheme* theme = [TKTheme themeForTableView:tableView];
+		cell = [theme textViewCellViewWithReuseId:cellId];
     }
-    
-    UITextView* tv = (UITextView*)[cell viewWithTag:100];
-	tv.delegate = (id)self;
-    tv.text = text;
+
+    cell.owner = self;
+	cell.textView.delegate = (id)self;
+	
+	[cell updateWithText:text];
+	[self applyAttributesToCellView:cell];
+
     return cell;
 }
 
@@ -73,5 +71,35 @@
 {
     self.text = textView.text;
 }
+
+
+-(void) setKeyboardType:(UIKeyboardType)keyboardType
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setKeyboardType:) value:keyboardType];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setFont:(UIFont*)font
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setFont:) value:font];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setTextColor:(UIColor*)color
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setTextColor:) value:color];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setBackgroundColor:(UIColor*)color
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setBackgroundColor:) value:color];
+	[self addAttribute:attr];
+	[attr release];
+}
+
 
 @end

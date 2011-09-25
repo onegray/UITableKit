@@ -11,6 +11,7 @@
 #import "TKActionCellView.h"
 #import "TKTextFieldCellView.h"
 #import "TKSwitchCellView.h"
+#import "TKTextViewCellView.h"
 
 @implementation TKTheme
 
@@ -43,6 +44,11 @@
 -(TKSwitchCellView*) switchCellViewWithReuseId:(NSString*)reuseId
 {
 	return [[[TKSwitchCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+}
+
+-(TKTextViewCellView*) textViewCellViewWithReuseId:(NSString*)reuseId
+{
+	return [[[TKTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
 }
 
 
