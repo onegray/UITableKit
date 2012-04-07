@@ -8,7 +8,6 @@
 #import "TKTextViewCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
-#import "TKTextViewCellView.h"
 #import "TKCellAttribute.h"
 
 @implementation TKTextViewCell
@@ -37,24 +36,20 @@
     [super dealloc];
 }
 
+-(void) updateViewInTableView:(UITableView*)tableView
+{
+	TKTextViewCellView* cellView = (TKTextViewCellView*)[self lookupCellViewInTableView:tableView];
+	[cellView updateWithText:text];
+}
+
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    static NSString* cellId = @"TKTextViewCellId";
-    
-    TKTextViewCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if(!cell)
-	{
-		TKTheme* theme = [TKTheme themeForTableView:tableView];
-		cell = [theme textViewCellViewWithReuseId:cellId];
-    }
-
-    cell.owner = self;
-	cell.textView.delegate = (id)self;
-	
-	[cell updateWithText:text];
-	[self applyAttributesToCellView:cell];
-
-    return cell;
+    TKTextViewCellView* cellView = [tableView.theme textViewCellViewWithReuseId:@"TKTextViewCellId"];
+    cellView.owner = self;
+	cellView.textView.delegate = (id)self;
+	[cellView updateWithText:text];
+	[self applyAttributesToCellView:cellView];
+    return cellView;
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText

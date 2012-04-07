@@ -7,7 +7,7 @@
 
 #import "TKTextFieldCell.h"
 #import "TKTheme.h"
-#import "TKTextFieldCellView.h"
+#import "TKCellView.h"
 #import "TKCellAttribute.h"
 
 @implementation TKTextFieldCell
@@ -39,28 +39,18 @@
 
 -(void) updateViewInTableView:(UITableView*)tableView
 {
-	TKTextFieldCellView* cell = (TKTextFieldCellView*)[self lookupCellViewInTableView:tableView];
-	[cell updateWithText:text placeholder:placeholder];
+	TKTextFieldCellView* cellView = (TKTextFieldCellView*)[self lookupCellViewInTableView:tableView];
+	[cellView updateWithText:text placeholder:placeholder];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    static NSString* cellId = @"TKTextFieldCellId";
-    
-    TKTextFieldCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if(!cell)
-	{
-		TKTheme* theme = [TKTheme themeForTableView:tableView];
-        cell = [theme textFieldCellViewWithReuseId:cellId];
-    }
-
-	cell.owner = self;
-	cell.textField.delegate = (id)self;
-
-	[cell updateWithText:text placeholder:placeholder];
-	[self applyAttributesToCellView:cell];
-	
-    return cell;
+    TKTextFieldCellView* cellView = [tableView.theme textFieldCellViewWithReuseId:@"TKTextFieldCellId"];
+	cellView.owner = self;
+	cellView.textField.delegate = (id)self;
+	[cellView updateWithText:text placeholder:placeholder];
+	[self applyAttributesToCellView:cellView];
+    return cellView;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string

@@ -5,16 +5,10 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "TKCellView.h"
 
-@class TKCellView, TKStaticCellView, TKActionCellView, TKTextFieldCellView, TKSwitchCellView, TKTextViewCellView;
-
-@interface TKTheme : NSObject
-{
-	
-}
-
-+(TKTheme*) themeForTableView:(UITableView*)tableView;
+@protocol TKThemeProtocol <NSObject>
 
 -(TKStaticCellView*) staticCellViewWithReuseId:(NSString*)reuseId;
 -(TKActionCellView*) actionCellViewWithReuseId:(NSString*)reuseId;
@@ -22,5 +16,10 @@
 -(TKSwitchCellView*) switchCellViewWithReuseId:(NSString*)reuseId;
 -(TKTextViewCellView*) textViewCellViewWithReuseId:(NSString*)reuseId;
 
+@end
 
+
+@interface UITableView (theme)
+-(void) applyTheme:(id<TKThemeProtocol>)theme;
+@property (nonatomic, readonly) id<TKThemeProtocol> theme;
 @end

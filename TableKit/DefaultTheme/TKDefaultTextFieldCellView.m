@@ -1,13 +1,14 @@
 //
-//  TKTextFieldCellView.m
+//  TKDefaultTextFieldCellView.m
+//  TableKitSample
 //
-//  Created by Sergey Nikitenko on 6/20/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by onegray on 4/7/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "TKTextFieldCellView.h"
+#import "TKDefaultTextFieldCellView.h"
 
-@implementation TKTextFieldCellView
+@implementation TKDefaultTextFieldCellView
 @synthesize textField;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
@@ -27,8 +28,5 @@
     textField.text = text;
     textField.placeholder = placeholder;
 }
-
-
-
 
 @end

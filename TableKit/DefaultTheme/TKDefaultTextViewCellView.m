@@ -1,13 +1,15 @@
 //
-//  TKTextViewCellView.m
+//  TKDefaultTextViewCellView.m
+//  TableKitSample
 //
-//  Created by Sergey Nikitenko on 9/25/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created by onegray on 4/7/12.
+//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "TKTextViewCellView.h"
+#import "TKDefaultTextViewCellView.h"
 
-@implementation TKTextViewCellView
+@implementation TKDefaultTextViewCellView
+
 @synthesize textView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier

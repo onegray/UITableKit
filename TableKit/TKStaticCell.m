@@ -7,7 +7,7 @@
 
 #import "TKStaticCell.h"
 #import "TKTheme.h"
-#import "TKStaticCellView.h"
+#import "TKCellView.h"
 #import "TKCellAttribute.h"
 
 @implementation TKStaticCell
@@ -36,26 +36,17 @@
 
 -(void) updateViewInTableView:(UITableView*)tableView
 {
-	TKStaticCellView* cell = (TKStaticCellView*)[self lookupCellViewInTableView:tableView];
-	[cell updateWithText:title];
+	TKStaticCellView* cellView = (TKStaticCellView*)[self lookupCellViewInTableView:tableView];
+	[cellView updateWithText:title];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    static NSString* cellId = @"TKStaticCellId";
-    
-    TKStaticCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if(!cell)
-	{
-		TKTheme* theme = [TKTheme themeForTableView:tableView];
-        cell = [theme staticCellViewWithReuseId:cellId];
-    }
-    
-	cell.owner = self;
-	[cell updateWithText:title];
-	[self applyAttributesToCellView:cell];
-
-    return cell;
+    TKStaticCellView* cellView = [tableView.theme staticCellViewWithReuseId:@"TKStaticCellId"];
+	cellView.owner = self;
+	[cellView updateWithText:title];
+	[self applyAttributesToCellView:cellView];
+    return cellView;
 }
 
 

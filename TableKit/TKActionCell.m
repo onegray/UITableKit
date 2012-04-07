@@ -6,7 +6,7 @@
 //
 
 #import "TKActionCell.h"
-#import "TKActionCellView.h"
+#import "TKCellView.h"
 #import "TKTheme.h"
 
 @implementation TKActionCell
@@ -37,26 +37,17 @@
 
 -(void) updateViewInTableView:(UITableView*)tableView
 {
-	TKActionCellView* cell = (TKActionCellView*)[self lookupCellViewInTableView:tableView];
-    [cell updateWithTitle:title];
+	TKActionCellView* cellView = (TKActionCellView*)[self lookupCellViewInTableView:tableView];
+    [cellView updateWithTitle:title];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    static NSString* cellId = @"TKActionCellId";
-
-    TKActionCellView* cell = [tableView dequeueReusableCellWithIdentifier:cellId];
-    if(!cell)
-	{
-		TKTheme* theme = [TKTheme themeForTableView:tableView];
-        cell = [theme actionCellViewWithReuseId:cellId];
-    }
-
-	cell.owner = self;
-    [cell updateWithTitle:title];
-	[self applyAttributesToCellView:cell];
-    
-	return cell;
+    TKActionCellView* cellView = [tableView.theme actionCellViewWithReuseId:@"TKActionCellId"];
+	cellView.owner = self;
+    [cellView updateWithTitle:title];
+	[self applyAttributesToCellView:cellView];
+	return cellView;
 }
 
 -(void) tableViewDidSelectCell:(UITableView*) tableView
