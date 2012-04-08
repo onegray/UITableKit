@@ -1,0 +1,372 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		ABD70877152DF94F0016FCFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70876152DF94F0016FCFD /* UIKit.framework */; };
+		ABD70879152DF94F0016FCFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70878152DF94F0016FCFD /* Foundation.framework */; };
+		ABD7087B152DF94F0016FCFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */; };
+		ABE434321531A252004401E9 /* TKDefaultActionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434111531A252004401E9 /* TKDefaultActionCellView.m */; };
+		ABE434331531A252004401E9 /* TKDefaultStaticCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434131531A252004401E9 /* TKDefaultStaticCellView.m */; };
+		ABE434341531A252004401E9 /* TKDefaultSwitchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434151531A252004401E9 /* TKDefaultSwitchCellView.m */; };
+		ABE434351531A252004401E9 /* TKDefaultTextFieldCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434171531A252004401E9 /* TKDefaultTextFieldCellView.m */; };
+		ABE434361531A252004401E9 /* TKDefaultTextViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434191531A252004401E9 /* TKDefaultTextViewCellView.m */; };
+		ABE434371531A252004401E9 /* TKDefaultTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4341B1531A252004401E9 /* TKDefaultTheme.m */; };
+		ABE434381531A252004401E9 /* TKActionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4341D1531A252004401E9 /* TKActionCell.m */; };
+		ABE434391531A252004401E9 /* TKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4341F1531A252004401E9 /* TKCell.m */; };
+		ABE4343A1531A252004401E9 /* TKCellAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434211531A252004401E9 /* TKCellAttribute.m */; };
+		ABE4343B1531A252004401E9 /* TKCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434231531A252004401E9 /* TKCellView.m */; };
+		ABE4343C1531A252004401E9 /* TKSection.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434251531A252004401E9 /* TKSection.m */; };
+		ABE4343D1531A252004401E9 /* TKStaticCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434271531A252004401E9 /* TKStaticCell.m */; };
+		ABE4343E1531A252004401E9 /* TKSwitchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434291531A252004401E9 /* TKSwitchCell.m */; };
+		ABE4343F1531A252004401E9 /* TKTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4342B1531A252004401E9 /* TKTableViewController.m */; };
+		ABE434401531A252004401E9 /* TKTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4342D1531A252004401E9 /* TKTextFieldCell.m */; };
+		ABE434411531A252004401E9 /* TKTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4342F1531A252004401E9 /* TKTextViewCell.m */; };
+		ABE434421531A252004401E9 /* TKTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434311531A252004401E9 /* TKTheme.m */; };
+		ABE434471531A432004401E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434441531A432004401E9 /* AppDelegate.m */; };
+		ABE434481531A432004401E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434461531A432004401E9 /* ViewController.m */; };
+		ABE4344C1531A45D004401E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434491531A45D004401E9 /* main.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		ABD70872152DF94F0016FCFD /* TableKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABD70876152DF94F0016FCFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		ABD70878152DF94F0016FCFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		ABE434101531A252004401E9 /* TKDefaultActionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultActionCellView.h; sourceTree = "<group>"; };
+		ABE434111531A252004401E9 /* TKDefaultActionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultActionCellView.m; sourceTree = "<group>"; };
+		ABE434121531A252004401E9 /* TKDefaultStaticCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultStaticCellView.h; sourceTree = "<group>"; };
+		ABE434131531A252004401E9 /* TKDefaultStaticCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultStaticCellView.m; sourceTree = "<group>"; };
+		ABE434141531A252004401E9 /* TKDefaultSwitchCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultSwitchCellView.h; sourceTree = "<group>"; };
+		ABE434151531A252004401E9 /* TKDefaultSwitchCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultSwitchCellView.m; sourceTree = "<group>"; };
+		ABE434161531A252004401E9 /* TKDefaultTextFieldCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultTextFieldCellView.h; sourceTree = "<group>"; };
+		ABE434171531A252004401E9 /* TKDefaultTextFieldCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultTextFieldCellView.m; sourceTree = "<group>"; };
+		ABE434181531A252004401E9 /* TKDefaultTextViewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultTextViewCellView.h; sourceTree = "<group>"; };
+		ABE434191531A252004401E9 /* TKDefaultTextViewCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultTextViewCellView.m; sourceTree = "<group>"; };
+		ABE4341A1531A252004401E9 /* TKDefaultTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultTheme.h; sourceTree = "<group>"; };
+		ABE4341B1531A252004401E9 /* TKDefaultTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultTheme.m; sourceTree = "<group>"; };
+		ABE4341C1531A252004401E9 /* TKActionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKActionCell.h; sourceTree = "<group>"; };
+		ABE4341D1531A252004401E9 /* TKActionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKActionCell.m; sourceTree = "<group>"; };
+		ABE4341E1531A252004401E9 /* TKCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCell.h; sourceTree = "<group>"; };
+		ABE4341F1531A252004401E9 /* TKCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCell.m; sourceTree = "<group>"; };
+		ABE434201531A252004401E9 /* TKCellAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCellAttribute.h; sourceTree = "<group>"; };
+		ABE434211531A252004401E9 /* TKCellAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCellAttribute.m; sourceTree = "<group>"; };
+		ABE434221531A252004401E9 /* TKCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCellView.h; sourceTree = "<group>"; };
+		ABE434231531A252004401E9 /* TKCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCellView.m; sourceTree = "<group>"; };
+		ABE434241531A252004401E9 /* TKSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSection.h; sourceTree = "<group>"; };
+		ABE434251531A252004401E9 /* TKSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSection.m; sourceTree = "<group>"; };
+		ABE434261531A252004401E9 /* TKStaticCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKStaticCell.h; sourceTree = "<group>"; };
+		ABE434271531A252004401E9 /* TKStaticCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKStaticCell.m; sourceTree = "<group>"; };
+		ABE434281531A252004401E9 /* TKSwitchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKSwitchCell.h; sourceTree = "<group>"; };
+		ABE434291531A252004401E9 /* TKSwitchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKSwitchCell.m; sourceTree = "<group>"; };
+		ABE4342A1531A252004401E9 /* TKTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTableViewController.h; sourceTree = "<group>"; };
+		ABE4342B1531A252004401E9 /* TKTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTableViewController.m; sourceTree = "<group>"; };
+		ABE4342C1531A252004401E9 /* TKTextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTextFieldCell.h; sourceTree = "<group>"; };
+		ABE4342D1531A252004401E9 /* TKTextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTextFieldCell.m; sourceTree = "<group>"; };
+		ABE4342E1531A252004401E9 /* TKTextViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTextViewCell.h; sourceTree = "<group>"; };
+		ABE4342F1531A252004401E9 /* TKTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTextViewCell.m; sourceTree = "<group>"; };
+		ABE434301531A252004401E9 /* TKTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTheme.h; sourceTree = "<group>"; };
+		ABE434311531A252004401E9 /* TKTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTheme.m; sourceTree = "<group>"; };
+		ABE434431531A432004401E9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
+		ABE434441531A432004401E9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
+		ABE434451531A432004401E9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = SOURCE_ROOT; };
+		ABE434461531A432004401E9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = SOURCE_ROOT; };
+		ABE434491531A45D004401E9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
+		ABE4344A1531A45D004401E9 /* TableKitSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TableKitSample-Info.plist"; sourceTree = SOURCE_ROOT; };
+		ABE4344B1531A45D004401E9 /* TableKitSample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TableKitSample-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABD7086F152DF94F0016FCFD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABD70877152DF94F0016FCFD /* UIKit.framework in Frameworks */,
+				ABD70879152DF94F0016FCFD /* Foundation.framework in Frameworks */,
+				ABD7087B152DF94F0016FCFD /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		ABD70867152DF94F0016FCFD = {
+			isa = PBXGroup;
+			children = (
+				ABE4340E1531A252004401E9 /* TableKit */,
+				ABD7087C152DF94F0016FCFD /* TableKitSample */,
+				ABD70875152DF94F0016FCFD /* Frameworks */,
+				ABD70873152DF94F0016FCFD /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		ABD70873152DF94F0016FCFD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABD70872152DF94F0016FCFD /* TableKitSample.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABD70875152DF94F0016FCFD /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABD70876152DF94F0016FCFD /* UIKit.framework */,
+				ABD70878152DF94F0016FCFD /* Foundation.framework */,
+				ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ABD7087C152DF94F0016FCFD /* TableKitSample */ = {
+			isa = PBXGroup;
+			children = (
+				ABE434431531A432004401E9 /* AppDelegate.h */,
+				ABE434441531A432004401E9 /* AppDelegate.m */,
+				ABE434451531A432004401E9 /* ViewController.h */,
+				ABE434461531A432004401E9 /* ViewController.m */,
+				ABD7087D152DF94F0016FCFD /* Supporting Files */,
+			);
+			path = TableKitSample;
+			sourceTree = "<group>";
+		};
+		ABD7087D152DF94F0016FCFD /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABE434491531A45D004401E9 /* main.m */,
+				ABE4344A1531A45D004401E9 /* TableKitSample-Info.plist */,
+				ABE4344B1531A45D004401E9 /* TableKitSample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ABE4340E1531A252004401E9 /* TableKit */ = {
+			isa = PBXGroup;
+			children = (
+				ABE4340F1531A252004401E9 /* DefaultTheme */,
+				ABE4341C1531A252004401E9 /* TKActionCell.h */,
+				ABE4341D1531A252004401E9 /* TKActionCell.m */,
+				ABE4341E1531A252004401E9 /* TKCell.h */,
+				ABE4341F1531A252004401E9 /* TKCell.m */,
+				ABE434201531A252004401E9 /* TKCellAttribute.h */,
+				ABE434211531A252004401E9 /* TKCellAttribute.m */,
+				ABE434221531A252004401E9 /* TKCellView.h */,
+				ABE434231531A252004401E9 /* TKCellView.m */,
+				ABE434241531A252004401E9 /* TKSection.h */,
+				ABE434251531A252004401E9 /* TKSection.m */,
+				ABE434261531A252004401E9 /* TKStaticCell.h */,
+				ABE434271531A252004401E9 /* TKStaticCell.m */,
+				ABE434281531A252004401E9 /* TKSwitchCell.h */,
+				ABE434291531A252004401E9 /* TKSwitchCell.m */,
+				ABE4342A1531A252004401E9 /* TKTableViewController.h */,
+				ABE4342B1531A252004401E9 /* TKTableViewController.m */,
+				ABE4342C1531A252004401E9 /* TKTextFieldCell.h */,
+				ABE4342D1531A252004401E9 /* TKTextFieldCell.m */,
+				ABE4342E1531A252004401E9 /* TKTextViewCell.h */,
+				ABE4342F1531A252004401E9 /* TKTextViewCell.m */,
+				ABE434301531A252004401E9 /* TKTheme.h */,
+				ABE434311531A252004401E9 /* TKTheme.m */,
+			);
+			name = TableKit;
+			path = ../TableKit;
+			sourceTree = "<group>";
+		};
+		ABE4340F1531A252004401E9 /* DefaultTheme */ = {
+			isa = PBXGroup;
+			children = (
+				ABE434101531A252004401E9 /* TKDefaultActionCellView.h */,
+				ABE434111531A252004401E9 /* TKDefaultActionCellView.m */,
+				ABE434121531A252004401E9 /* TKDefaultStaticCellView.h */,
+				ABE434131531A252004401E9 /* TKDefaultStaticCellView.m */,
+				ABE434141531A252004401E9 /* TKDefaultSwitchCellView.h */,
+				ABE434151531A252004401E9 /* TKDefaultSwitchCellView.m */,
+				ABE434161531A252004401E9 /* TKDefaultTextFieldCellView.h */,
+				ABE434171531A252004401E9 /* TKDefaultTextFieldCellView.m */,
+				ABE434181531A252004401E9 /* TKDefaultTextViewCellView.h */,
+				ABE434191531A252004401E9 /* TKDefaultTextViewCellView.m */,
+				ABE4341A1531A252004401E9 /* TKDefaultTheme.h */,
+				ABE4341B1531A252004401E9 /* TKDefaultTheme.m */,
+			);
+			path = DefaultTheme;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABD70871152DF94F0016FCFD /* TableKitSample */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABD70890152DF94F0016FCFD /* Build configuration list for PBXNativeTarget "TableKitSample" */;
+			buildPhases = (
+				ABD7086E152DF94F0016FCFD /* Sources */,
+				ABD7086F152DF94F0016FCFD /* Frameworks */,
+				ABD70870152DF94F0016FCFD /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TableKitSample;
+			productName = TableKitSample;
+			productReference = ABD70872152DF94F0016FCFD /* TableKitSample.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABD70869152DF94F0016FCFD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+			};
+			buildConfigurationList = ABD7086C152DF94F0016FCFD /* Build configuration list for PBXProject "TableKitSample" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = ABD70867152DF94F0016FCFD;
+			productRefGroup = ABD70873152DF94F0016FCFD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABD70871152DF94F0016FCFD /* TableKitSample */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABD70870152DF94F0016FCFD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABD7086E152DF94F0016FCFD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABE434321531A252004401E9 /* TKDefaultActionCellView.m in Sources */,
+				ABE434331531A252004401E9 /* TKDefaultStaticCellView.m in Sources */,
+				ABE434341531A252004401E9 /* TKDefaultSwitchCellView.m in Sources */,
+				ABE434351531A252004401E9 /* TKDefaultTextFieldCellView.m in Sources */,
+				ABE434361531A252004401E9 /* TKDefaultTextViewCellView.m in Sources */,
+				ABE434371531A252004401E9 /* TKDefaultTheme.m in Sources */,
+				ABE434381531A252004401E9 /* TKActionCell.m in Sources */,
+				ABE434391531A252004401E9 /* TKCell.m in Sources */,
+				ABE4343A1531A252004401E9 /* TKCellAttribute.m in Sources */,
+				ABE4343B1531A252004401E9 /* TKCellView.m in Sources */,
+				ABE4343C1531A252004401E9 /* TKSection.m in Sources */,
+				ABE4343D1531A252004401E9 /* TKStaticCell.m in Sources */,
+				ABE4343E1531A252004401E9 /* TKSwitchCell.m in Sources */,
+				ABE4343F1531A252004401E9 /* TKTableViewController.m in Sources */,
+				ABE434401531A252004401E9 /* TKTextFieldCell.m in Sources */,
+				ABE434411531A252004401E9 /* TKTextViewCell.m in Sources */,
+				ABE434421531A252004401E9 /* TKTheme.m in Sources */,
+				ABE434471531A432004401E9 /* AppDelegate.m in Sources */,
+				ABE434481531A432004401E9 /* ViewController.m in Sources */,
+				ABE4344C1531A45D004401E9 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		ABD7088E152DF94F0016FCFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		ABD7088F152DF94F0016FCFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABD70891152DF94F0016FCFD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableKitSample-Prefix.pch";
+				INFOPLIST_FILE = "TableKitSample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		ABD70892152DF94F0016FCFD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "TableKitSample-Prefix.pch";
+				INFOPLIST_FILE = "TableKitSample-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABD7086C152DF94F0016FCFD /* Build configuration list for PBXProject "TableKitSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABD7088E152DF94F0016FCFD /* Debug */,
+				ABD7088F152DF94F0016FCFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABD70890152DF94F0016FCFD /* Build configuration list for PBXNativeTarget "TableKitSample" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABD70891152DF94F0016FCFD /* Debug */,
+				ABD70892152DF94F0016FCFD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABD70869152DF94F0016FCFD /* Project object */;
+}
