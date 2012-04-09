@@ -50,16 +50,6 @@
 	[super dealloc];
 }
 
-+(TKTheme*) themeForTableView:(UITableView*)tableView
-{
-	static TKTheme* instance = nil;
-	if(!instance) 
-	{
-		instance = [[TKTheme alloc] init];
-	}
-	return instance;
-}
-
 -(TKStaticCellView*) staticCellView
 {
 	static NSString* reuseId = @"TKStaticCellId";
@@ -129,40 +119,26 @@
 
 
 
-static NSMutableArray* themeList = nil;
+static NSMutableDictionary* themeDict = nil;
+static TKTheme* cachedTheme = nil;
 
 @implementation UITableView(theme)
 
 -(id<TKThemeProtocol>) theme
 {
-	if( [themeList count]>0 )
+	if(cachedTheme.tableView!=self)
 	{
-		TKTheme* th = [themeList objectAtIndex:0];
-		if(th.tableView==self)
+		cachedTheme = [themeDict objectForKey:[NSValue valueWithPointer:self]];
+		if(!cachedTheme)
 		{
-			return th;
-		}
-
-		for(TKTheme* th in themeList)
-		{
-			if(th.tableView==self)
-			{
-				[th retain];
-				[themeList removeObject:th];
-				[themeList insertObject:th atIndex:0];
-				[th release];
-				return th;
-			}		
+			NSLog(@"No one theme was applied to %@, applying default theme", self);
+			TKDefaultTheme* defaultTheme = [[[TKDefaultTheme alloc] init] autorelease];
+			[self applyTheme:defaultTheme];
 		}
 	}
-	
-	NSLog(@"No one theme was applied to %@, applying default theme", self);
-
-	id defaultTheme = [[[TKDefaultTheme alloc] init] autorelease];
-	[self applyTheme:defaultTheme];
-	
-	return [self theme];
+	return cachedTheme;
 }
+
 
 -(void) applyTheme:(id<TKThemeProtocol>)themeImpl
 {
@@ -170,23 +146,12 @@ static NSMutableArray* themeList = nil;
 	theme.themeImpl = themeImpl;
 	theme.tableView = self;	
 	
-	if(!themeList)
+	if(!themeDict)
 	{
-		themeList = [[NSMutableArray alloc] initWithCapacity:1];
-		[themeList addObject:theme];
+		themeDict = [[NSMutableDictionary alloc] initWithCapacity:1];
 	}
-	else
-	{
-		for(TKTheme* th in themeList)
-		{
-			if(th.tableView==self)
-			{
-				[themeList removeObject:th];
-				break;
-			}
-		}
-		[themeList insertObject:theme atIndex:0];
-	}
+	[themeDict setObject:theme forKey:[NSValue valueWithPointer:self]];
+	cachedTheme = theme;
 	
 	// Overloading dealloc from category
 	if( class_getInstanceMethod([self class], @selector(original_dealloc)) == NULL ) 
@@ -201,14 +166,11 @@ static NSMutableArray* themeList = nil;
 
 -(void) overloaded_dealloc
 {
-	for(TKTheme* th in themeList)
+	if(cachedTheme.tableView==self)
 	{
-		if(th.tableView==self)
-		{
-			[themeList removeObject:th];
-			break;
-		}
+		cachedTheme = nil;
 	}
+	[themeDict removeObjectForKey:[NSValue valueWithPointer:self]];
 	
 	[self performSelector:@selector(original_dealloc)];
 }
