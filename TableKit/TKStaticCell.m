@@ -60,7 +60,7 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKStaticCellView* cellView = [tableView.theme staticCellViewWithReuseId:@"TKStaticCellId"];
+    TKStaticCellView* cellView = [tableView.theme staticCellView];
 	cellView.owner = self;
 	[cellView updateWithText:title];
 	[self applyAttributesToCellView:cellView];

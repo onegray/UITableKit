@@ -27,6 +27,12 @@
 
 @implementation TKCellView
 @synthesize owner;
+@synthesize reuseIdentifier=tableViewCellReuseId;
 
+-(void) dealloc 
+{
+	[tableViewCellReuseId release];
+	[super dealloc];
+}
 
 @end

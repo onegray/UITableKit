@@ -62,7 +62,7 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKSwitchCellView* cellView = [tableView.theme switchCellViewWithReuseId:@"TKSwitchCellId"];
+    TKSwitchCellView* cellView = [tableView.theme switchCellView];
 	cellView.owner = self;
 	[cellView.switchButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
 	[cellView.switchButton addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];

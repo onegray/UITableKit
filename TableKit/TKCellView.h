@@ -28,8 +28,10 @@
 @interface TKCellView : UITableViewCell
 {
 	id owner;
+	NSString* tableViewCellReuseId;
 }
 @property (nonatomic, assign) id owner;
+@property (nonatomic, copy) NSString* reuseIdentifier;
 
 @end
 

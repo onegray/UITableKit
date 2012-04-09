@@ -61,7 +61,7 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKActionCellView* cellView = [tableView.theme actionCellViewWithReuseId:@"TKActionCellId"];
+    TKActionCellView* cellView = [tableView.theme actionCellView];
 	cellView.owner = self;
     [cellView updateWithTitle:title];
 	[self applyAttributesToCellView:cellView];

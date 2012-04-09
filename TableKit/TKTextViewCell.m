@@ -62,7 +62,7 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKTextViewCellView* cellView = [tableView.theme textViewCellViewWithReuseId:@"TKTextViewCellId"];
+    TKTextViewCellView* cellView = [tableView.theme textViewCellView];
     cellView.owner = self;
 	cellView.textView.delegate = (id)self;
 	[cellView updateWithText:text];

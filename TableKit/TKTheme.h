@@ -28,11 +28,11 @@
 
 @protocol TKThemeProtocol <NSObject>
 
--(TKStaticCellView*) staticCellViewWithReuseId:(NSString*)reuseId;
--(TKActionCellView*) actionCellViewWithReuseId:(NSString*)reuseId;
--(TKTextFieldCellView*) textFieldCellViewWithReuseId:(NSString*)reuseId;
--(TKSwitchCellView*) switchCellViewWithReuseId:(NSString*)reuseId;
--(TKTextViewCellView*) textViewCellViewWithReuseId:(NSString*)reuseId;
+-(TKStaticCellView*) staticCellView;
+-(TKActionCellView*) actionCellView;
+-(TKTextFieldCellView*) textFieldCellView;
+-(TKSwitchCellView*) switchCellView;
+-(TKTextViewCellView*) textViewCellView;
 
 @end
 

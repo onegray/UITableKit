@@ -35,29 +35,29 @@
 
 @implementation TKDefaultTheme
 
--(TKDefaultStaticCellView*) staticCellViewWithReuseId:(NSString*)reuseId
+-(TKDefaultStaticCellView*) staticCellView
 {
-	return [[[TKDefaultStaticCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+	return [[[TKDefaultStaticCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
 
--(TKDefaultActionCellView*) actionCellViewWithReuseId:(NSString*)reuseId
+-(TKDefaultActionCellView*) actionCellView
 {
-	return [[[TKDefaultActionCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+	return [[[TKDefaultActionCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
 
--(TKDefaultTextFieldCellView*) textFieldCellViewWithReuseId:(NSString*)reuseId
+-(TKDefaultTextFieldCellView*) textFieldCellView
 {
-	return [[[TKDefaultTextFieldCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+	return [[[TKDefaultTextFieldCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
 
--(TKDefaultSwitchCellView*) switchCellViewWithReuseId:(NSString*)reuseId
+-(TKDefaultSwitchCellView*) switchCellView
 {
-	return [[[TKDefaultSwitchCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+	return [[[TKDefaultSwitchCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
 
--(TKDefaultTextViewCellView*) textViewCellViewWithReuseId:(NSString*)reuseId
+-(TKDefaultTextViewCellView*) textViewCellView
 {
-	return [[[TKDefaultTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+	return [[[TKDefaultTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
 
 

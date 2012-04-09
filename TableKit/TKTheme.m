@@ -60,52 +60,66 @@
 	return instance;
 }
 
--(TKStaticCellView*) staticCellViewWithReuseId:(NSString*)reuseId
+-(TKStaticCellView*) staticCellView
 {
+	static NSString* reuseId = @"TKStaticCellId";
 	TKStaticCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
     if(!cellView)
 	{
-        cellView = [themeImpl staticCellViewWithReuseId:reuseId];
+        cellView = [themeImpl staticCellView];
+		cellView.reuseIdentifier = reuseId;
     }
 	return cellView;
 }
 
--(TKActionCellView*) actionCellViewWithReuseId:(NSString*)reuseId
+-(TKActionCellView*) actionCellView
 {
+	static NSString* reuseId = @"TKActionCellId";
 	TKActionCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(!cellView)
 	{
-		cellView = [themeImpl actionCellViewWithReuseId:reuseId];
+		cellView = [themeImpl actionCellView];
+		cellView.reuseIdentifier = reuseId;
+
 	}
 	return cellView;
 }
 
--(TKTextFieldCellView*) textFieldCellViewWithReuseId:(NSString*)reuseId
+-(TKTextFieldCellView*) textFieldCellView
 {
+	static NSString* reuseId = @"TKTextFieldCellId";
 	TKTextFieldCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(!cellView)
 	{
-		cellView = [themeImpl textFieldCellViewWithReuseId:reuseId];
+		cellView = [themeImpl textFieldCellView];
+		cellView.reuseIdentifier = reuseId;
+
 	}
 	return cellView;
 }
 
--(TKSwitchCellView*) switchCellViewWithReuseId:(NSString*)reuseId
+-(TKSwitchCellView*) switchCellView
 {
+	static NSString* reuseId = @"TKSwitchCellId";
 	TKSwitchCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(!cellView)
 	{
-		cellView = [themeImpl switchCellViewWithReuseId:reuseId];
+		cellView = [themeImpl switchCellView];
+		cellView.reuseIdentifier = reuseId;
+
 	}
 	return cellView;
 }
 
--(TKTextViewCellView*) textViewCellViewWithReuseId:(NSString*)reuseId
+-(TKTextViewCellView*) textViewCellView
 {
+	static NSString* reuseId = @"TKTextViewCellId";
 	TKTextViewCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(!cellView)
 	{
-		cellView = [themeImpl textViewCellViewWithReuseId:reuseId];
+		cellView = [themeImpl textViewCellView];
+		cellView.reuseIdentifier = reuseId;
+
 	}
 	return cellView;
 }
