@@ -24,6 +24,7 @@
 //  THE SOFTWARE.
 //
 
+#import <UIKit/UIKit.h>
 #import "TKDefaultTextFieldCellView.h"
 
 @implementation TKDefaultTextFieldCellView
@@ -34,11 +35,22 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-		textField = [[UITextField alloc] initWithFrame:CGRectMake(30, 12, 270, 40)];
-		[self addSubview:textField];
+		textField = [[UITextField alloc] initWithFrame:CGRectZero];
+		textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		[self.contentView addSubview:textField];
 		[textField release];
     }
     return self;
+}
+
+-(void) layoutSubviews
+{
+	[super layoutSubviews];
+	CGSize boundsSize = self.bounds.size;
+	CGFloat accessoryWidth = self.accessoryType==UITableViewCellAccessoryNone ? 0 : self.accessoryView ? self.accessoryView.frame.size.width : 30;
+	CGFloat offset = self.imageView.frame.origin.x + self.imageView.frame.size.width + 10;
+	CGFloat width = boundsSize.width-offset-accessoryWidth-30;
+	textField.frame = CGRectMake(offset, 0, width, boundsSize.height);
 }
 
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder

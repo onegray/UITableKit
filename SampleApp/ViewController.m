@@ -31,17 +31,21 @@
 		staticCell = [TKStaticCell cellWithTitle:@"Static cell"];
 		[staticCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 		[staticCell setTextColor:[UIColor redColor]];
-		[staticCell setImage:[UIImage imageNamed:@"apple.png"]];
+		[staticCell setImage:[UIImage imageNamed:@"coke.png"]];
 		
 		textFieldCell = [TKTextFieldCell cellWithText:@"Text" placeholder:@"Enter text"];
 		[textFieldCell setKeyboardType:UIKeyboardTypeEmailAddress];
 		textFieldCell.delegate = (id)self;
+		[textFieldCell setImage:[UIImage imageNamed:@"apple.png"]];
+		[textFieldCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 		
 		switchCell = [TKSwitchCell cellWithTitle:@"Switch" state:NO];
 		[switchCell setImage:[UIImage imageNamed:@"coke.png"]];
 		
 		textViewCell = [TKTextViewCell cellWithText:@"Hello!"];
 		[textViewCell setFont:[UIFont systemFontOfSize:18]];
+		[textViewCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+		[textViewCell setImage:[UIImage imageNamed:@"apple.png"]];
 
 		TKSection* section = [TKSection sectionWithCells:staticCell, textFieldCell, switchCell, textViewCell, nil];
 		section.headerTitle = @"Section title";

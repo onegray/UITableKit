@@ -35,12 +35,22 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-        textView = [[UITextView alloc] initWithFrame:CGRectMake(20, 5, 280, 110)];
+        textView = [[UITextView alloc] initWithFrame:CGRectZero];
 		textView.backgroundColor = [UIColor clearColor];
-        [self addSubview:textView];
+        [self.contentView addSubview:textView];
 		[textView release];
     }
     return self;
+}
+
+-(void) layoutSubviews
+{
+	[super layoutSubviews];
+	CGSize boundsSize = self.bounds.size;
+	CGFloat accessoryWidth = self.accessoryType==UITableViewCellAccessoryNone ? 0 : self.accessoryView ? self.accessoryView.frame.size.width : 30;
+	CGFloat offset = self.imageView.frame.origin.x + self.imageView.frame.size.width+3;
+	CGFloat width = boundsSize.width-offset-accessoryWidth-20;
+	textView.frame = CGRectMake(offset, 5, width, boundsSize.height-10);
 }
 
 -(void) updateWithText:(NSString*)text

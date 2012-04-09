@@ -34,8 +34,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-        switchButton = [[UISwitch alloc] initWithFrame:CGRectMake(200, 9, 40, 20)];
-        [self addSubview:switchButton];
+        switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+		self.accessoryView = switchButton;
 		[switchButton release];
     }
     return self;
