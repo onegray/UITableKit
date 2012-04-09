@@ -27,9 +27,11 @@
 		ABE434401531A252004401E9 /* TKTextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4342D1531A252004401E9 /* TKTextFieldCell.m */; };
 		ABE434411531A252004401E9 /* TKTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4342F1531A252004401E9 /* TKTextViewCell.m */; };
 		ABE434421531A252004401E9 /* TKTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434311531A252004401E9 /* TKTheme.m */; };
-		ABE434471531A432004401E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434441531A432004401E9 /* AppDelegate.m */; };
-		ABE434481531A432004401E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434461531A432004401E9 /* ViewController.m */; };
-		ABE4344C1531A45D004401E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434491531A45D004401E9 /* main.m */; };
+		ABE4349C1533778B004401E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434991533778B004401E9 /* AppDelegate.m */; };
+		ABE4349D1533778B004401E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4349B1533778B004401E9 /* ViewController.m */; };
+		ABE434A2153377AB004401E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4349F153377AB004401E9 /* main.m */; };
+		ABE434A615337813004401E9 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE434A515337813004401E9 /* apple.png */; };
+		ABE434A815337822004401E9 /* coke.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE434A715337822004401E9 /* coke.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -71,13 +73,15 @@
 		ABE4342F1531A252004401E9 /* TKTextViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTextViewCell.m; sourceTree = "<group>"; };
 		ABE434301531A252004401E9 /* TKTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKTheme.h; sourceTree = "<group>"; };
 		ABE434311531A252004401E9 /* TKTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTheme.m; sourceTree = "<group>"; };
-		ABE434431531A432004401E9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = SOURCE_ROOT; };
-		ABE434441531A432004401E9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = SOURCE_ROOT; };
-		ABE434451531A432004401E9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = SOURCE_ROOT; };
-		ABE434461531A432004401E9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = SOURCE_ROOT; };
-		ABE434491531A45D004401E9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = SOURCE_ROOT; };
-		ABE4344A1531A45D004401E9 /* TableKitSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TableKitSample-Info.plist"; sourceTree = SOURCE_ROOT; };
-		ABE4344B1531A45D004401E9 /* TableKitSample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TableKitSample-Prefix.pch"; sourceTree = SOURCE_ROOT; };
+		ABE434981533778B004401E9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		ABE434991533778B004401E9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		ABE4349A1533778B004401E9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		ABE4349B1533778B004401E9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		ABE4349F153377AB004401E9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		ABE434A0153377AB004401E9 /* TableKitSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TableKitSample-Info.plist"; sourceTree = "<group>"; };
+		ABE434A1153377AB004401E9 /* TableKitSample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TableKitSample-Prefix.pch"; sourceTree = "<group>"; };
+		ABE434A515337813004401E9 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
+		ABE434A715337822004401E9 /* coke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coke.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,7 +102,9 @@
 			isa = PBXGroup;
 			children = (
 				ABE4340E1531A252004401E9 /* TableKit */,
-				ABD7087C152DF94F0016FCFD /* TableKitSample */,
+				ABE434971533776B004401E9 /* Classes */,
+				ABE4349E1533779A004401E9 /* Supporting Files */,
+				ABE434A4153377F9004401E9 /* Resources */,
 				ABD70875152DF94F0016FCFD /* Frameworks */,
 				ABD70873152DF94F0016FCFD /* Products */,
 			);
@@ -120,28 +126,6 @@
 				ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		ABD7087C152DF94F0016FCFD /* TableKitSample */ = {
-			isa = PBXGroup;
-			children = (
-				ABE434431531A432004401E9 /* AppDelegate.h */,
-				ABE434441531A432004401E9 /* AppDelegate.m */,
-				ABE434451531A432004401E9 /* ViewController.h */,
-				ABE434461531A432004401E9 /* ViewController.m */,
-				ABD7087D152DF94F0016FCFD /* Supporting Files */,
-			);
-			path = TableKitSample;
-			sourceTree = "<group>";
-		};
-		ABD7087D152DF94F0016FCFD /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				ABE434491531A45D004401E9 /* main.m */,
-				ABE4344A1531A45D004401E9 /* TableKitSample-Info.plist */,
-				ABE4344B1531A45D004401E9 /* TableKitSample-Prefix.pch */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		ABE4340E1531A252004401E9 /* TableKit */ = {
@@ -194,6 +178,36 @@
 			path = DefaultTheme;
 			sourceTree = "<group>";
 		};
+		ABE434971533776B004401E9 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				ABE434981533778B004401E9 /* AppDelegate.h */,
+				ABE434991533778B004401E9 /* AppDelegate.m */,
+				ABE4349A1533778B004401E9 /* ViewController.h */,
+				ABE4349B1533778B004401E9 /* ViewController.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		ABE4349E1533779A004401E9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				ABE4349F153377AB004401E9 /* main.m */,
+				ABE434A0153377AB004401E9 /* TableKitSample-Info.plist */,
+				ABE434A1153377AB004401E9 /* TableKitSample-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		ABE434A4153377F9004401E9 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				ABE434A515337813004401E9 /* apple.png */,
+				ABE434A715337822004401E9 /* coke.png */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -244,6 +258,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ABE434A615337813004401E9 /* apple.png in Resources */,
+				ABE434A815337822004401E9 /* coke.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,9 +287,9 @@
 				ABE434401531A252004401E9 /* TKTextFieldCell.m in Sources */,
 				ABE434411531A252004401E9 /* TKTextViewCell.m in Sources */,
 				ABE434421531A252004401E9 /* TKTheme.m in Sources */,
-				ABE434471531A432004401E9 /* AppDelegate.m in Sources */,
-				ABE434481531A432004401E9 /* ViewController.m in Sources */,
-				ABE4344C1531A45D004401E9 /* main.m in Sources */,
+				ABE4349C1533778B004401E9 /* AppDelegate.m in Sources */,
+				ABE4349D1533778B004401E9 /* ViewController.m in Sources */,
+				ABE434A2153377AB004401E9 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

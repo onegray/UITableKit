@@ -41,10 +41,11 @@
 
 -(void) tableViewDidSelectCell:(UITableView*)tableView;
 
--(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType;
--(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle;
-
 -(void) addAttribute:(TKCellAttribute*)attribute;
 -(void) applyAttributesToCellView:(TKCellView*)cellView;
+
+-(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType;
+-(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle;
+-(void) setImage:(UIImage*)image;
 
 @end

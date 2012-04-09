@@ -31,12 +31,14 @@
 		staticCell = [TKStaticCell cellWithTitle:@"Static cell"];
 		[staticCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 		[staticCell setTextColor:[UIColor redColor]];
+		[staticCell setImage:[UIImage imageNamed:@"apple.png"]];
 		
 		textFieldCell = [TKTextFieldCell cellWithText:@"Text" placeholder:@"Enter text"];
 		[textFieldCell setKeyboardType:UIKeyboardTypeEmailAddress];
 		textFieldCell.delegate = (id)self;
 		
 		switchCell = [TKSwitchCell cellWithTitle:@"Switch" state:NO];
+		[switchCell setImage:[UIImage imageNamed:@"coke.png"]];
 		
 		textViewCell = [TKTextViewCell cellWithText:@"Hello!"];
 		[textViewCell setFont:[UIFont systemFontOfSize:18]];

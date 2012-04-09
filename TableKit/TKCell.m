@@ -109,6 +109,13 @@
 	[attr release];
 }
 
+-(void) setImage:(UIImage*)image
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(imageView) selector:@selector(setImage:) value:image];
+	[self addAttribute:attr];
+	[attr release];
+}
+
 
 @end
 
