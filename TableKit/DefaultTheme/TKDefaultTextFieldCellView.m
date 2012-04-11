@@ -46,11 +46,9 @@
 -(void) layoutSubviews
 {
 	[super layoutSubviews];
-	CGSize boundsSize = self.bounds.size;
-	CGFloat accessoryWidth = self.accessoryType==UITableViewCellAccessoryNone ? 0 : self.accessoryView ? self.accessoryView.frame.size.width : 30;
-	CGFloat offset = self.imageView.frame.origin.x + self.imageView.frame.size.width + 10;
-	CGFloat width = boundsSize.width-offset-accessoryWidth-30;
-	textField.frame = CGRectMake(offset, 0, width, boundsSize.height);
+	CGSize boundsSize = self.contentView.bounds.size;
+	CGFloat offset = self.imageView.frame.origin.x + self.imageView.frame.size.width;
+	textField.frame = CGRectMake(offset+10, 0, boundsSize.width-offset-20, boundsSize.height);
 }
 
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder
