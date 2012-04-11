@@ -138,3 +138,49 @@
 }
 
 @end
+
+
+@implementation TKCellFloatAttribute
+
+-(id) initWithSelector:(SEL)sel value:(CGFloat)value
+{
+	self = [super init];
+	if(self) 
+	{
+		selector = sel;
+		floatValue = value;
+	}
+	return self;
+}
+
+-(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(CGFloat)value
+{
+	self = [super init];
+	if(self) 
+	{
+		accessor = acr;
+		selector = sel;
+		floatValue = value;
+	}
+	return self;
+}
+
+-(void) apply:(id)target
+{
+	if(accessor)
+	{
+		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
+		target = [target performSelector:accessor];
+	}
+	
+	NSAssert([target respondsToSelector:selector], @"Unresponded TKCellAttribute selector");
+	NSMethodSignature* sig = [target methodSignatureForSelector:selector];
+	NSAssert([sig numberOfArguments]==3, @"Invalid TKCellAttribute selector signature");
+	NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+	[inv setTarget:target];
+	[inv setSelector:selector];
+	[inv setArgument:&floatValue atIndex:2];
+	[inv invoke];
+}
+
+@end

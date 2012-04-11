@@ -62,3 +62,16 @@
 
 @end
 
+
+@interface TKCellFloatAttribute : TKCellAttribute
+{
+	CGFloat floatValue;
+}
+
+-(id) initWithSelector:(SEL)sel value:(CGFloat)value;
+-(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(CGFloat)value;
+
+-(void) apply:(id)target;
+
+@end
+

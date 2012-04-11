@@ -95,19 +95,8 @@
 	}
 }
 
--(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setAccessoryType:) value:accessoryType];
-	[self addAttribute:attr];
-	[attr release];
-}
 
--(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setSelectionStyle:) value:selectionStyle];
-	[self addAttribute:attr];
-	[attr release];
-}
+// Managing Images as Cell Content
 
 -(void) setImage:(UIImage*)image
 {
@@ -116,6 +105,83 @@
 	[attr release];
 }
 
+// Accessing Views of the Cell Object
+
+-(void) setBackgroundView:(UIView*)view
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setBackgroundView:) value:view];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setSelectedBackgroundView:(UIView*)view
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setSelectedBackgroundView:) value:view];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setMultipleSelectionBackgroundView:(UIView*)view
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setMultipleSelectionBackgroundView:) value:view];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+// Managing Accessory Views
+
+-(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setAccessoryType:) value:accessoryType];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setAccessoryView:(UIView*)view
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setAccessoryView:) value:view];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setEditingAccessoryType:(UITableViewCellAccessoryType)accessoryType
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setEditingAccessoryType:) value:accessoryType];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setEditingAccessoryView:(UIView*)view
+{
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setEditingAccessoryView:) value:view];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+// Managing Cell Selection and Highlighting
+
+-(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setSelectionStyle:) value:selectionStyle];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+// Managing Content Indentation
+
+-(void) setIndentationLevel:(NSInteger)indentationLevel
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setIndentationLevel:) value:indentationLevel];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setIndentationWidth:(CGFloat)indentationWidth
+{
+	TKCellAttribute* attr = [[TKCellFloatAttribute alloc] initWithSelector:@selector(setIndentationWidth:) value:indentationWidth];
+	[self addAttribute:attr];
+	[attr release];
+}
 
 @end
 

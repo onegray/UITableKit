@@ -44,8 +44,26 @@
 -(void) addAttribute:(TKCellAttribute*)attribute;
 -(void) applyAttributesToCellView:(TKCellView*)cellView;
 
--(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType;
--(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle;
+
+// Managing Images as Cell Content
 -(void) setImage:(UIImage*)image;
+
+// Accessing Views of the Cell Object
+-(void) setBackgroundView:(UIView*)view;
+-(void) setSelectedBackgroundView:(UIView*)view;
+-(void) setMultipleSelectionBackgroundView:(UIView*)view;
+
+// Managing Accessory Views
+-(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType;
+-(void) setAccessoryView:(UIView*)view;
+-(void) setEditingAccessoryType:(UITableViewCellAccessoryType)accessoryType;
+-(void) setEditingAccessoryView:(UIView*)view;
+
+// Managing Cell Selection and Highlighting
+-(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle;
+
+// Managing Content Indentation
+-(void) setIndentationLevel:(NSInteger)indentationLevel;
+-(void) setIndentationWidth:(CGFloat)indentationWidth;
 
 @end
