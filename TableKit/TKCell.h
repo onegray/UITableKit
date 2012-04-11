@@ -66,4 +66,7 @@
 -(void) setIndentationLevel:(NSInteger)indentationLevel;
 -(void) setIndentationWidth:(CGFloat)indentationWidth;
 
+// TKCellView specific attributes
+-(void) setPreventEditing:(BOOL)preventEditing;
 @end
+

@@ -28,10 +28,12 @@
 		ABE434411531A252004401E9 /* TKTextViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4342F1531A252004401E9 /* TKTextViewCell.m */; };
 		ABE434421531A252004401E9 /* TKTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434311531A252004401E9 /* TKTheme.m */; };
 		ABE4349C1533778B004401E9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434991533778B004401E9 /* AppDelegate.m */; };
-		ABE4349D1533778B004401E9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4349B1533778B004401E9 /* ViewController.m */; };
 		ABE434A2153377AB004401E9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE4349F153377AB004401E9 /* main.m */; };
 		ABE434A615337813004401E9 /* apple.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE434A515337813004401E9 /* apple.png */; };
 		ABE434A815337822004401E9 /* coke.png in Resources */ = {isa = PBXBuildFile; fileRef = ABE434A715337822004401E9 /* coke.png */; };
+		ABE434CD1535FC6A004401E9 /* EditingSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */; };
+		ABE434D11535FE0D004401E9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434D01535FE0D004401E9 /* RootViewController.m */; };
+		ABE434D415360157004401E9 /* AttributesSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434D315360156004401E9 /* AttributesSampleViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,13 +77,17 @@
 		ABE434311531A252004401E9 /* TKTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKTheme.m; sourceTree = "<group>"; };
 		ABE434981533778B004401E9 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		ABE434991533778B004401E9 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		ABE4349A1533778B004401E9 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		ABE4349B1533778B004401E9 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		ABE4349F153377AB004401E9 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		ABE434A0153377AB004401E9 /* TableKitSample-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "TableKitSample-Info.plist"; sourceTree = "<group>"; };
 		ABE434A1153377AB004401E9 /* TableKitSample-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TableKitSample-Prefix.pch"; sourceTree = "<group>"; };
 		ABE434A515337813004401E9 /* apple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = apple.png; sourceTree = "<group>"; };
 		ABE434A715337822004401E9 /* coke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = coke.png; sourceTree = "<group>"; };
+		ABE434CB1535FC6A004401E9 /* EditingSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditingSampleViewController.h; sourceTree = "<group>"; };
+		ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditingSampleViewController.m; sourceTree = "<group>"; };
+		ABE434CF1535FE0C004401E9 /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
+		ABE434D01535FE0D004401E9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
+		ABE434D215360156004401E9 /* AttributesSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AttributesSampleViewController.h; sourceTree = "<group>"; };
+		ABE434D315360156004401E9 /* AttributesSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AttributesSampleViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,8 +189,12 @@
 			children = (
 				ABE434981533778B004401E9 /* AppDelegate.h */,
 				ABE434991533778B004401E9 /* AppDelegate.m */,
-				ABE4349A1533778B004401E9 /* ViewController.h */,
-				ABE4349B1533778B004401E9 /* ViewController.m */,
+				ABE434CF1535FE0C004401E9 /* RootViewController.h */,
+				ABE434D01535FE0D004401E9 /* RootViewController.m */,
+				ABE434D215360156004401E9 /* AttributesSampleViewController.h */,
+				ABE434D315360156004401E9 /* AttributesSampleViewController.m */,
+				ABE434CB1535FC6A004401E9 /* EditingSampleViewController.h */,
+				ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -288,8 +298,10 @@
 				ABE434411531A252004401E9 /* TKTextViewCell.m in Sources */,
 				ABE434421531A252004401E9 /* TKTheme.m in Sources */,
 				ABE4349C1533778B004401E9 /* AppDelegate.m in Sources */,
-				ABE4349D1533778B004401E9 /* ViewController.m in Sources */,
 				ABE434A2153377AB004401E9 /* main.m in Sources */,
+				ABE434CD1535FC6A004401E9 /* EditingSampleViewController.m in Sources */,
+				ABE434D11535FE0D004401E9 /* RootViewController.m in Sources */,
+				ABE434D415360157004401E9 /* AttributesSampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,12 +27,18 @@
 
 @implementation TKCellView
 @synthesize owner;
+@synthesize preventEditing;
 @synthesize reuseIdentifier=tableViewCellReuseId;
 
 -(void) dealloc 
 {
 	[tableViewCellReuseId release];
 	[super dealloc];
+}
+
+-(BOOL) isEditing
+{
+	return !preventEditing && [super isEditing];
 }
 
 @end

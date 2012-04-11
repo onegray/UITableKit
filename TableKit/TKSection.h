@@ -37,6 +37,9 @@
     CGFloat footerHeight;
     NSString* footerTitle;
     UIView* footerView;    
+	
+	BOOL preventEditing;
+	BOOL preventIndentationWhileEditing;
 }
 
 @property (nonatomic, readonly) int cellCount;
@@ -46,6 +49,9 @@
 @property (nonatomic, assign) CGFloat footerHeight;
 @property (nonatomic, retain) NSString* footerTitle;
 @property (nonatomic, retain) UIView* footerView;
+
+@property (nonatomic, assign) BOOL preventEditing;
+@property (nonatomic, assign) BOOL preventIndentationWhileEditing;
 
 +(TKSection*) sectionWithCells: (TKCell*)cell, ... NS_REQUIRES_NIL_TERMINATION;
 -(TKCell*) cellAtIndex:(int)cellIndex;

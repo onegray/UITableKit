@@ -183,6 +183,17 @@
 	[attr release];
 }
 
+
+// TKCellView specific attributes
+
+-(void) setPreventEditing:(BOOL)preventEditing
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setPreventEditing:) value:preventEditing];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+
 @end
 
 

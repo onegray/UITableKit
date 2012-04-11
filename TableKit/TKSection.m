@@ -28,6 +28,7 @@
 
 @implementation TKSection
 @synthesize headerHeight, headerTitle, headerView, footerHeight, footerTitle, footerView;
+@synthesize preventEditing, preventIndentationWhileEditing;
 
 +(TKSection*) sectionWithCells: (TKCell*)cell, ...
 {
@@ -56,8 +57,8 @@
     if(self)
 	{
         cells = [[NSMutableArray alloc] init];
-        headerHeight = 44;
-        footerHeight = 44;
+        headerHeight = 20;
+        footerHeight = 20;
     }
     return self;
 }

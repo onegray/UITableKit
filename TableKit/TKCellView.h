@@ -28,9 +28,11 @@
 @interface TKCellView : UITableViewCell
 {
 	id owner;
+	BOOL preventEditing;
 	NSString* tableViewCellReuseId;
 }
 @property (nonatomic, assign) id owner;
+@property (nonatomic, assign) BOOL preventEditing;
 @property (nonatomic, copy) NSString* reuseIdentifier;
 
 @end

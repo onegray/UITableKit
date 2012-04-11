@@ -107,6 +107,16 @@
     [[sections objectAtIndex:indexPath.section] tableView:tableView didSelectCellWithIndex:indexPath.row];
 }
 
+-(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return ![[sections objectAtIndex:indexPath.section] preventEditing];
+}
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return ![[sections objectAtIndex:indexPath.section] preventIndentationWhileEditing];
+}
+
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if(editingStyle==UITableViewCellEditingStyleDelete)
