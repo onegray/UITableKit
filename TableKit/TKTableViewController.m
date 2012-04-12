@@ -25,6 +25,7 @@
 
 #import "TKTableViewController.h"
 #import "TKCell.h"
+#import "TKCellView.h"
 #import "TKSection.h"
 
 @implementation TKTableViewController
@@ -109,7 +110,8 @@
 
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return ![[sections objectAtIndex:indexPath.section] preventEditing];
+	TKCellView* cellView = (TKCellView*)[tableView cellForRowAtIndexPath:indexPath];
+	return !cellView.preventEditing && ![[sections objectAtIndex:indexPath.section] preventEditing];
 }
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath

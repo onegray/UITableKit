@@ -39,9 +39,5 @@
 	[super dealloc];
 }
 
--(BOOL) isEditing
-{
-	return !preventEditing && [super isEditing];
-}
 
 @end
