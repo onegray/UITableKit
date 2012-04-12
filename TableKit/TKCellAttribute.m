@@ -26,23 +26,44 @@
 #import "TKCellAttribute.h"
 
 @implementation TKCellAttribute
-@synthesize  selector, accessor;
+@synthesize  getter, setter, accessor;
 
--(void) apply:(id)target
+-(BOOL) isEqual:(TKCellAttribute*)object
+{
+	return setter == object.setter && accessor==object.accessor;
+}
+
+-(void) invokeOnTarget:(id)target withArgument:(void*)argument
 {
 	if(accessor)
 	{
 		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
 		target = [target performSelector:accessor];
 	}
-	NSAssert([target respondsToSelector:selector], @"Unresponded TKCellAttribute selector");
-	[target performSelector:selector];
+	
+	NSAssert([target respondsToSelector:setter], @"Unresponded TKCellAttribute selector");
+	NSMethodSignature* sig = [target methodSignatureForSelector:setter];
+	NSAssert([sig numberOfArguments]==3, @"Invalid TKCellAttribute selector signature");
+	NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
+	[inv setTarget:target];
+	[inv setSelector:setter];
+	[inv setArgument:argument atIndex:2];
+	[inv invoke];
 }
 
--(BOOL) isEqual:(TKCellAttribute*)object
+-(void) apply:(id)target value:(id)v
 {
-	return selector == object.selector && accessor==object.accessor;
 }
+
+-(void) apply:(id)target
+{
+}
+
+-(id) getRollbackValue:(id)target
+{
+	return nil;
+}
+
 
 @end
 
@@ -50,29 +71,18 @@
 
 @implementation TKCellObjectAttribute
 
--(id) initWithSelector:(SEL)sel value:(NSObject*)value
+-(id) initWithAccessor:(SEL)accessorSelector getter:(SEL)getterSelector setter:(SEL)setterSelector value:(NSObject*)value
 {
 	self = [super init];
 	if(self) 
 	{
-		selector = sel;
+		accessor = accessorSelector;
+		getter = getterSelector;
+		setter = setterSelector;
 		objectValue = [value retain];
 	}
 	return self;
 }
-
--(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(NSObject*)value
-{
-	self = [super init];
-	if(self) 
-	{
-		accessor = acr;
-		selector = sel;
-		objectValue = [value retain];
-	}
-	return self;
-}
-
 
 -(void) dealloc
 {
@@ -80,107 +90,129 @@
 	[super dealloc];
 }
 
+-(void) apply:(id)target value:(id)v
+{
+	id a = ( v!=[NSNull null] ? v : nil );
+	[self invokeOnTarget:target withArgument:&a];
+}
+
+
 -(void) apply:(id)target
+{
+	[self invokeOnTarget:target withArgument:&objectValue];
+}
+
+-(id) getRollbackValue:(id)target
 {
 	if(accessor)
 	{
 		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
 		target = [target performSelector:accessor];
 	}
-	
-	NSAssert([target respondsToSelector:selector], @"Unresponded TKCellAttribute selector");
-	[target performSelector:selector withObject:objectValue];
+	NSAssert([target respondsToSelector:getter], @"Unresponded TKCellAttribute selector");
+	id v = [target performSelector:getter];
+
+	return v ? v : [NSNull null];
 }
 
 @end
+
+
 
 @implementation TKCellScalarAttribute
 
--(id) initWithSelector:(SEL)sel value:(int)value
+-(id) initWithAccessor:(SEL)accessorSelector getter:(SEL)getterSelector setter:(SEL)setterSelector value:(void*)value
 {
 	self = [super init];
 	if(self) 
 	{
-		selector = sel;
-		scalarValue = value;
+		accessor = accessorSelector;
+		getter = getterSelector;
+		setter = setterSelector;
+		scalarValue = *(int*)value;
 	}
 	return self;
 }
 
--(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(int)value
+
+-(void) apply:(id)target value:(id)v
 {
-	self = [super init];
-	if(self) 
-	{
-		accessor = acr;
-		selector = sel;
-		scalarValue = value;
-	}
-	return self;
+	void* a = [v pointerValue];
+	[self invokeOnTarget:target withArgument:&a];
 }
 
 -(void) apply:(id)target
+{
+	[self invokeOnTarget:target withArgument:&scalarValue];
+}
+
+-(id) getRollbackValue:(id)target
 {
 	if(accessor)
 	{
 		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
 		target = [target performSelector:accessor];
 	}
+	NSAssert([target respondsToSelector:getter], @"Unresponded TKCellAttribute selector");
+	void* v = [target performSelector:getter];
 	
-	NSAssert([target respondsToSelector:selector], @"Unresponded TKCellAttribute selector");
-	NSMethodSignature* sig = [target methodSignatureForSelector:selector];
-	NSAssert([sig numberOfArguments]==3, @"Invalid TKCellAttribute selector signature");
-	NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
-	[inv setTarget:target];
-	[inv setSelector:selector];
-	[inv setArgument:&scalarValue atIndex:2];
-	[inv invoke];
+	return [NSValue valueWithPointer:v];
 }
 
 @end
 
 
-@implementation TKCellFloatAttribute
 
--(id) initWithSelector:(SEL)sel value:(CGFloat)value
+
+@implementation TKRollbackArribute
+
+-(id) init
 {
 	self = [super init];
-	if(self) 
+	if(self)
 	{
-		selector = sel;
-		floatValue = value;
+		attributes = [[NSMutableArray alloc] initWithCapacity:3];
+		values = [[NSMutableArray alloc] initWithCapacity:3];
 	}
 	return self;
 }
 
--(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(CGFloat)value
+-(void) clean
 {
-	self = [super init];
-	if(self) 
-	{
-		accessor = acr;
-		selector = sel;
-		floatValue = value;
-	}
-	return self;
+	[attributes removeAllObjects];
+	[values removeAllObjects];
+}
+
+-(void) dealloc
+{
+	[attributes release];
+	[values release];
+	[super dealloc];
+}
+
+-(void) addAttribute:(TKCellAttribute*)attr withRollbackValue:(id)v
+{
+	[attributes addObject:attr];
+	[values addObject:v];
 }
 
 -(void) apply:(id)target
 {
-	if(accessor)
+	for(int i=0; i<[attributes count]; i++)
 	{
-		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
-		target = [target performSelector:accessor];
+		TKCellAttribute* attr = [attributes objectAtIndex:i];
+		id v = [values objectAtIndex:i];
+		[attr apply:target value:v];
 	}
-	
-	NSAssert([target respondsToSelector:selector], @"Unresponded TKCellAttribute selector");
-	NSMethodSignature* sig = [target methodSignatureForSelector:selector];
-	NSAssert([sig numberOfArguments]==3, @"Invalid TKCellAttribute selector signature");
-	NSInvocation* inv = [NSInvocation invocationWithMethodSignature:sig];
-	[inv setTarget:target];
-	[inv setSelector:selector];
-	[inv setArgument:&floatValue atIndex:2];
-	[inv invoke];
 }
 
 @end
+
+
+
+
+
+
+
+
+

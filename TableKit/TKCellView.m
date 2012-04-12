@@ -24,15 +24,18 @@
 //
 
 #import "TKCellView.h"
+#import "TKCellAttribute.h"
 
 @implementation TKCellView
 @synthesize owner;
 @synthesize preventEditing;
 @synthesize reuseIdentifier=tableViewCellReuseId;
+@synthesize rollbackArribute;
 
 -(void) dealloc 
 {
 	[tableViewCellReuseId release];
+	[rollbackArribute release];
 	[super dealloc];
 }
 

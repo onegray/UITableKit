@@ -27,12 +27,18 @@
 
 @interface TKCellAttribute : NSObject
 {
-	SEL selector;
+	SEL getter;
+	SEL setter;
 	SEL accessor;
 }
-@property (nonatomic, assign) SEL selector;
+@property (nonatomic, assign) SEL getter;
+@property (nonatomic, assign) SEL setter;
 @property (nonatomic, assign) SEL accessor;
+
 -(void) apply:(id)target;
+-(void) apply:(id)target value:(id)v;
+
+-(id) getRollbackValue:(id)target;
 
 @end
 
@@ -42,9 +48,7 @@
 	NSObject* objectValue;
 }
 
--(id) initWithSelector:(SEL)sel value:(NSObject*)value;
--(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(NSObject*)value;
-
+-(id) initWithAccessor:(SEL)accessorSelector getter:(SEL)getterSelector setter:(SEL)setterSelector value:(NSObject*)value;
 -(void) apply:(id)target;
 
 @end
@@ -55,23 +59,26 @@
 	int scalarValue;
 }
 
--(id) initWithSelector:(SEL)sel value:(int)value;
--(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(int)value;
-
+-(id) initWithAccessor:(SEL)accessorSelector getter:(SEL)getterSelector setter:(SEL)setterSelector value:(void*)value;
 -(void) apply:(id)target;
 
 @end
 
 
-@interface TKCellFloatAttribute : TKCellAttribute
+@interface TKRollbackArribute : TKCellAttribute
 {
-	CGFloat floatValue;
+	NSMutableArray* attributes;
+	NSMutableArray* values;
 }
 
--(id) initWithSelector:(SEL)sel value:(CGFloat)value;
--(id) initWithAccessor:(SEL)acr selector:(SEL)sel value:(CGFloat)value;
+-(void) clean;
 
--(void) apply:(id)target;
+-(void) addAttribute:(TKCellAttribute*)attr withRollbackValue:(NSValue*)v;
 
 @end
+
+
+
+
+
 

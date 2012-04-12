@@ -88,28 +88,28 @@
 
 -(void) setKeyboardType:(UIKeyboardType)keyboardType
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setKeyboardType:) value:keyboardType];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(keyboardType) setter:@selector(setKeyboardType:) value:&keyboardType];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setFont:(UIFont*)font
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setFont:) value:font];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(font) setter:@selector(setFont:) value:font];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setTextColor:(UIColor*)color
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setTextColor:) value:color];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(textColor) setter:@selector(setTextColor:) value:color];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setBackgroundColor:(UIColor*)color
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) selector:@selector(setBackgroundColor:) value:color];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(backgroundColor) setter:@selector(setBackgroundColor:) value:color];
 	[self addAttribute:attr];
 	[attr release];
 }

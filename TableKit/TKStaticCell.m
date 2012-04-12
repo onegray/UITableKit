@@ -70,14 +70,14 @@
 
 -(void) setFont:(UIFont*)font
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) selector:@selector(setFont:) value:font];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) getter:@selector(font) setter:@selector(setFont:) value:font];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setTextColor:(UIColor*)color
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) selector:@selector(setTextColor:) value:color];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) getter:@selector(textColor) setter:@selector(setTextColor:) value:color];
 	[self addAttribute:attr];
 	[attr release];
 }

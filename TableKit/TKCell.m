@@ -89,9 +89,25 @@
 
 -(void) applyAttributesToCellView:(TKCellView*)cellView
 {
-	for(TKCellAttribute* attr in attributes)
+	if(cellView.rollbackArribute)
 	{
-		[attr apply:cellView];
+		[cellView.rollbackArribute apply:cellView];
+		[cellView.rollbackArribute clean];
+	}
+
+	if(attributes)
+	{
+		if(!cellView.rollbackArribute)
+		{
+			cellView.rollbackArribute = [[[TKRollbackArribute alloc] init] autorelease];
+		}
+		
+		for(TKCellAttribute* attr in attributes)
+		{
+			id v = [attr getRollbackValue:cellView];
+			[cellView.rollbackArribute addAttribute:attr withRollbackValue:v];
+			[attr apply:cellView];
+		}
 	}
 }
 
@@ -100,7 +116,7 @@
 
 -(void) setImage:(UIImage*)image
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(imageView) selector:@selector(setImage:) value:image];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(imageView) getter:@selector(image) setter:@selector(setImage:) value:image];
 	[self addAttribute:attr];
 	[attr release];
 }
@@ -109,21 +125,21 @@
 
 -(void) setBackgroundView:(UIView*)view
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setBackgroundView:) value:view];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(backgroundView) setter:@selector(setBackgroundView:) value:view];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setSelectedBackgroundView:(UIView*)view
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setSelectedBackgroundView:) value:view];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(selectedBackgroundView) setter:@selector(setSelectedBackgroundView:) value:view];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setMultipleSelectionBackgroundView:(UIView*)view
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setMultipleSelectionBackgroundView:) value:view];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(multipleSelectionBackgroundView) setter:@selector(setMultipleSelectionBackgroundView:) value:view];
 	[self addAttribute:attr];
 	[attr release];
 }
@@ -132,28 +148,28 @@
 
 -(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setAccessoryType:) value:accessoryType];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(accessoryType) setter:@selector(setAccessoryType:) value:&accessoryType];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setAccessoryView:(UIView*)view
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setAccessoryView:) value:view];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(accessoryView) setter:@selector(setAccessoryView:) value:view];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setEditingAccessoryType:(UITableViewCellAccessoryType)accessoryType
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setEditingAccessoryType:) value:accessoryType];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(editingAccessoryType) setter:@selector(setEditingAccessoryType:) value:&accessoryType];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setEditingAccessoryView:(UIView*)view
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithSelector:@selector(setEditingAccessoryView:) value:view];
+	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(editingAccessoryView) setter:@selector(setEditingAccessoryView:) value:view];
 	[self addAttribute:attr];
 	[attr release];
 }
@@ -162,7 +178,7 @@
 
 -(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setSelectionStyle:) value:selectionStyle];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(selectionStyle) setter:@selector(setSelectionStyle:) value:&selectionStyle];
 	[self addAttribute:attr];
 	[attr release];
 }
@@ -171,14 +187,14 @@
 
 -(void) setIndentationLevel:(NSInteger)indentationLevel
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setIndentationLevel:) value:indentationLevel];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(indentationLevel) setter:@selector(setIndentationLevel:) value:&indentationLevel];
 	[self addAttribute:attr];
 	[attr release];
 }
 
 -(void) setIndentationWidth:(CGFloat)indentationWidth
 {
-	TKCellAttribute* attr = [[TKCellFloatAttribute alloc] initWithSelector:@selector(setIndentationWidth:) value:indentationWidth];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(indentationWidth) setter:@selector(setIndentationWidth:) value:&indentationWidth];
 	[self addAttribute:attr];
 	[attr release];
 }
@@ -188,7 +204,7 @@
 
 -(void) setPreventEditing:(BOOL)preventEditing
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithSelector:@selector(setPreventEditing:) value:preventEditing];
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(preventEditing) setter:@selector(setPreventEditing:) value:&preventEditing];
 	[self addAttribute:attr];
 	[attr release];
 }
