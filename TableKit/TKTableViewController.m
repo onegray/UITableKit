@@ -108,15 +108,48 @@
     [[sections objectAtIndex:indexPath.section] tableView:tableView didSelectCellWithIndex:indexPath.row];
 }
 
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return [[sections objectAtIndex:indexPath.section] allowsReorderingDuringEditing];
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+{
+	if(![[sections objectAtIndex:proposedDestinationIndexPath.section] allowsReorderingDuringEditing])
+	{
+		int dir = sourceIndexPath.section < proposedDestinationIndexPath.section ? -1 : 1; 
+		int i = proposedDestinationIndexPath.section + dir;
+		while ( i!=sourceIndexPath.section && [[sections objectAtIndex:i] allowsReorderingDuringEditing] )
+		{
+			i+=dir;
+		}
+		int row = dir > 0 ? 0 : [[sections objectAtIndex:i] cellCount]-1;
+		return [NSIndexPath indexPathForRow:row inSection:i];
+	}
+		
+    return proposedDestinationIndexPath;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+	TKSection* sourceSection = [sections objectAtIndex:sourceIndexPath.section];
+	TKCell* cell = [[sourceSection cellAtIndex:sourceIndexPath.row] retain];
+	[sourceSection removeCellAtIndex:sourceIndexPath.row];
+	TKSection* destinationSection = [sections objectAtIndex:destinationIndexPath.section];
+	[destinationSection insertCell:cell atIndex:destinationIndexPath.row];
+	[cell release];
+}
+
+
+- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
+{
+	return ![[sections objectAtIndex:indexPath.section] preventIndentationDuringEditing];
+}
+
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
 	TKCellView* cellView = (TKCellView*)[tableView cellForRowAtIndexPath:indexPath];
 	return !cellView.preventEditing && ![[sections objectAtIndex:indexPath.section] preventEditing];
-}
-
-- (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
-{
-	return ![[sections objectAtIndex:indexPath.section] preventIndentationWhileEditing];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

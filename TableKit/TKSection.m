@@ -28,7 +28,7 @@
 
 @implementation TKSection
 @synthesize headerHeight, headerTitle, headerView, footerHeight, footerTitle, footerView;
-@synthesize preventEditing, preventIndentationWhileEditing;
+@synthesize preventEditing, allowsReorderingDuringEditing, preventIndentationDuringEditing;
 
 +(TKSection*) sectionWithCells: (TKCell*)cell, ...
 {
@@ -97,6 +97,11 @@
 -(void) insertCell:(TKCell*)cell atIndex:(int)cellIndex
 {
     [cells insertObject:cell atIndex:cellIndex];
+}
+
+-(int) indexOfCell:(TKCell*)cell
+{
+	return [cells indexOfObject:cell];
 }
 
 -(int) cellCount

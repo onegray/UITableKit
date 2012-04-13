@@ -41,7 +41,8 @@
 	if(self.sections==nil)
 	{
 		self.citiesSection = [[[TKSection alloc] init] autorelease];
-		citiesSection.preventIndentationWhileEditing = YES;
+		citiesSection.preventIndentationDuringEditing = YES;
+		citiesSection.allowsReorderingDuringEditing = YES;
 		citiesSection.headerTitle = @"Cities";
 
 		[citiesSection addCell:[TKStaticCell cellWithTitle:@"Minsk"]];
@@ -68,7 +69,7 @@
 	if([cell.text length] > 0) 
 	{
 		TKStaticCell* cityCell = [TKStaticCell cellWithTitle:cell.text];
-		[citiesSection insertCell:cityCell atIndex:[citiesSection cellCount]-1];
+		[citiesSection insertCell:cityCell atIndex:[citiesSection indexOfCell:cell]];
 		cell.text = nil;
 		[self.tableView reloadData];
 	}

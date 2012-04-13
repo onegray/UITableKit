@@ -39,7 +39,8 @@
     UIView* footerView;    
 	
 	BOOL preventEditing;
-	BOOL preventIndentationWhileEditing;
+	BOOL allowsReorderingDuringEditing;
+	BOOL preventIndentationDuringEditing;
 }
 
 @property (nonatomic, readonly) int cellCount;
@@ -51,7 +52,8 @@
 @property (nonatomic, retain) UIView* footerView;
 
 @property (nonatomic, assign) BOOL preventEditing;
-@property (nonatomic, assign) BOOL preventIndentationWhileEditing;
+@property (nonatomic, assign) BOOL allowsReorderingDuringEditing;
+@property (nonatomic, assign) BOOL preventIndentationDuringEditing;
 
 +(TKSection*) sectionWithCells: (TKCell*)cell, ... NS_REQUIRES_NIL_TERMINATION;
 -(TKCell*) cellAtIndex:(int)cellIndex;
@@ -59,6 +61,7 @@
 -(void) removeCellAtIndex:(int)cellIndex;
 -(void) removeAllCells;
 -(void) insertCell:(TKCell*)cell atIndex:(int)cellIndex;
+-(int) indexOfCell:(TKCell*)cell;
 -(UITableViewCell*) cellWithIndex:(int)cellIndex forTableView:(UITableView*)tableView;
 -(CGFloat) heightForCellIndex:(int)cellIndex;
 
