@@ -25,22 +25,73 @@
 
 #import "TKTheme.h"
 #import "TKCellView.h"
+#import "TKDefaultTheme.h"
+
 #import <objc/runtime.h>
 
-#import "TKDefaultTheme.h"
+
+static TKDefaultTheme* defaultThemeImpl = nil;
+
 
 @interface TKThemeCacheProxy : NSProxy
 {
 	UITableView* tableView;
-	id<TKThemeProtocol> themeImpl;
+	id themeImpl;
 }
 
 -(id) initWithTheme:(id)theme forTableView:(UITableView*) tableView;
 
 @property (nonatomic, assign) UITableView* tableView;
-@property (nonatomic, retain) id<TKThemeProtocol> themeImpl;
+@property (nonatomic, retain) id themeImpl;
 
 @end
+
+
+
+// String pool to prevent numerous allocations
+@interface SelectorCachedString : NSObject
+{ 
+@public
+	NSString* string;
+	SEL key;
+	SelectorCachedString* next;
+}
++(void) initHashTable;
++(NSString*) stringForSelector:(SEL)key;
+@end
+
+@implementation SelectorCachedString
+#define HASH_TABLE_SIZE 31
+static SelectorCachedString** hashTable = NULL;
+
++(void) initHashTable
+{
+	hashTable = hashTable ? hashTable : (SelectorCachedString**)calloc(HASH_TABLE_SIZE, sizeof(void*));
+}
+
++(NSString*) stringForSelector:(SEL)key
+{
+	int ind = (int)key % HASH_TABLE_SIZE;
+	SelectorCachedString* root = hashTable[ind];
+	while(root)
+	{
+		if(root->key==key)
+		{
+			return root->string;
+		}
+		root = root->next;
+	}
+
+	root = [[SelectorCachedString alloc] init];
+	root->string = [NSStringFromSelector(key) retain];
+	root->key = key;
+	root->next = hashTable[ind];
+	hashTable[ind] = root;
+	
+	return root->string;
+}
+@end
+
 
 
 @implementation TKThemeCacheProxy
@@ -61,12 +112,19 @@
 
 - (NSMethodSignature*) methodSignatureForSelector:(SEL)selector
 {
-	return [(id)themeImpl methodSignatureForSelector:selector];
+	NSMethodSignature* signature = [(id)themeImpl methodSignatureForSelector:selector];
+	if(!signature)
+	{
+		defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
+		signature = [defaultThemeImpl methodSignatureForSelector:selector];
+	}
+	return signature;
 }
+
 
 - (void) forwardInvocation:(NSInvocation *)invocation
 {
-	NSString* reuseId = NSStringFromSelector(invocation.selector);
+	NSString* reuseId = [SelectorCachedString stringForSelector:invocation.selector];
 	TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(cellView) 
 	{
@@ -74,7 +132,8 @@
 	}
 	else
 	{
-		[invocation invokeWithTarget:themeImpl];
+		id target = [themeImpl respondsToSelector:invocation.selector] ? themeImpl : defaultThemeImpl;
+		[invocation invokeWithTarget:target];
 		[invocation getReturnValue:&cellView];
 		[cellView setReuseIdentifier:reuseId];
 	}
@@ -89,7 +148,7 @@ static TKThemeCacheProxy* cachedTheme = nil;
 
 @implementation UITableView(theme)
 
--(id<TKThemeProtocol>) theme
+-(id) theme
 {
 	if(cachedTheme.tableView!=self)
 	{
@@ -97,21 +156,22 @@ static TKThemeCacheProxy* cachedTheme = nil;
 		if(!cachedTheme)
 		{
 			NSLog(@"No one theme was applied to %@, applying default theme", self);
-			TKDefaultTheme* defaultTheme = [[[TKDefaultTheme alloc] init] autorelease];
-			[self applyTheme:defaultTheme];
+			defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
+			[self applyTheme:defaultThemeImpl];
 		}
 	}
-	return (id)cachedTheme;
+	return cachedTheme;
 }
 
 
--(void) applyTheme:(id<TKThemeProtocol>)themeImpl
+-(void) applyTheme:(id)themeImpl
 {
 	TKThemeCacheProxy* theme = [[[TKThemeCacheProxy alloc] initWithTheme:themeImpl forTableView:self] autorelease];
 	
 	if(!themeDict)
 	{
 		themeDict = [[NSMutableDictionary alloc] initWithCapacity:1];
+		[SelectorCachedString initHashTable];
 	}
 	[themeDict setObject:theme forKey:[NSValue valueWithPointer:self]];
 	cachedTheme = theme;

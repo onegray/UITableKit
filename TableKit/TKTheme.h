@@ -27,6 +27,7 @@
 #import "TKCellView.h"
 
 @protocol TKThemeProtocol <NSObject>
+@optional // if method is not implemented it will be forwarded to default theme
 
 -(TKStaticCellView*) staticCellView;
 -(TKActionCellView*) actionCellView;
