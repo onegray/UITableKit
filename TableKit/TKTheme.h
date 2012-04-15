@@ -38,6 +38,6 @@
 
 
 @interface UITableView (theme)
--(void) applyTheme:(id<TKThemeProtocol>)theme;
-@property (nonatomic, readonly) id<TKThemeProtocol> theme;
+-(void) applyTheme:(id)theme;
+@property (nonatomic, readonly) id theme;
 @end

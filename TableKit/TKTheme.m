@@ -29,11 +29,13 @@
 
 #import "TKDefaultTheme.h"
 
-@interface TKTheme : NSObject <TKThemeProtocol>
+@interface TKThemeCacheProxy : NSProxy
 {
 	UITableView* tableView;
 	id<TKThemeProtocol> themeImpl;
 }
+
+-(id) initWithTheme:(id)theme forTableView:(UITableView*) tableView;
 
 @property (nonatomic, assign) UITableView* tableView;
 @property (nonatomic, retain) id<TKThemeProtocol> themeImpl;
@@ -41,8 +43,15 @@
 @end
 
 
-@implementation TKTheme
+@implementation TKThemeCacheProxy
 @synthesize tableView, themeImpl;
+
+-(id) initWithTheme:(id)theme forTableView:(UITableView*)aTableView
+{
+	self.themeImpl = theme;
+	self.tableView = aTableView;
+	return self;
+}
 
 -(void) dealloc
 {
@@ -50,77 +59,33 @@
 	[super dealloc];
 }
 
--(TKStaticCellView*) staticCellView
+- (NSMethodSignature*) methodSignatureForSelector:(SEL)selector
 {
-	static NSString* reuseId = @"TKStaticCellId";
-	TKStaticCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
-    if(!cellView)
-	{
-        cellView = [themeImpl staticCellView];
-		cellView.reuseIdentifier = reuseId;
-    }
-	return cellView;
+	return [(id)themeImpl methodSignatureForSelector:selector];
 }
 
--(TKActionCellView*) actionCellView
+- (void) forwardInvocation:(NSInvocation *)invocation
 {
-	static NSString* reuseId = @"TKActionCellId";
-	TKActionCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
-	if(!cellView)
+	NSString* reuseId = NSStringFromSelector(invocation.selector);
+	TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:reuseId];
+	if(cellView) 
 	{
-		cellView = [themeImpl actionCellView];
-		cellView.reuseIdentifier = reuseId;
-
+		[invocation setReturnValue:&cellView];
 	}
-	return cellView;
-}
-
--(TKTextFieldCellView*) textFieldCellView
-{
-	static NSString* reuseId = @"TKTextFieldCellId";
-	TKTextFieldCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
-	if(!cellView)
+	else
 	{
-		cellView = [themeImpl textFieldCellView];
-		cellView.reuseIdentifier = reuseId;
-
+		[invocation invokeWithTarget:themeImpl];
+		[invocation getReturnValue:&cellView];
+		[cellView setReuseIdentifier:reuseId];
 	}
-	return cellView;
 }
-
--(TKSwitchCellView*) switchCellView
-{
-	static NSString* reuseId = @"TKSwitchCellId";
-	TKSwitchCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
-	if(!cellView)
-	{
-		cellView = [themeImpl switchCellView];
-		cellView.reuseIdentifier = reuseId;
-
-	}
-	return cellView;
-}
-
--(TKTextViewCellView*) textViewCellView
-{
-	static NSString* reuseId = @"TKTextViewCellId";
-	TKTextViewCellView* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
-	if(!cellView)
-	{
-		cellView = [themeImpl textViewCellView];
-		cellView.reuseIdentifier = reuseId;
-
-	}
-	return cellView;
-}
-
 
 @end
 
 
 
 static NSMutableDictionary* themeDict = nil;
-static TKTheme* cachedTheme = nil;
+static TKThemeCacheProxy* cachedTheme = nil;
 
 @implementation UITableView(theme)
 
@@ -136,15 +101,13 @@ static TKTheme* cachedTheme = nil;
 			[self applyTheme:defaultTheme];
 		}
 	}
-	return cachedTheme;
+	return (id)cachedTheme;
 }
 
 
 -(void) applyTheme:(id<TKThemeProtocol>)themeImpl
 {
-	TKTheme* theme = [[[TKTheme alloc] init] autorelease];
-	theme.themeImpl = themeImpl;
-	theme.tableView = self;	
+	TKThemeCacheProxy* theme = [[[TKThemeCacheProxy alloc] initWithTheme:themeImpl forTableView:self] autorelease];
 	
 	if(!themeDict)
 	{
