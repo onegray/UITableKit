@@ -30,69 +30,91 @@
 
 
 @implementation TKSwitchCell
-@synthesize title, state, delegate;
+@synthesize state;
 
-+(TKSwitchCell*) cellWithTitle:(NSString*)title state:(BOOL)state
++(id) cellWithText:(NSString*)text state:(BOOL)state
 {
-    return [[[self alloc] initWithTitle:title state:state] autorelease];
+    return [[[self alloc] initWithText:text state:state target:nil action:NULL] autorelease];
 }
 
--(id) initWithTitle:(NSString*)aTitle state:(BOOL)aState
++(id) cellWithText:(NSString*)text state:(BOOL)state target:(id)target action:(SEL)selector
 {
-    self = [super init];
+    return [[[self alloc] initWithText:text state:state target:target action:selector] autorelease];
+}
+
++(id) cellWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText state:(BOOL)aState
+{
+	return [[[self alloc] initWithStyle:aCellStyle text:aText detailText:aDetailText state:aState] autorelease];
+}
+
+-(id) initWithText:(NSString*)aText state:(BOOL)aState
+{
+	return [self initWithText:aText state:aState target:nil action:NULL];
+}
+
+-(id) initWithText:(NSString*)aText state:(BOOL)aState target:(id)aTarget action:(SEL)selector
+{
+    self = [super initWithText:aText target:aTarget action:selector];
     if(self)
 	{
-        self.title = aTitle;
-        self.state = aState; 
+        self.state = aState;
     }
     return self;
 }
 
--(void) dealloc
+-(id) initWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText state:(BOOL)aState;
 {
-    [title release];
-    [super dealloc];
+    self = [super initWithStyle:aCellStyle text:aText detailText:aDetailText];
+    if(self)
+	{
+        self.state = aState;
+    }
+    return self;
 }
 
 -(void) updateViewInTableView:(UITableView*)tableView
 {
 	TKSwitchCellView* cellView = (TKSwitchCellView*)[self lookupCellViewInTableView:tableView];
-	[cellView updateWithTitle:title state:state];
+	[cellView updateWithText:text detailText:detailText state:state];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKSwitchCellView* cellView = [tableView.theme switchCellView];
+    TKSwitchCellView* cellView = [tableView.theme switchCellViewWithStyle:cellStyle];
 	cellView.owner = self;
 	[cellView.switchButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
 	[cellView.switchButton addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];
-	[cellView updateWithTitle:title state:state];
+	[cellView updateWithText:text detailText:detailText state:state];
 	[self applyAttributesToCellView:cellView];
     return cellView;
+}
+
+-(void) tableViewDidSelectCell:(UITableView*) tableView
+{
 }
 
 -(void) onSwitchBtn:(UISwitch*)sender
 {
     state = [sender isOn];
-    if([delegate respondsToSelector:@selector(switchCell:didSwitchState:)])
+	
+	NSMethodSignature* methodSignature = [target methodSignatureForSelector:action];
+	if(methodSignature)
 	{
-        [delegate switchCell:self didSwitchState:[sender isOn]];
-    }
+		NSInvocation* inv = [NSInvocation invocationWithMethodSignature:methodSignature];
+		[inv setTarget:target];
+		[inv setSelector:action];
+		if([methodSignature numberOfArguments]==2)
+		{
+			[inv invoke];
+		}
+		else if([methodSignature numberOfArguments]==2+1)
+		{
+			[inv setArgument:&state atIndex:2];
+			[inv invoke];
+		}
+	}
 }
 
--(void) setFont:(UIFont*)font
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) getter:@selector(font) setter:@selector(setFont:) value:font];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setTextColor:(UIColor*)color
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) getter:@selector(textColor) setter:@selector(setTextColor:) value:color];
-	[self addAttribute:attr];
-	[attr release];
-}
 
 
 @end

@@ -39,6 +39,7 @@
 		textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 		[self.contentView addSubview:textField];
 		[textField release];
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

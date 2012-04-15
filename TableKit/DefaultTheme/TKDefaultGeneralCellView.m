@@ -1,5 +1,5 @@
 //
-//  TKDefaultActionCellView.h
+//  TKDefaultGeneralCellView.m
 //  TableKitSample
 //
 //  Created by Sergey Nikitenko on 4/7/12.
@@ -24,10 +24,24 @@
 //  THE SOFTWARE.
 //
 
-#import "TKCellView.h"
+#import "TKDefaultGeneralCellView.h"
 
-@interface TKDefaultActionCellView : TKActionCellView
+@implementation TKDefaultGeneralCellView
 
--(void) updateWithTitle:(NSString*)text;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
+{
+    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+    if (self) 
+	{
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
+    }
+    return self;
+}
+
+-(void) updateWithText:(NSString*)text detailText:(NSString*)detailText
+{
+	self.textLabel.text = text;
+	self.detailTextLabel.text = detailText;
+}
 
 @end

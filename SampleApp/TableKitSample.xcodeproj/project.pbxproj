@@ -10,8 +10,7 @@
 		ABD70877152DF94F0016FCFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70876152DF94F0016FCFD /* UIKit.framework */; };
 		ABD70879152DF94F0016FCFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70878152DF94F0016FCFD /* Foundation.framework */; };
 		ABD7087B152DF94F0016FCFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */; };
-		ABE434321531A252004401E9 /* TKDefaultActionCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434111531A252004401E9 /* TKDefaultActionCellView.m */; };
-		ABE434331531A252004401E9 /* TKDefaultStaticCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434131531A252004401E9 /* TKDefaultStaticCellView.m */; };
+		ABE434331531A252004401E9 /* TKDefaultGeneralCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434131531A252004401E9 /* TKDefaultGeneralCellView.m */; };
 		ABE434341531A252004401E9 /* TKDefaultSwitchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434151531A252004401E9 /* TKDefaultSwitchCellView.m */; };
 		ABE434351531A252004401E9 /* TKDefaultTextFieldCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434171531A252004401E9 /* TKDefaultTextFieldCellView.m */; };
 		ABE434361531A252004401E9 /* TKDefaultTextViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434191531A252004401E9 /* TKDefaultTextViewCellView.m */; };
@@ -41,10 +40,8 @@
 		ABD70876152DF94F0016FCFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ABD70878152DF94F0016FCFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		ABE434101531A252004401E9 /* TKDefaultActionCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultActionCellView.h; sourceTree = "<group>"; };
-		ABE434111531A252004401E9 /* TKDefaultActionCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultActionCellView.m; sourceTree = "<group>"; };
-		ABE434121531A252004401E9 /* TKDefaultStaticCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultStaticCellView.h; sourceTree = "<group>"; };
-		ABE434131531A252004401E9 /* TKDefaultStaticCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultStaticCellView.m; sourceTree = "<group>"; };
+		ABE434121531A252004401E9 /* TKDefaultGeneralCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultGeneralCellView.h; sourceTree = "<group>"; };
+		ABE434131531A252004401E9 /* TKDefaultGeneralCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultGeneralCellView.m; sourceTree = "<group>"; };
 		ABE434141531A252004401E9 /* TKDefaultSwitchCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultSwitchCellView.h; sourceTree = "<group>"; };
 		ABE434151531A252004401E9 /* TKDefaultSwitchCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKDefaultSwitchCellView.m; sourceTree = "<group>"; };
 		ABE434161531A252004401E9 /* TKDefaultTextFieldCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKDefaultTextFieldCellView.h; sourceTree = "<group>"; };
@@ -168,10 +165,8 @@
 		ABE4340F1531A252004401E9 /* DefaultTheme */ = {
 			isa = PBXGroup;
 			children = (
-				ABE434101531A252004401E9 /* TKDefaultActionCellView.h */,
-				ABE434111531A252004401E9 /* TKDefaultActionCellView.m */,
-				ABE434121531A252004401E9 /* TKDefaultStaticCellView.h */,
-				ABE434131531A252004401E9 /* TKDefaultStaticCellView.m */,
+				ABE434121531A252004401E9 /* TKDefaultGeneralCellView.h */,
+				ABE434131531A252004401E9 /* TKDefaultGeneralCellView.m */,
 				ABE434141531A252004401E9 /* TKDefaultSwitchCellView.h */,
 				ABE434151531A252004401E9 /* TKDefaultSwitchCellView.m */,
 				ABE434161531A252004401E9 /* TKDefaultTextFieldCellView.h */,
@@ -280,8 +275,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABE434321531A252004401E9 /* TKDefaultActionCellView.m in Sources */,
-				ABE434331531A252004401E9 /* TKDefaultStaticCellView.m in Sources */,
+				ABE434331531A252004401E9 /* TKDefaultGeneralCellView.m in Sources */,
 				ABE434341531A252004401E9 /* TKDefaultSwitchCellView.m in Sources */,
 				ABE434351531A252004401E9 /* TKDefaultTextFieldCellView.m in Sources */,
 				ABE434361531A252004401E9 /* TKDefaultTextViewCellView.m in Sources */,

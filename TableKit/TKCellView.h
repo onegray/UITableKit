@@ -41,20 +41,12 @@
 @end
 
 
-@protocol TKStaticCellViewProtocol <NSObject>
+@protocol TKGeneralCellViewProtocol <NSObject>
 @required
--(void) updateWithText:(NSString*)text;
+-(void) updateWithText:(NSString*)text detailText:(NSString*)detailText;
 @end
 
-#define TKStaticCellView TKCellView<TKStaticCellViewProtocol>
-
-
-@protocol TKActionCellViewProtocol <NSObject>
-@required
--(void) updateWithTitle:(NSString*)text;
-@end
-
-#define TKActionCellView TKCellView<TKActionCellViewProtocol>
+#define TKGeneralCellView TKCellView<TKGeneralCellViewProtocol>
 
 
 @protocol TKTextFieldCellViewProtocol <NSObject>
@@ -68,8 +60,8 @@
 
 @protocol TKSwitchCellViewProtocol <NSObject>
 @required
--(UISwitch*) switchButton;
--(void) updateWithTitle:(NSString*)title state:(BOOL)state;
+-(UIControl*) switchButton;
+-(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
 @end
 
 #define TKSwitchCellView TKCellView<TKSwitchCellViewProtocol>

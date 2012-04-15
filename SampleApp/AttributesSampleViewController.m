@@ -24,7 +24,7 @@
 	
 	if(self.sections==nil)
 	{
-		TKStaticCell* staticCell = [TKStaticCell cellWithTitle:@"Static cell"];
+		TKStaticCell* staticCell = [TKStaticCell cellWithStyle:UITableViewCellStyleValue1 text:@"Static cell" detailText:@"details"];
 		[staticCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 		[staticCell setTextColor:[UIColor redColor]];
 		[staticCell setImage:[UIImage imageNamed:@"coke.png"]];
@@ -35,7 +35,7 @@
 		[textFieldCell setImage:[UIImage imageNamed:@"apple.png"]];
 		[textFieldCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 		
-		TKSwitchCell* switchCell = [TKSwitchCell cellWithTitle:@"Switch" state:NO];
+		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Switch" state:NO];
 		[switchCell setImage:[UIImage imageNamed:@"coke.png"]];
 		
 		TKTextViewCell* textViewCell = [TKTextViewCell cellWithText:@"Hello!"];

@@ -28,13 +28,20 @@
 
 @interface TKStaticCell : TKCell
 {
-    NSString* title;
+    NSString* text;
+    NSString* detailText;
+	UITableViewCellStyle cellStyle;
 }
 
-@property (nonatomic, retain) NSString* title;
+@property (nonatomic, retain) NSString* text;
+@property (nonatomic, retain) NSString* detailText;
+@property (nonatomic, assign) UITableViewCellStyle cellStyle;
 
-+(TKStaticCell*) cellWithTitle:(NSString*)title;
--(id) initWithTitle:(NSString*)title;
++(id) cellWithText:(NSString*)text;
++(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText;
+
+-(id) initWithText:(NSString*)text;
+-(id) initWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText;
 
 -(void) setFont:(UIFont*)font;
 -(void) setTextColor:(UIColor*)color;

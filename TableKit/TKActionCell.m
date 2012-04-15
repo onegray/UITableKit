@@ -28,44 +28,63 @@
 #import "TKTheme.h"
 
 @implementation TKActionCell
-@synthesize title;
+@synthesize target, action;
 
-+(TKActionCell*) cellWithTitle:(NSString*)aTitle target:(id)aTarget action:(SEL)actionSelector
++(id) cellWithTarget:(id)aTarget action:(SEL)selector
 {
-    return [[[self alloc] initWithTitle:aTitle target:aTarget action:actionSelector] autorelease];
+    return [[[self alloc] initWithText:nil target:aTarget action:selector] autorelease];
 }
 
--(id) initWithTitle:(NSString*)aTitle target:(id)aTarget action:(SEL)actionSelector
++(id) cellWithText:(NSString*)aText target:(id)aTarget action:(SEL)selector
 {
-    self = [super init];
-    if(self)
+    return [[[self alloc] initWithText:aText target:aTarget action:selector] autorelease];
+}
+
++(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText target:(id)aTarget action:(SEL)selector
+{
+	return [[[self alloc] initWithStyle:cellStyle text:text detailText:detailText target:aTarget action:selector] autorelease];
+}
+
+-(id) initWithTarget:(id)aTarget action:(SEL)selector;
+{
+	return [self initWithText:nil target:aTarget action:selector];
+}
+
+-(id) initWithText:(NSString*)aText target:(id)aTarget action:(SEL)selector;
+{
+	self = [super initWithText:aText];
+	if(self)
 	{
-        self.title = aTitle;
-        target = aTarget;
-        action = actionSelector;
-    }
-    return self;
+		target = aTarget;
+		action = selector;
+	}
+	return self;
 }
 
--(void) dealloc
+-(id) initWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText target:(id)aTarget action:(SEL)selector
 {
-    [title release];
-    [super dealloc];
+	self = [super initWithStyle:aCellStyle text:aText detailText:aDetailText];
+	if(self)
+	{
+		target = aTarget;
+		action = selector;
+	}
+	return self;
 }
 
--(void) updateViewInTableView:(UITableView*)tableView
+-(void) setTarget:(id)aTarget action:(SEL)selector
 {
-	TKActionCellView* cellView = (TKActionCellView*)[self lookupCellViewInTableView:tableView];
-    [cellView updateWithTitle:title];
+	target = aTarget;
+	action = selector;
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKActionCellView* cellView = [tableView.theme actionCellView];
+    TKGeneralCellView* cellView = [tableView.theme actionCellViewWithStyle:cellStyle];
 	cellView.owner = self;
-    [cellView updateWithTitle:title];
+	[cellView updateWithText:text detailText:detailText];
 	[self applyAttributesToCellView:cellView];
-	return cellView;
+    return cellView;
 }
 
 -(void) tableViewDidSelectCell:(UITableView*) tableView
@@ -83,7 +102,6 @@
 		}
     }
 }
-
 
 
 @end

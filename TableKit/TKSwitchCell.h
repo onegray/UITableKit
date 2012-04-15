@@ -24,30 +24,21 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TKCell.h"
-
-@class TKSwitchCell;
-@protocol TKSwitchCellDelegate <NSObject>
-@optional
--(void)switchCell:(TKSwitchCell*)cell didSwitchState:(BOOL)state;
-@end
+#import "TKActionCell.h"
 
 
-@interface TKSwitchCell : TKCell
+@interface TKSwitchCell : TKActionCell
 {
-    NSString* title;
     BOOL state;
-	id<TKSwitchCellDelegate> delegate;
 }
-
-@property (nonatomic, assign) id<TKSwitchCellDelegate> delegate;
-@property (nonatomic, retain) NSString* title;
 @property (nonatomic, assign) BOOL state;
 
-+(TKSwitchCell*) cellWithTitle:(NSString*)title state:(BOOL)state;
--(id) initWithTitle:(NSString*)title state:(BOOL)state;
++(id) cellWithText:(NSString*)text state:(BOOL)state;
++(id) cellWithText:(NSString*)text state:(BOOL)state target:(id)aTarget action:(SEL)selector;
++(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
 
--(void) setFont:(UIFont*)font;
--(void) setTextColor:(UIColor*)color;
+-(id) initWithText:(NSString*)text state:(BOOL)state;
+-(id) initWithText:(NSString*)text state:(BOOL)state target:(id)aTarget action:(SEL)selector;
+-(id) initWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
 
 @end

@@ -32,7 +32,6 @@
 
 static TKDefaultTheme* defaultThemeImpl = nil;
 
-
 @interface TKThemeCacheProxy : NSProxy
 {
 	UITableView* tableView;
@@ -121,7 +120,6 @@ static SelectorCachedString** hashTable = NULL;
 	return signature;
 }
 
-
 - (void) forwardInvocation:(NSInvocation *)invocation
 {
 	NSString* reuseId = [SelectorCachedString stringForSelector:invocation.selector];
@@ -137,6 +135,45 @@ static SelectorCachedString** hashTable = NULL;
 		[invocation getReturnValue:&cellView];
 		[cellView setReuseIdentifier:reuseId];
 	}
+}
+
+-(TKGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle
+{
+	static NSString* reuseIds[] = {@"cellDefault", @"cellValue1", @"cellValue2", @"cellSubtitle"};
+	TKGeneralCellView* cellView = (TKGeneralCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
+	if(!cellView)
+	{
+		id target = [themeImpl respondsToSelector:@selector(generalCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
+		cellView = [target generalCellViewWithStyle:cellStyle];
+		[cellView setReuseIdentifier:reuseIds[cellStyle]];
+	}
+	return cellView;
+}
+
+-(TKGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle
+{
+	static NSString* reuseIds[] = {@"actionDefault", @"actionValue1", @"actionValue2", @"actionSubtitle"};
+	TKGeneralCellView* cellView = (TKGeneralCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
+	if(!cellView)
+	{
+		id target = [themeImpl respondsToSelector:@selector(actionCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
+		cellView = [target actionCellViewWithStyle:cellStyle];
+		[cellView setReuseIdentifier:reuseIds[cellStyle]];
+	}
+	return cellView;
+}
+
+-(TKSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
+{
+	static NSString* reuseIds[] = {@"switchDefault", @"switchValue1", @"switchValue2", @"switchSubtitle"};
+	TKSwitchCellView* cellView = (TKSwitchCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
+	if(!cellView)
+	{
+		id target = [themeImpl respondsToSelector:@selector(switchCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
+		cellView = [target switchCellViewWithStyle:cellStyle];
+		[cellView setReuseIdentifier:reuseIds[cellStyle]];
+	}
+	return cellView;
 }
 
 @end

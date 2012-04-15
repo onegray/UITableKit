@@ -1,5 +1,5 @@
 //
-//  TKDefaultActionCellView.m
+//  TKDefaultGeneralCellView.h
 //  TableKitSample
 //
 //  Created by Sergey Nikitenko on 4/7/12.
@@ -24,13 +24,10 @@
 //  THE SOFTWARE.
 //
 
-#import "TKDefaultActionCellView.h"
+#import "TKCellView.h"
 
-@implementation TKDefaultActionCellView
+@interface TKDefaultGeneralCellView : TKGeneralCellView
 
--(void) updateWithTitle:(NSString*)text
-{
-	self.textLabel.text = text;
-}
+-(void) updateWithText:(NSString*)text detailText:(NSString*)detailText;
 
 @end

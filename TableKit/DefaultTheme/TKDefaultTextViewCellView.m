@@ -39,6 +39,7 @@
 		textView.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:textView];
 		[textView release];
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }

@@ -32,6 +32,6 @@
 }
 @property (nonatomic, readonly) UISwitch* switchButton;
 
--(void) updateWithTitle:(NSString*)title state:(BOOL)state;
+-(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
 
 @end

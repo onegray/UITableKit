@@ -24,18 +24,23 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "TKCell.h"
+#import "TKStaticCell.h"
 
-@interface TKActionCell : TKCell
+@interface TKActionCell : TKStaticCell
 {
-    NSString* title;
     id target;
     SEL action;
 }
+@property (nonatomic, assign) id target;
+@property (nonatomic, assign) SEL action;
 
-+(TKActionCell*) cellWithTitle:(NSString*)title target:(id)target action:(SEL)action;
--(id) initWithTitle:(NSString*)title target:(id)target action:(SEL)action;
++(id) cellWithTarget:(id)target action:(SEL)selector;
++(id) cellWithText:(NSString*)text target:(id)target action:(SEL)selector;
++(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText target:(id)target action:(SEL)selector;
 
-@property(nonatomic, retain) NSString* title;
+-(id) initWithTarget:(id)target action:(SEL)selector;
+-(id) initWithText:(NSString*)text target:(id)target action:(SEL)selector;
+
+-(void) setTarget:(id)target action:(SEL)selector;
 
 @end

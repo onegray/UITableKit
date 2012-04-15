@@ -29,10 +29,10 @@
 @protocol TKThemeProtocol <NSObject>
 @optional // if method is not implemented it will be forwarded to default theme
 
--(TKStaticCellView*) staticCellView;
--(TKActionCellView*) actionCellView;
+-(TKGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle;
+-(TKGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle;
+-(TKSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle;
 -(TKTextFieldCellView*) textFieldCellView;
--(TKSwitchCellView*) switchCellView;
 -(TKTextViewCellView*) textViewCellView;
 
 @end

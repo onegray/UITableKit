@@ -37,13 +37,15 @@
         switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
 		self.accessoryView = switchButton;
 		[switchButton release];
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
 
--(void) updateWithTitle:(NSString*)title state:(BOOL)state
+-(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state
 {
-	self.textLabel.text = title;
+	self.textLabel.text = text;
+	self.detailTextLabel.text = detailText;
 	switchButton.on = state;
 }
 

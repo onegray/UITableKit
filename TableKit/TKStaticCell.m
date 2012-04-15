@@ -29,40 +29,60 @@
 #import "TKCellAttribute.h"
 
 @implementation TKStaticCell
-@synthesize title;
+@synthesize text, detailText, cellStyle;
 
-+(TKStaticCell*) cellWithTitle:(NSString*)aTitle
++(id) cellWithText:(NSString*)aText
 {
-    return [[[self alloc] initWithTitle:aTitle] autorelease];
+    return [[[self alloc] initWithText:aText] autorelease];
 }
 
--(id) initWithTitle:(NSString*)aTitle
++(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText
+{
+	return [[[self alloc] initWithStyle:cellStyle text:text detailText:detailText] autorelease];
+}
+
+-(id) initWithText:(NSString*)aText
 {
     self = [super init];
     if(self)
 	{
-        self.title = aTitle;
+        self.text = aText;
+		cellStyle = UITableViewCellStyleDefault;
     }
     return self;
 }
 
+-(id) initWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText
+{
+    self = [super init];
+    if(self)
+	{
+        self.text = aText;
+		self.detailText = aDetailText;
+		cellStyle = aCellStyle;
+    }
+    return self;
+}
+
+
 -(void) dealloc
 {
-    [title release];
+    [text release];
+	[detailText release];
     [super dealloc];
 }
 
 -(void) updateViewInTableView:(UITableView*)tableView
 {
-	TKStaticCellView* cellView = (TKStaticCellView*)[self lookupCellViewInTableView:tableView];
-	[cellView updateWithText:title];
+	TKGeneralCellView* cellView = (TKGeneralCellView*)[self lookupCellViewInTableView:tableView];
+	[cellView updateWithText:text detailText:detailText];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKStaticCellView* cellView = [tableView.theme staticCellView];
+    TKGeneralCellView* cellView = [tableView.theme generalCellViewWithStyle:cellStyle];
 	cellView.owner = self;
-	[cellView updateWithText:title];
+	[cellView updateWithText:text detailText:detailText];
 	[self applyAttributesToCellView:cellView];
     return cellView;
 }

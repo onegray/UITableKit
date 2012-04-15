@@ -26,8 +26,7 @@
 
 #import "TKDefaultTheme.h"
 
-#import "TKDefaultStaticCellView.h"
-#import "TKDefaultActionCellView.h"
+#import "TKDefaultGeneralCellView.h"
 #import "TKDefaultTextFieldCellView.h"
 #import "TKDefaultSwitchCellView.h"
 #import "TKDefaultTextViewCellView.h"
@@ -35,14 +34,21 @@
 
 @implementation TKDefaultTheme
 
--(TKDefaultStaticCellView*) staticCellView
+-(TKDefaultGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[TKDefaultStaticCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	return [[[TKDefaultGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
 }
 
--(TKDefaultActionCellView*) actionCellView
+-(TKDefaultGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[TKDefaultActionCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	TKDefaultGeneralCellView* cellView = [[TKDefaultGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
+	cellView.selectionStyle = UITableViewCellSelectionStyleBlue;
+	return [cellView autorelease];
+}
+
+-(TKDefaultSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
+{
+	return [[[TKDefaultSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
 }
 
 -(TKDefaultTextFieldCellView*) textFieldCellView
@@ -50,16 +56,9 @@
 	return [[[TKDefaultTextFieldCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
 
--(TKDefaultSwitchCellView*) switchCellView
-{
-	return [[[TKDefaultSwitchCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
-}
-
 -(TKDefaultTextViewCellView*) textViewCellView
 {
 	return [[[TKDefaultTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
 }
-
-
 
 @end
