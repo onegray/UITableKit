@@ -29,10 +29,11 @@
 @interface TKDefaultTextFieldCellView : TKTextFieldCellView
 {
 	UITextField* textField;
+	UITableViewCellStyle cellStyle;
 }
 
 @property (nonatomic, readonly) UITextField* textField;
 
--(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder;
+-(void) updateWithTitle:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
 
 @end

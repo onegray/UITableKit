@@ -105,8 +105,10 @@
 		for(TKCellAttribute* attr in attributes)
 		{
 			id v = [attr getRollbackValue:cellView];
-			[cellView.rollbackArribute addAttribute:attr withRollbackValue:v];
-			[attr apply:cellView];
+			if(v) {
+				[cellView.rollbackArribute addAttribute:attr withRollbackValue:v];
+				[attr apply:cellView];
+			}
 		}
 	}
 }

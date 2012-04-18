@@ -35,13 +35,13 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 @interface TKThemeCacheProxy : NSProxy
 {
 	UITableView* tableView;
-	id themeImpl;
+	id<TKThemeProtocol> themeImpl;
 }
 
--(id) initWithTheme:(id)theme forTableView:(UITableView*) tableView;
+-(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*) tableView;
 
 @property (nonatomic, assign) UITableView* tableView;
-@property (nonatomic, retain) id themeImpl;
+@property (nonatomic, retain) id<TKThemeProtocol> themeImpl;
 
 @end
 
@@ -96,7 +96,7 @@ static SelectorCachedString** hashTable = NULL;
 @implementation TKThemeCacheProxy
 @synthesize tableView, themeImpl;
 
--(id) initWithTheme:(id)theme forTableView:(UITableView*)aTableView
+-(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*)aTableView
 {
 	self.themeImpl = theme;
 	self.tableView = aTableView;
@@ -122,6 +122,7 @@ static SelectorCachedString** hashTable = NULL;
 
 - (void) forwardInvocation:(NSInvocation *)invocation
 {
+	NSAssert([invocation.methodSignature numberOfArguments]==2, @"TKThemeCacheProxy doesn't support forward methods with params. Define method explicit.");
 	NSString* reuseId = [SelectorCachedString stringForSelector:invocation.selector];
 	TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(cellView) 
@@ -139,6 +140,7 @@ static SelectorCachedString** hashTable = NULL;
 
 -(TKGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
+	NSAssert(cellStyle < 4, @"-[TKThemeCacheProxy generalCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
 	static NSString* reuseIds[] = {@"cellDefault", @"cellValue1", @"cellValue2", @"cellSubtitle"};
 	TKGeneralCellView* cellView = (TKGeneralCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
 	if(!cellView)
@@ -152,6 +154,7 @@ static SelectorCachedString** hashTable = NULL;
 
 -(TKGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
+	NSAssert(cellStyle < 4, @"-[TKThemeCacheProxy actionCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
 	static NSString* reuseIds[] = {@"actionDefault", @"actionValue1", @"actionValue2", @"actionSubtitle"};
 	TKGeneralCellView* cellView = (TKGeneralCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
 	if(!cellView)
@@ -165,12 +168,27 @@ static SelectorCachedString** hashTable = NULL;
 
 -(TKSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
+	NSAssert(cellStyle < 4, @"-[TKThemeCacheProxy switchCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
 	static NSString* reuseIds[] = {@"switchDefault", @"switchValue1", @"switchValue2", @"switchSubtitle"};
 	TKSwitchCellView* cellView = (TKSwitchCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
 	if(!cellView)
 	{
 		id target = [themeImpl respondsToSelector:@selector(switchCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
 		cellView = [target switchCellViewWithStyle:cellStyle];
+		[cellView setReuseIdentifier:reuseIds[cellStyle]];
+	}
+	return cellView;
+}
+
+-(TKTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle
+{
+	NSAssert(cellStyle < 3, @"-[TKThemeCacheProxy textFieldCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
+	static NSString* reuseIds[] = {@"textFieldDefault", @"textFieldValue1", @"textFieldValue2"};
+	TKTextFieldCellView* cellView = (TKTextFieldCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
+	if(!cellView)
+	{
+		id target = [themeImpl respondsToSelector:@selector(textFieldCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
+		cellView = [target textFieldCellViewWithStyle:cellStyle];
 		[cellView setReuseIdentifier:reuseIds[cellStyle]];
 	}
 	return cellView;

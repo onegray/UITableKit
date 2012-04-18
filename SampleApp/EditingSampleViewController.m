@@ -49,14 +49,14 @@
 		[citiesSection addCell:[TKStaticCell cellWithText:@"Brest"]];
 		[citiesSection addCell:[TKStaticCell cellWithText:@"Homel"]];
 
-		self.addCityCell = [TKTextFieldCell cellWithText:nil placeholder:@"Add New"];
+		self.addCityCell = [TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Add New:" placeholder:@"Enter Text"];
 		addCityCell.delegate = (id)self;
 		[addCityCell setPreventEditing:YES];
 		[citiesSection addCell:addCityCell];
 
 		TKSwitchCell* editingModeCell = [TKSwitchCell cellWithText:@"Editing Mode" target:self action:@selector(onSwitchCell:)];
 		TKSection* editingModeSection = [TKSection sectionWithCells:editingModeCell, nil];
-		editingModeSection.preventEditing = YES;		
+		editingModeSection.preventEditing = YES;
 
 		self.sections = [NSArray arrayWithObjects:citiesSection, editingModeSection, nil];
 	}

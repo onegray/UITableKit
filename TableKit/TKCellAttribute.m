@@ -39,6 +39,9 @@
 	{
 		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
 		target = [target performSelector:accessor];
+		if(!target) {
+			return; // accessor returns nil if property isn't initialized, for ex. cell.imageView might be nil
+		}
 	}
 	
 	NSAssert([target respondsToSelector:setter], @"Unresponded TKCellAttribute selector");
@@ -106,10 +109,13 @@
 {
 	if(accessor)
 	{
-		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
+		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellObjectAttribute accessor");
 		target = [target performSelector:accessor];
+		if(!target) {
+			return nil; // accessor returns nil if property isn't initialized, for ex. cell.imageView might be nil
+		}
 	}
-	NSAssert([target respondsToSelector:getter], @"Unresponded TKCellAttribute selector");
+	NSAssert([target respondsToSelector:getter], @"Unresponded TKCellObjectAttribute selector");
 	id v = [target performSelector:getter];
 
 	return v ? v : [NSNull null];
@@ -150,10 +156,10 @@
 {
 	if(accessor)
 	{
-		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
+		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellScalarAttribute accessor");
 		target = [target performSelector:accessor];
 	}
-	NSAssert([target respondsToSelector:getter], @"Unresponded TKCellAttribute selector");
+	NSAssert([target respondsToSelector:getter], @"Unresponded TKCellScalarAttribute selector");
 	void* v = [target performSelector:getter];
 	
 	return [NSValue valueWithPointer:v];

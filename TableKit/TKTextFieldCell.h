@@ -32,19 +32,29 @@
 -(void)textFieldCellDidEndEditing:(TKTextFieldCell*)cell;
 @end
 
+
 @interface TKTextFieldCell : TKCell
 {
+    NSString* title;
     NSString* text;
     NSString* placeholder;
+	UITableViewCellStyle cellStyle;
 	id<TKTextFieldCellDelegate> delegate;
 }
 
 @property (nonatomic, assign) id<TKTextFieldCellDelegate> delegate;
+@property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* placeholder;
+@property (nonatomic, assign) UITableViewCellStyle cellStyle;
 
-+(TKTextFieldCell*) cellWithText:(NSString*)text placeholder:(NSString*)placeholder;
 -(id) initWithText:(NSString*)text placeholder:(NSString*)placeholder;
+-(id) initWithStyle:(UITableViewCellStyle)style title:(NSString*)title placeholder:(NSString*)placeholder;
+-(id) initWithStyle:(UITableViewCellStyle)style title:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
+
++(id) cellWithText:(NSString*)text placeholder:(NSString*)placeholder;
++(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title placeholder:(NSString*)placeholder;
++(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
 
 -(void) setKeyboardType:(UIKeyboardType)keyboardType;
 -(void) setFont:(UIFont*)font;

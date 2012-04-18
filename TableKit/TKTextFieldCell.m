@@ -30,26 +30,50 @@
 
 @implementation TKTextFieldCell
 @synthesize delegate;
-@synthesize text, placeholder;
+@synthesize title, text, cellStyle, placeholder;
 
 +(TKTextFieldCell*) cellWithText:(NSString*)text placeholder:(NSString*)placeholder
 {
     return [[[self alloc] initWithText:text placeholder:placeholder] autorelease];
 }
 
++(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title placeholder:(NSString*)placeholder
+{
+	return [[[self alloc] initWithStyle:style title:title text:nil placeholder:placeholder] autorelease];
+}
+
++(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
+{
+	return [[[self alloc] initWithStyle:style title:title text:text placeholder:placeholder] autorelease];
+}
+
 -(id) initWithText:(NSString*)aText placeholder:(NSString*)aPlaceholder
+{
+    return [self initWithStyle:UITableViewCellStyleDefault title:nil text:aText placeholder:aPlaceholder];
+}
+
+-(id) initWithStyle:(UITableViewCellStyle)aStyle title:(NSString*)aTitle placeholder:(NSString*)aPlaceholder
+{
+    return [self initWithStyle:aStyle title:aTitle text:nil placeholder:aPlaceholder];	
+}
+
+-(id) initWithStyle:(UITableViewCellStyle)aStyle title:(NSString*)aTitle text:(NSString*)aText placeholder:(NSString*)aPlaceholder
 {
     self = [super init];
     if(self)
 	{
+		cellStyle = aStyle;
+        self.title = aTitle; 
         self.text = aText; 
         self.placeholder = aPlaceholder;
     }
-    return self;
+    return self;	
 }
+
 
 -(void) dealloc
 {
+	[title release];
     [text release];
     [placeholder release];
     [super dealloc];
@@ -58,15 +82,15 @@
 -(void) updateViewInTableView:(UITableView*)tableView
 {
 	TKTextFieldCellView* cellView = (TKTextFieldCellView*)[self lookupCellViewInTableView:tableView];
-	[cellView updateWithText:text placeholder:placeholder];
+	[cellView updateWithTitle:title text:text placeholder:placeholder];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKTextFieldCellView* cellView = [tableView.theme textFieldCellView];
+    TKTextFieldCellView* cellView = [tableView.theme textFieldCellViewWithStyle:cellStyle];
 	cellView.owner = self;
 	cellView.textField.delegate = (id)self;
-	[cellView updateWithText:text placeholder:placeholder];
+	[cellView updateWithTitle:title text:text placeholder:placeholder];
 	[self applyAttributesToCellView:cellView];
     return cellView;
 }

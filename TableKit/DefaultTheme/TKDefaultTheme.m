@@ -51,9 +51,10 @@
 	return [[[TKDefaultSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
 }
 
--(TKDefaultTextFieldCellView*) textFieldCellView
+
+-(TKDefaultTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[TKDefaultTextFieldCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	return [[[TKDefaultTextFieldCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
 }
 
 -(TKDefaultTextViewCellView*) textViewCellView

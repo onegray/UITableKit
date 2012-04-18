@@ -32,13 +32,13 @@
 -(TKGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle;
 -(TKGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle;
 -(TKSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle;
--(TKTextFieldCellView*) textFieldCellView;
+-(TKTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle;
 -(TKTextViewCellView*) textViewCellView;
 
 @end
 
 
 @interface UITableView (theme)
--(void) applyTheme:(id)theme;
-@property (nonatomic, readonly) id theme;
+-(void) applyTheme:(id<TKThemeProtocol>)theme;
+@property (nonatomic, readonly) id<TKThemeProtocol> theme;
 @end

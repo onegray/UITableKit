@@ -35,8 +35,10 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
+		cellStyle = style;
 		textField = [[UITextField alloc] initWithFrame:CGRectZero];
-		textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;		
+		textField.textAlignment = style==UITableViewCellStyleValue1 ? UITextAlignmentRight : UITextAlignmentLeft;
 		[self.contentView addSubview:textField];
 		[textField release];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -48,12 +50,31 @@
 {
 	[super layoutSubviews];
 	CGSize boundsSize = self.contentView.bounds.size;
-	CGFloat offset = self.imageView.frame.origin.x + self.imageView.frame.size.width;
+	CGFloat offset = 0;
+	
+	if(cellStyle == UITableViewCellStyleValue1)
+	{
+		offset = CGRectGetMaxX(self.textLabel.frame);
+		if(offset==0) {
+			offset = CGRectGetMaxX(self.imageView.frame);
+		}
+	}
+	else if(cellStyle == UITableViewCellStyleValue2)
+	{
+		offset = self.indentationLevel*self.indentationWidth + 73;
+	}
+	else
+	{
+		offset = CGRectGetMaxX(self.imageView.frame);
+	}
 	textField.frame = CGRectMake(offset+10, 0, boundsSize.width-offset-20, boundsSize.height);
+	
+	[self.contentView bringSubviewToFront:textField];
 }
 
--(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder
+-(void) updateWithTitle:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder
 {
+	self.textLabel.text = title;
     textField.text = text;
     textField.placeholder = placeholder;
 }
