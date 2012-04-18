@@ -11,22 +11,19 @@
 #import "TKTextFieldCell.h"
 #import "TKStaticCell.h"
 #import "TKSwitchCell.h"
-#import "TKTextViewCell.h"
-
-#import "TKDefaultTheme.h"
 
 @interface EditingSampleViewController ()
-@property (nonatomic, retain) TKTextFieldCell* addCityCell;
-@property (nonatomic, retain) TKSection* citiesSection;
+@property (nonatomic, retain) TKTextFieldCell* textFieldCell;
+@property (nonatomic, retain) TKSection* planetsSection;
 @end
 
 @implementation EditingSampleViewController
-@synthesize citiesSection, addCityCell;
+@synthesize planetsSection, textFieldCell;
 
 -(void) dealloc
 {
-	[citiesSection release];
-	[addCityCell release];
+	[planetsSection release];
+	[textFieldCell release];
 	[super dealloc];
 }
 
@@ -35,42 +32,47 @@
 {
     [super viewDidLoad];
 
-	TKDefaultTheme* defaultTheme = [[[TKDefaultTheme alloc] init] autorelease];
-	[self.tableView applyTheme:defaultTheme];
-	
 	if(self.sections==nil)
 	{
-		self.citiesSection = [[[TKSection alloc] init] autorelease];
-		citiesSection.preventIndentationDuringEditing = YES;
-		citiesSection.allowsReorderingDuringEditing = YES;
-		citiesSection.headerTitle = @"Cities";
+		self.planetsSection = [[[TKSection alloc] init] autorelease];
+		planetsSection.preventIndentationDuringEditing = YES;
+		planetsSection.allowsReorderingDuringEditing = YES;
+		planetsSection.headerTitle = @"Solar System";
 
-		[citiesSection addCell:[TKStaticCell cellWithText:@"Minsk"]];
-		[citiesSection addCell:[TKStaticCell cellWithText:@"Brest"]];
-		[citiesSection addCell:[TKStaticCell cellWithText:@"Homel"]];
+		[planetsSection addCell:[TKStaticCell cellWithText:@"Mercury"]];
+		[planetsSection addCell:[TKStaticCell cellWithText:@"Venus"]];
+		[planetsSection addCell:[TKStaticCell cellWithText:@"Earth"]];
+		[planetsSection addCell:[TKStaticCell cellWithText:@"Mars"]];
 
-		self.addCityCell = [TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Add New:" placeholder:@"Enter Text"];
-		addCityCell.delegate = (id)self;
-		[addCityCell setPreventEditing:YES];
-		[citiesSection addCell:addCityCell];
+		self.textFieldCell = [TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Add New:" placeholder:@"Enter Text"];
+		[textFieldCell setTextFieldDelegate:(id)self];
+		[textFieldCell setPreventEditing:YES];
+		[planetsSection addCell:textFieldCell];
 
 		TKSwitchCell* editingModeCell = [TKSwitchCell cellWithText:@"Editing Mode" target:self action:@selector(onSwitchCell:)];
 		TKSection* editingModeSection = [TKSection sectionWithCells:editingModeCell, nil];
 		editingModeSection.preventEditing = YES;
 
-		self.sections = [NSArray arrayWithObjects:citiesSection, editingModeSection, nil];
+		self.sections = [NSArray arrayWithObjects:planetsSection, editingModeSection, nil];
 	}
 }
 
--(void)textFieldCellDidEndEditing:(TKTextFieldCell*)cell
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-	if([cell.text length] > 0) 
+	[textField resignFirstResponder];
+	if([textFieldCell.text length] > 0) 
 	{
-		TKStaticCell* cityCell = [TKStaticCell cellWithText:cell.text];
-		[citiesSection insertCell:cityCell atIndex:[citiesSection indexOfCell:cell]];
-		cell.text = nil;
-		[self.tableView reloadData];
+		int newRowIndex = [planetsSection indexOfCell:textFieldCell];
+		TKStaticCell* customPlanetCell = [TKStaticCell cellWithText:textFieldCell.text];
+		[planetsSection insertCell:customPlanetCell atIndex:newRowIndex];
+		
+		NSIndexPath* indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
+		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
+		
+		textFieldCell.text = nil;
+		[textFieldCell updateViewInTableView:self.tableView];
 	}
+	return YES;
 }
 
 

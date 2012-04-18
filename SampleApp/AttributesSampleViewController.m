@@ -12,15 +12,12 @@
 #import "TKStaticCell.h"
 #import "TKSwitchCell.h"
 #import "TKTextViewCell.h"
-#import "TKDefaultTheme.h"
 
 @implementation AttributesSampleViewController
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	TKDefaultTheme* defaultTheme = [[[TKDefaultTheme alloc] init] autorelease];
-	[self.tableView applyTheme:defaultTheme];
 	
 	if(self.sections==nil)
 	{
@@ -31,7 +28,6 @@
 		
 		TKTextFieldCell* textFieldCell = [TKTextFieldCell cellWithText:@"Text" placeholder:@"Enter text"];
 		[textFieldCell setKeyboardType:UIKeyboardTypeEmailAddress];
-		textFieldCell.delegate = (id)self;
 		[textFieldCell setImage:[UIImage imageNamed:@"apple.png"]];
 		[textFieldCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 		

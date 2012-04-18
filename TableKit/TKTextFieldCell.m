@@ -29,7 +29,6 @@
 #import "TKCellAttribute.h"
 
 @implementation TKTextFieldCell
-@synthesize delegate;
 @synthesize title, text, cellStyle, placeholder;
 
 +(TKTextFieldCell*) cellWithText:(NSString*)text placeholder:(NSString*)placeholder
@@ -73,6 +72,7 @@
 
 -(void) dealloc
 {
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[title release];
     [text release];
     [placeholder release];
@@ -89,34 +89,30 @@
 {
     TKTextFieldCellView* cellView = [tableView.theme textFieldCellViewWithStyle:cellStyle];
 	cellView.owner = self;
-	cellView.textField.delegate = (id)self;
+	cellView.textField.delegate=nil;
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) 
+												 name:UITextFieldTextDidChangeNotification object:cellView.textField];
+	
 	[cellView updateWithTitle:title text:text placeholder:placeholder];
+
 	[self applyAttributesToCellView:cellView];
+	if(cellView.textField.delegate==nil)
+	{
+		cellView.textField.delegate = (id)self;
+	}
     return cellView;
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+-(void) textFieldTextDidChange:(NSNotification*)notification
 {
-    [self performSelector:@selector(textFieldUpdateCallback:) withObject:textField afterDelay:0];
-    return YES;
+    self.text = [[notification object] text];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     return YES;
-}
-
--(void) textFieldUpdateCallback:(UITextField*)tf
-{
-    self.text = tf.text;
-}
-
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-	if([delegate respondsToSelector:@selector(textFieldCellDidEndEditing:)])
-	{
-		[delegate textFieldCellDidEndEditing:self];
-	}
 }
 
 
@@ -137,6 +133,13 @@
 -(void) setTextColor:(UIColor*)color
 {
 	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textField) getter:@selector(textColor) setter:@selector(setTextColor:) value:color];
+	[self addAttribute:attr];
+	[attr release];
+}
+
+-(void) setTextFieldDelegate:(id<UITextFieldDelegate>)delegate
+{
+	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textField) getter:@selector(delegate) setter:@selector(setDelegate:) value:&delegate];
 	[self addAttribute:attr];
 	[attr release];
 }

@@ -26,23 +26,14 @@
 #import <UIKit/UIKit.h>
 #import "TKCell.h"
 
-@class TKTextFieldCell;
-@protocol TKTextFieldCellDelegate <NSObject>
-@optional
--(void)textFieldCellDidEndEditing:(TKTextFieldCell*)cell;
-@end
-
-
 @interface TKTextFieldCell : TKCell
 {
     NSString* title;
     NSString* text;
     NSString* placeholder;
 	UITableViewCellStyle cellStyle;
-	id<TKTextFieldCellDelegate> delegate;
 }
 
-@property (nonatomic, assign) id<TKTextFieldCellDelegate> delegate;
 @property (nonatomic, retain) NSString* title;
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* placeholder;
@@ -56,6 +47,7 @@
 +(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title placeholder:(NSString*)placeholder;
 +(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
 
+-(void) setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
 -(void) setKeyboardType:(UIKeyboardType)keyboardType;
 -(void) setFont:(UIFont*)font;
 -(void) setTextColor:(UIColor*)color;
