@@ -37,8 +37,17 @@
 
 @end
 
+@interface TKThemeCacheProxy : NSProxy <TKThemeProtocol>
+{
+	UITableView* tableView;
+	id<TKThemeProtocol> themeImpl;
+}
+-(Class) cellClassForSelector:(SEL)selector style:(int)style;
+
+@end
+
 
 @interface UITableView (theme)
 -(void) applyTheme:(id<TKThemeProtocol>)theme;
-@property (nonatomic, readonly) id<TKThemeProtocol> theme;
+@property (nonatomic, readonly) TKThemeCacheProxy* theme;
 @end

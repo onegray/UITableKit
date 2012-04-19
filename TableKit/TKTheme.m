@@ -30,71 +30,64 @@
 #import <objc/runtime.h>
 
 
-static TKDefaultTheme* defaultThemeImpl = nil;
-
-@interface TKThemeCacheProxy : NSProxy
-{
-	UITableView* tableView;
-	id<TKThemeProtocol> themeImpl;
-}
-
--(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*) tableView;
-
-@property (nonatomic, assign) UITableView* tableView;
-@property (nonatomic, retain) id<TKThemeProtocol> themeImpl;
-
-@end
-
-
-
-// String pool to prevent numerous allocations
-@interface SelectorCachedString : NSObject
+@interface CellCache : NSObject
 { 
 @public
-	NSString* string;
-	SEL key;
-	SelectorCachedString* next;
+	SEL keySel;
+	int keyParam;
+	Class class;
+	TKCellView* cellView;
+	NSString* cellId;
+	CellCache* next;
 }
 +(void) initHashTable;
-+(NSString*) stringForSelector:(SEL)key;
 @end
 
-@implementation SelectorCachedString
+@implementation CellCache
 #define HASH_TABLE_SIZE 31
-static SelectorCachedString** hashTable = NULL;
+static CellCache** hashTable = NULL;
 
 +(void) initHashTable
 {
-	hashTable = hashTable ? hashTable : (SelectorCachedString**)calloc(HASH_TABLE_SIZE, sizeof(void*));
+	hashTable = hashTable ? hashTable : (CellCache**)calloc(HASH_TABLE_SIZE, sizeof(void*));
 }
 
-+(NSString*) stringForSelector:(SEL)key
++(CellCache*) cacheForSelector:(SEL)sel param:(int)param
 {
-	int ind = (int)key % HASH_TABLE_SIZE;
-	SelectorCachedString* root = hashTable[ind];
+	int ind = ((int)sel + param) % HASH_TABLE_SIZE;
+	CellCache* root = hashTable[ind];
 	while(root)
 	{
-		if(root->key==key)
+		if(root->keySel==sel && root->keyParam==param)
 		{
-			return root->string;
+			return root;
 		}
 		root = root->next;
 	}
-
-	root = [[SelectorCachedString alloc] init];
-	root->string = [NSStringFromSelector(key) retain];
-	root->key = key;
+	
+	root = [[CellCache alloc] init];
+	root->cellId = [[NSString alloc] initWithFormat:@"%s%d", sel_getName(sel), param];
+	root->keySel = sel;
+	root->keyParam = param;
 	root->next = hashTable[ind];
 	hashTable[ind] = root;
 	
-	return root->string;
+	return root;
 }
+
 @end
 
 
+@interface TKThemeCacheProxy()
+-(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*) tableView;
+@property (nonatomic, assign) UITableView* tableView;
+@property (nonatomic, retain) id<TKThemeProtocol> themeImpl;
+@end
 
 @implementation TKThemeCacheProxy
 @synthesize tableView, themeImpl;
+
+static TKDefaultTheme* defaultThemeImpl = nil;
 
 -(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*)aTableView
 {
@@ -122,76 +115,65 @@ static SelectorCachedString** hashTable = NULL;
 
 - (void) forwardInvocation:(NSInvocation *)invocation
 {
-	NSAssert([invocation.methodSignature numberOfArguments]==2, @"TKThemeCacheProxy doesn't support forward methods with params. Define method explicit.");
-	NSString* reuseId = [SelectorCachedString stringForSelector:invocation.selector];
-	TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:reuseId];
+	int param = 0;
+	NSMethodSignature* ms = invocation.methodSignature;
+	if([ms numberOfArguments]>2)
+	{
+		NSAssert([ms numberOfArguments]==3, @"TKThemeCacheProxy supports only 1 param");
+		NSAssert([ms getArgumentTypeAtIndex:2][0]=='i', @"TKThemeCacheProxy supports only int params");
+		[invocation getArgument:&param atIndex:2];
+	}
+	
+	CellCache* cache = [CellCache cacheForSelector:invocation.selector param:param];
+	TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:cache->cellId];
 	if(cellView) 
 	{
 		[invocation setReturnValue:&cellView];
+	}
+	else if(cache->cellView)
+	{
+		[invocation setReturnValue:&(cache->cellView)];
+		[cache->cellView autorelease];
+		cache->cellView = nil;
 	}
 	else
 	{
 		id target = [themeImpl respondsToSelector:invocation.selector] ? themeImpl : defaultThemeImpl;
 		[invocation invokeWithTarget:target];
 		[invocation getReturnValue:&cellView];
-		[cellView setReuseIdentifier:reuseId];
+		[cellView setReuseIdentifier:cache->cellId];
 	}
 }
 
--(TKGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle
+-(Class) cellClassForSelector:(SEL)selector style:(int)style
 {
-	NSAssert(cellStyle < 4, @"-[TKThemeCacheProxy generalCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
-	static NSString* reuseIds[] = {@"cellDefault", @"cellValue1", @"cellValue2", @"cellSubtitle"};
-	TKGeneralCellView* cellView = (TKGeneralCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
-	if(!cellView)
+	CellCache* cache = [CellCache cacheForSelector:selector param:style];
+	if(!cache->class) 
 	{
-		id target = [themeImpl respondsToSelector:@selector(generalCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
-		cellView = [target generalCellViewWithStyle:cellStyle];
-		[cellView setReuseIdentifier:reuseIds[cellStyle]];
-	}
-	return cellView;
-}
+		TKCellView* cellView = nil;
+		id target = [themeImpl respondsToSelector:selector] ? themeImpl : defaultThemeImpl;
+		NSMethodSignature* ms = [target methodSignatureForSelector:selector];
 
--(TKGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle
-{
-	NSAssert(cellStyle < 4, @"-[TKThemeCacheProxy actionCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
-	static NSString* reuseIds[] = {@"actionDefault", @"actionValue1", @"actionValue2", @"actionSubtitle"};
-	TKGeneralCellView* cellView = (TKGeneralCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
-	if(!cellView)
-	{
-		id target = [themeImpl respondsToSelector:@selector(actionCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
-		cellView = [target actionCellViewWithStyle:cellStyle];
-		[cellView setReuseIdentifier:reuseIds[cellStyle]];
+		if([ms numberOfArguments]==2)
+		{
+			cellView = [target performSelector:selector];
+		}
+		else
+		{
+			NSAssert([ms numberOfArguments]==3, @"Invalid param num for selector %s", sel_getName(selector));
+			NSAssert([ms getArgumentTypeAtIndex:2][0]=='i', @"TKThemeCacheProxy supports only int params");
+			
+			NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:ms];
+			[invocation setSelector:selector];
+			[invocation invokeWithTarget:target];
+			[invocation getReturnValue:&cellView];
+		}
+		
+		[cellView setReuseIdentifier:cache->cellId];
+		cache->cellView = [cellView retain];
+		cache->class = [cellView class];
 	}
-	return cellView;
-}
-
--(TKSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
-{
-	NSAssert(cellStyle < 4, @"-[TKThemeCacheProxy switchCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
-	static NSString* reuseIds[] = {@"switchDefault", @"switchValue1", @"switchValue2", @"switchSubtitle"};
-	TKSwitchCellView* cellView = (TKSwitchCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
-	if(!cellView)
-	{
-		id target = [themeImpl respondsToSelector:@selector(switchCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
-		cellView = [target switchCellViewWithStyle:cellStyle];
-		[cellView setReuseIdentifier:reuseIds[cellStyle]];
-	}
-	return cellView;
-}
-
--(TKTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle
-{
-	NSAssert(cellStyle < 3, @"-[TKThemeCacheProxy textFieldCellViewWithStyle:%d] failed. Invalid cell UITableViewCellStyle param", cellStyle);
-	static NSString* reuseIds[] = {@"textFieldDefault", @"textFieldValue1", @"textFieldValue2"};
-	TKTextFieldCellView* cellView = (TKTextFieldCellView*)[tableView dequeueReusableCellWithIdentifier:reuseIds[cellStyle]];
-	if(!cellView)
-	{
-		id target = [themeImpl respondsToSelector:@selector(textFieldCellViewWithStyle:)] ? themeImpl : defaultThemeImpl;
-		cellView = [target textFieldCellViewWithStyle:cellStyle];
-		[cellView setReuseIdentifier:reuseIds[cellStyle]];
-	}
-	return cellView;
+	return cache->class;
 }
 
 @end
@@ -226,7 +208,7 @@ static TKThemeCacheProxy* cachedTheme = nil;
 	if(!themeDict)
 	{
 		themeDict = [[NSMutableDictionary alloc] initWithCapacity:1];
-		[SelectorCachedString initHashTable];
+		[CellCache initHashTable];
 	}
 	[themeDict setObject:theme forKey:[NSValue valueWithPointer:self]];
 	cachedTheme = theme;
