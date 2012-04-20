@@ -69,7 +69,7 @@
 
 @protocol TKTextViewCellViewProtocol <NSObject>
 -(UITextView*) textView;
--(void) updateWithText:(NSString*)text;
+-(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder;
 @end
 
 #define TKTextViewCellView TKCellView<TKTextViewCellViewProtocol>

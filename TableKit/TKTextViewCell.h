@@ -32,10 +32,15 @@
     NSString* placeholder;
 }
 @property (nonatomic, retain) NSString* text;
+@property (nonatomic, retain) NSString* placeholder;
 
-+(TKTextViewCell*) cellWithText:(NSString*)text;
++(id) cellWithText:(NSString*)text;
++(id) cellWithText:(NSString*)text placeholder:(NSString*)placeholder;
+
 -(id) initWithText:(NSString*)text;
+-(id) initWithText:(NSString*)text placeholder:(NSString*)placeholder;
 
+-(void) setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
 -(void) setKeyboardType:(UIKeyboardType)keyboardType;
 -(void) setFont:(UIFont*)font;
 -(void) setTextColor:(UIColor*)color;

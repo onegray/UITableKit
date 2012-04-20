@@ -34,7 +34,7 @@
 		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Switch" state:NO];
 		[switchCell setImage:[UIImage imageNamed:@"coke.png"]];
 		
-		TKTextViewCell* textViewCell = [TKTextViewCell cellWithText:@"Hello!"];
+		TKTextViewCell* textViewCell = [TKTextViewCell cellWithText:@"Hello World!" placeholder:@"start typing here"];
 		[textViewCell setFont:[UIFont systemFontOfSize:18]];
 		[textViewCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
 		[textViewCell setImage:[UIImage imageNamed:@"apple.png"]];

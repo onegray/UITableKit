@@ -27,8 +27,7 @@
 #import "TKDefaultTextViewCellView.h"
 
 @implementation TKDefaultTextViewCellView
-
-@synthesize textView;
+@synthesize textView, placeholder;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -40,8 +39,36 @@
         [self.contentView addSubview:textView];
 		[textView release];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:nil];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:nil];
     }
     return self;
+}
+
+-(void) dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
+	[placeholder release];
+	[super dealloc];
+}
+
+-(void) textViewTextDidBeginEditing:(NSNotification*)notification
+{
+	if(textView.textColor!=[UIColor blackColor])
+	{
+		textView.textColor = [UIColor blackColor];
+		textView.text = nil;
+	}
+}
+
+-(void) textViewTextDidEndEditing:(NSNotification*)notification
+{
+	if([textView.text length]==0)
+	{
+		textView.textColor = [UIColor lightGrayColor];
+		textView.text = placeholder;
+	}
 }
 
 -(void) layoutSubviews
@@ -52,9 +79,17 @@
 	textView.frame = CGRectMake(offset+2, 0, boundsSize.width-offset-4, boundsSize.height);
 }
 
--(void) updateWithText:(NSString*)text
+
+-(void) updateWithText:(NSString*)text placeholder:(NSString*)aPlaceholder;
 {
-    textView.text = text;
+	textView.text = text;
+	self.placeholder = aPlaceholder;
+
+	if([text length]==0)
+	{
+		textView.textColor = [UIColor lightGrayColor];
+		textView.text = placeholder;
+	}
 }
 
 
