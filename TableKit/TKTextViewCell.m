@@ -30,7 +30,6 @@
 
 @implementation TKTextViewCell
 @synthesize text;
-@synthesize cellHeight;
 
 +(TKTextViewCell*) cellWithText:(NSString*)text
 {

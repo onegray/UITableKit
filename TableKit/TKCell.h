@@ -31,10 +31,11 @@
 @interface TKCell : NSObject
 {
 	NSMutableArray* attributes;
+	CGFloat cellHeight;
 }
+@property (nonatomic, assign) CGFloat cellHeight;
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView;
--(CGFloat) cellHeight;
 
 -(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView;
 -(void) updateViewInTableView:(UITableView*)tableView;

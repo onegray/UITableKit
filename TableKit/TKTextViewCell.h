@@ -30,10 +30,8 @@
 {
     NSString* text;
     NSString* placeholder;
-    CGFloat cellHeight;
 }
 @property (nonatomic, retain) NSString* text;
-@property (nonatomic, assign) CGFloat cellHeight;
 
 +(TKTextViewCell*) cellWithText:(NSString*)text;
 -(id) initWithText:(NSString*)text;

@@ -30,6 +30,17 @@
 #import "TKCellAttribute.h"
 
 @implementation TKCell
+@synthesize cellHeight;
+
+-(id) init
+{
+	self = [super init];
+	if(self)
+	{
+		cellHeight = 44;
+	}
+	return self;
+}
 
 -(void) dealloc 
 {
@@ -40,11 +51,6 @@
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
     return nil;
-}
-
--(CGFloat) cellHeight
-{
-    return 44;
 }
 
 -(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView
