@@ -36,12 +36,12 @@
 	{
         textView = [[UITextView alloc] initWithFrame:CGRectZero];
 		textView.backgroundColor = [UIColor clearColor];
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:textView];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:textView];
+		textView.delegate = (id)self;
         [self.contentView addSubview:textView];
 		[textView release];
-		self.selectionStyle = UITableViewCellSelectionStyleNone;
-
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:nil];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:nil];
     }
     return self;
 }
@@ -51,6 +51,16 @@
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[placeholder release];
 	[super dealloc];
+}
+
+- (BOOL)textView:(UITextView *)tw shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText
+{
+    if ([replacementText isEqualToString:@"\n"])
+	{
+        [tw resignFirstResponder];
+        return FALSE;
+    }
+    return TRUE;    
 }
 
 -(void) textViewTextDidBeginEditing:(NSNotification*)notification

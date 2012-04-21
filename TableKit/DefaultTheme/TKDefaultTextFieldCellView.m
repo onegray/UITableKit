@@ -39,11 +39,18 @@
 		textField = [[UITextField alloc] initWithFrame:CGRectZero];
 		textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;		
 		textField.textAlignment = style==UITableViewCellStyleValue1 ? UITextAlignmentRight : UITextAlignmentLeft;
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
+		textField.delegate = (id)self;
 		[self.contentView addSubview:textField];
 		[textField release];
-		self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
+}
+
+-(BOOL)textFieldShouldReturn:(UITextField *)tf
+{
+    [tf resignFirstResponder];
+    return YES;
 }
 
 -(void) layoutSubviews

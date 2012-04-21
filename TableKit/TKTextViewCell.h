@@ -40,7 +40,7 @@
 -(id) initWithText:(NSString*)text;
 -(id) initWithText:(NSString*)text placeholder:(NSString*)placeholder;
 
--(void) setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
+-(void) setTextViewDelegate:(id<UITextFieldDelegate>)delegate;
 -(void) setKeyboardType:(UIKeyboardType)keyboardType;
 -(void) setFont:(UIFont*)font;
 -(void) setTextColor:(UIColor*)color;

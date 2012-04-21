@@ -75,18 +75,11 @@
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
     TKTextViewCellView* cellView = [tableView.theme textViewCellView];
-    cellView.owner = self;	
-	cellView.textView.delegate = nil;
+    cellView.owner = self;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChange:) name:UITextViewTextDidChangeNotification object:nil];
-
 	[cellView updateWithText:text placeholder:placeholder];
-	
 	[self applyAttributesToCellView:cellView];
-	if(	cellView.textView.delegate == nil )
-	{
-		cellView.textView.delegate = (id)self;
-	}
     return cellView;
 }
 
@@ -94,17 +87,6 @@
 {
     self.text = [[notification object] text];
 }
-
-- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText
-{
-    if ([replacementText isEqualToString:@"\n"])
-	{
-        [textView resignFirstResponder];
-        return FALSE;
-    }
-    return TRUE;    
-}
-
 
 
 -(void) setKeyboardType:(UIKeyboardType)keyboardType
@@ -135,7 +117,7 @@
 	[attr release];
 }
 
--(void) setTextFieldDelegate:(id<UITextFieldDelegate>)delegate
+-(void) setTextViewDelegate:(id<UITextFieldDelegate>)delegate
 {
 	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(delegate) setter:@selector(setDelegate:) value:&delegate];
 	[self addAttribute:attr];

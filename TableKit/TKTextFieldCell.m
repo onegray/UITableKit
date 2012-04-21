@@ -89,7 +89,6 @@
 {
     TKTextFieldCellView* cellView = [tableView.theme textFieldCellViewWithStyle:cellStyle];
 	cellView.owner = self;
-	cellView.textField.delegate=nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) 
 												 name:UITextFieldTextDidChangeNotification object:cellView.textField];
@@ -97,22 +96,12 @@
 	[cellView updateWithTitle:title text:text placeholder:placeholder];
 
 	[self applyAttributesToCellView:cellView];
-	if(cellView.textField.delegate==nil)
-	{
-		cellView.textField.delegate = (id)self;
-	}
     return cellView;
 }
 
 -(void) textFieldTextDidChange:(NSNotification*)notification
 {
     self.text = [[notification object] text];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return YES;
 }
 
 
