@@ -25,6 +25,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TKCell.h"
+#import "TKAttrTextFieldProxyInterface.h"
 
 @interface TKTextFieldCell : TKCell
 {
@@ -47,9 +48,6 @@
 +(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title placeholder:(NSString*)placeholder;
 +(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
 
--(void) setTextFieldDelegate:(id<UITextFieldDelegate>)delegate;
--(void) setKeyboardType:(UIKeyboardType)keyboardType;
--(void) setFont:(UIFont*)font;
--(void) setTextColor:(UIColor*)color;
+@property (nonatomic, readonly) TKAttrTextFieldProxyInterface* textField;
 
 @end

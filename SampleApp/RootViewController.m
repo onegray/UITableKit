@@ -22,10 +22,10 @@
 	if(self.sections==nil)
 	{
 		TKActionCell* attributesSampleCell = [TKActionCell cellWithText:@"Attributes Sample" target:self action:@selector(onAttributesSampleCell)];
-		[attributesSampleCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+		attributesSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 		TKActionCell* editingSampleCell = [TKActionCell cellWithText:@"Editing Sample" target:self action:@selector(onEditingSampleCell)];
-		[editingSampleCell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
+		editingSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, nil];
 		self.sections = [NSArray arrayWithObjects:section, nil];

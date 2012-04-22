@@ -25,6 +25,7 @@
 
 #import <UIKit/UIKit.h>
 #import "TKCell.h"
+#import "TKAttrTextViewProxyInterface.h"
 
 @interface TKTextViewCell : TKCell
 {
@@ -40,10 +41,6 @@
 -(id) initWithText:(NSString*)text;
 -(id) initWithText:(NSString*)text placeholder:(NSString*)placeholder;
 
--(void) setTextViewDelegate:(id<UITextFieldDelegate>)delegate;
--(void) setKeyboardType:(UIKeyboardType)keyboardType;
--(void) setFont:(UIFont*)font;
--(void) setTextColor:(UIColor*)color;
--(void) setBackgroundColor:(UIColor*)color;
+@property (nonatomic, readonly) TKAttrTextViewProxyInterface* textView;
 
 @end

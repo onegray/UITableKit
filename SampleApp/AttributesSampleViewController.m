@@ -22,22 +22,22 @@
 	if(self.sections==nil)
 	{
 		TKStaticCell* staticCell = [TKStaticCell cellWithStyle:UITableViewCellStyleValue1 text:@"Static cell" detailText:@"details"];
-		[staticCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-		[staticCell setTextColor:[UIColor redColor]];
-		[staticCell setImage:[UIImage imageNamed:@"coke.png"]];
+		staticCell.textLabel.textColor = [UIColor redColor];
+		staticCell.imageView.image = [UIImage imageNamed:@"coke.png"];
 		
 		TKTextFieldCell* textFieldCell = [TKTextFieldCell cellWithText:@"Text" placeholder:@"Enter text"];
-		[textFieldCell setKeyboardType:UIKeyboardTypeEmailAddress];
-		[textFieldCell setImage:[UIImage imageNamed:@"apple.png"]];
-		[textFieldCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
+		textFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
+		textFieldCell.imageView.image = [UIImage imageNamed:@"apple.png"];
+		textFieldCell.textField.textColor = [UIColor blueColor];
+		textFieldCell.tableViewCell.accessoryType = UITableViewCellAccessoryCheckmark;
 		
 		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Switch" state:NO];
-		[switchCell setImage:[UIImage imageNamed:@"coke.png"]];
+		switchCell.imageView.image = [UIImage imageNamed:@"coke.png"];
+		switchCell.textLabel.textColor = [UIColor magentaColor];
 		
 		TKTextViewCell* textViewCell = [TKTextViewCell cellWithText:@"Hello World!" placeholder:@"start typing here"];
-		[textViewCell setFont:[UIFont systemFontOfSize:18]];
-		[textViewCell setAccessoryType:UITableViewCellAccessoryDetailDisclosureButton];
-		[textViewCell setImage:[UIImage imageNamed:@"apple.png"]];
+		textViewCell.textView.font = [UIFont systemFontOfSize:18];
+		textViewCell.imageView.image = [UIImage imageNamed:@"apple.png"];
 		
 		TKSection* section = [TKSection sectionWithCells:staticCell, textFieldCell, switchCell, textViewCell, nil];
 		section.headerTitle = @"Section title";

@@ -45,7 +45,7 @@
 		[planetsSection addCell:[TKStaticCell cellWithText:@"Mars"]];
 
 		self.textFieldCell = [TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Add New:" placeholder:@"Enter Text"];
-		[textFieldCell setTextFieldDelegate:(id)self];
+		textFieldCell.textField.delegate = (id)self;
 		[textFieldCell setPreventEditing:YES];
 		[planetsSection addCell:textFieldCell];
 

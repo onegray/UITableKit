@@ -26,7 +26,11 @@
 #import "TKStaticCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
-#import "TKCellAttribute.h"
+
+
+@interface TKAttrLabelProxyInterface(private)
++(TKAttrLabelProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@end
 
 @implementation TKStaticCell
 @synthesize text, detailText, cellStyle;
@@ -87,21 +91,17 @@
     return cellView;
 }
 
-
--(void) setFont:(UIFont*)font
+-(TKAttrLabelProxyInterface*) textLabel
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) getter:@selector(font) setter:@selector(setFont:) value:font];
-	[self addAttribute:attr];
-	[attr release];
+	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
+	return (TKAttrLabelProxyInterface*)[TKAttrLabelProxyInterface sharedProxyWithAccesor:@selector(textLabel) attributes:attributes];
 }
 
--(void) setTextColor:(UIColor*)color
+-(TKAttrLabelProxyInterface*) detailTextLabel
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textLabel) getter:@selector(textColor) setter:@selector(setTextColor:) value:color];
-	[self addAttribute:attr];
-	[attr release];
+	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
+	return (TKAttrLabelProxyInterface*)[TKAttrLabelProxyInterface sharedProxyWithAccesor:@selector(detailTextLabel) attributes:attributes];
 }
-
 
 
 @end

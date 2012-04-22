@@ -1,8 +1,9 @@
 //
-//  TKStaticCell.h
+//  TKAttrLabelProxyInterface.h
+//  TableKitSample
 //
-//  Created by Sergey Nikitenko on 6/8/11.
-//  Copyright 2011 Sergey Nikitenko. All rights reserved.
+//  Created by Sergey Nikitenko on 4/22/12.
+//  Copyright (c) 2012 Sergey Nikitenko. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +24,21 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "TKCell.h"
-#import "TKAttrLabelProxyInterface.h"
+#import "TKAttrViewProxyInterface.h"
 
-@interface TKStaticCell : TKCell
-{
-    NSString* text;
-    NSString* detailText;
-	UITableViewCellStyle cellStyle;
-}
+@interface TKAttrLabelProxyInterface : TKAttrViewProxyInterface
 
-@property (nonatomic, retain) NSString* text;
-@property (nonatomic, retain) NSString* detailText;
-@property (nonatomic, assign) UITableViewCellStyle cellStyle;
-
-+(id) cellWithText:(NSString*)text;
-+(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText;
-
--(id) initWithText:(NSString*)text;
--(id) initWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText;
-
-@property (nonatomic, readonly) TKAttrLabelProxyInterface* textLabel;
-@property (nonatomic, readonly) TKAttrLabelProxyInterface* detailTextLabel;
+@property(nonatomic, retain, writeonly) UIFont *font;
+@property(nonatomic, retain, writeonly) UIColor *textColor;
+@property(nonatomic, retain, writeonly) UIColor *shadowColor;
+@property(nonatomic, assign, writeonly) UITextAlignment textAlignment;
+@property(nonatomic, assign, writeonly) UILineBreakMode lineBreakMode;
+@property(nonatomic, retain, writeonly) UIColor *highlightedTextColor;
+@property(nonatomic, assign, writeonly) BOOL highlighted;
+@property(nonatomic, assign, writeonly) BOOL enabled;
+@property(nonatomic, assign, writeonly) NSInteger numberOfLines;
+@property(nonatomic, assign, writeonly) BOOL adjustsFontSizeToFitWidth;
+@property(nonatomic, assign, writeonly) CGFloat minimumFontSize;
+@property(nonatomic, assign, writeonly) UIBaselineAdjustment baselineAdjustment;
 
 @end

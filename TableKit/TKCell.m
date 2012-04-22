@@ -29,6 +29,14 @@
 #import "TKTheme.h"
 #import "TKCellAttribute.h"
 
+@interface TKAttrTableViewCellProxyInterface(private)
++(TKAttrTableViewCellProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@end
+
+@interface TKAttrImageViewProxyInterface(private)
++(TKAttrImageViewProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@end
+
 @implementation TKCell
 @synthesize cellHeight;
 
@@ -119,103 +127,26 @@
 	}
 }
 
-
-// Managing Images as Cell Content
-
--(void) setImage:(UIImage*)image
+-(TKAttrTableViewCellProxyInterface*) tableViewCell
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(imageView) getter:@selector(image) setter:@selector(setImage:) value:image];
-	[self addAttribute:attr];
-	[attr release];
+	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
+	return (TKAttrTableViewCellProxyInterface*)[TKAttrTableViewCellProxyInterface sharedProxyWithAccesor:NULL attributes:attributes];
 }
 
-// Accessing Views of the Cell Object
-
--(void) setBackgroundView:(UIView*)view
+-(TKAttrImageViewProxyInterface*) imageView
 {
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(backgroundView) setter:@selector(setBackgroundView:) value:view];
-	[self addAttribute:attr];
-	[attr release];
+	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
+	return (TKAttrImageViewProxyInterface*)[TKAttrImageViewProxyInterface sharedProxyWithAccesor:@selector(imageView) attributes:attributes];
 }
-
--(void) setSelectedBackgroundView:(UIView*)view
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(selectedBackgroundView) setter:@selector(setSelectedBackgroundView:) value:view];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setMultipleSelectionBackgroundView:(UIView*)view
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(multipleSelectionBackgroundView) setter:@selector(setMultipleSelectionBackgroundView:) value:view];
-	[self addAttribute:attr];
-	[attr release];
-}
-
-// Managing Accessory Views
-
--(void) setAccessoryType:(UITableViewCellAccessoryType)accessoryType
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(accessoryType) setter:@selector(setAccessoryType:) value:&accessoryType];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setAccessoryView:(UIView*)view
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(accessoryView) setter:@selector(setAccessoryView:) value:view];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setEditingAccessoryType:(UITableViewCellAccessoryType)accessoryType
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(editingAccessoryType) setter:@selector(setEditingAccessoryType:) value:&accessoryType];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setEditingAccessoryView:(UIView*)view
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:NULL getter:@selector(editingAccessoryView) setter:@selector(setEditingAccessoryView:) value:view];
-	[self addAttribute:attr];
-	[attr release];
-}
-
-// Managing Cell Selection and Highlighting
-
--(void) setSelectionStyle:(UITableViewCellSelectionStyle)selectionStyle
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(selectionStyle) setter:@selector(setSelectionStyle:) value:&selectionStyle];
-	[self addAttribute:attr];
-	[attr release];
-}
-
-// Managing Content Indentation
-
--(void) setIndentationLevel:(NSInteger)indentationLevel
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(indentationLevel) setter:@selector(setIndentationLevel:) value:&indentationLevel];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setIndentationWidth:(CGFloat)indentationWidth
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(indentationWidth) setter:@selector(setIndentationWidth:) value:&indentationWidth];
-	[self addAttribute:attr];
-	[attr release];
-}
-
 
 // TKCellView specific attributes
-
 -(void) setPreventEditing:(BOOL)preventEditing
 {
 	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(preventEditing) setter:@selector(setPreventEditing:) value:&preventEditing];
 	[self addAttribute:attr];
 	[attr release];
 }
+
 
 
 @end

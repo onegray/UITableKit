@@ -1,8 +1,9 @@
 //
-//  TKStaticCell.h
+//  TKAttrProxy.h
+//  TableKitSample
 //
-//  Created by Sergey Nikitenko on 6/8/11.
-//  Copyright 2011 Sergey Nikitenko. All rights reserved.
+//  Created by Sergey Nikitenko on 4/21/12.
+//  Copyright (c) 2012 Sergey Nikitenko. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -23,28 +24,17 @@
 //  THE SOFTWARE.
 //
 
-#import <UIKit/UIKit.h>
-#import "TKCell.h"
-#import "TKAttrLabelProxyInterface.h"
+#import <Foundation/Foundation.h>
 
-@interface TKStaticCell : TKCell
+@interface TKAttrProxy : NSProxy
 {
-    NSString* text;
-    NSString* detailText;
-	UITableViewCellStyle cellStyle;
+	NSMutableArray* attributes;
+	SEL accessor;
+	Class targetClass;
+	BOOL preparedForSingleCall;
 }
 
-@property (nonatomic, retain) NSString* text;
-@property (nonatomic, retain) NSString* detailText;
-@property (nonatomic, assign) UITableViewCellStyle cellStyle;
-
-+(id) cellWithText:(NSString*)text;
-+(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText;
-
--(id) initWithText:(NSString*)text;
--(id) initWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText;
-
-@property (nonatomic, readonly) TKAttrLabelProxyInterface* textLabel;
-@property (nonatomic, readonly) TKAttrLabelProxyInterface* detailTextLabel;
+-(TKAttrProxy*) initWithTargetClass:(Class)aTargetClass;
+-(TKAttrProxy*) prepareWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 
 @end

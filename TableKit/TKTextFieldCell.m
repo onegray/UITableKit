@@ -26,7 +26,11 @@
 #import "TKTextFieldCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
-#import "TKCellAttribute.h"
+
+@interface TKAttrTextFieldProxyInterface(private)
++(TKAttrTextFieldProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@end
+
 
 @implementation TKTextFieldCell
 @synthesize title, text, cellStyle, placeholder;
@@ -69,7 +73,6 @@
     return self;	
 }
 
-
 -(void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -104,35 +107,11 @@
     self.text = [[notification object] text];
 }
 
-
--(void) setKeyboardType:(UIKeyboardType)keyboardType
+-(TKAttrTextFieldProxyInterface*) textField
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textField) getter:@selector(keyboardType) setter:@selector(setKeyboardType:) value:&keyboardType];
-	[self addAttribute:attr];
-	[attr release];
+	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
+	return [TKAttrTextFieldProxyInterface sharedProxyWithAccesor:@selector(textField) attributes:attributes];
 }
-
--(void) setFont:(UIFont*)font
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textField) getter:@selector(font) setter:@selector(setFont:) value:font];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setTextColor:(UIColor*)color
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textField) getter:@selector(textColor) setter:@selector(setTextColor:) value:color];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setTextFieldDelegate:(id<UITextFieldDelegate>)delegate
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textField) getter:@selector(delegate) setter:@selector(setDelegate:) value:&delegate];
-	[self addAttribute:attr];
-	[attr release];
-}
-
 
 @end
 

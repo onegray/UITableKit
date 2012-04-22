@@ -26,7 +26,11 @@
 #import "TKTextViewCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
-#import "TKCellAttribute.h"
+
+@interface TKAttrTextViewProxyInterface(private)
++(TKAttrTextViewProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@end
+
 
 @implementation TKTextViewCell
 @synthesize text, placeholder;
@@ -89,39 +93,10 @@
 }
 
 
--(void) setKeyboardType:(UIKeyboardType)keyboardType
+-(TKAttrTextViewProxyInterface*) textView
 {
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(keyboardType) setter:@selector(setKeyboardType:) value:&keyboardType];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setFont:(UIFont*)font
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(font) setter:@selector(setFont:) value:font];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setTextColor:(UIColor*)color
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(textColor) setter:@selector(setTextColor:) value:color];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setBackgroundColor:(UIColor*)color
-{
-	TKCellAttribute* attr = [[TKCellObjectAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(backgroundColor) setter:@selector(setBackgroundColor:) value:color];
-	[self addAttribute:attr];
-	[attr release];
-}
-
--(void) setTextViewDelegate:(id<UITextFieldDelegate>)delegate
-{
-	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:@selector(textView) getter:@selector(delegate) setter:@selector(setDelegate:) value:&delegate];
-	[self addAttribute:attr];
-	[attr release];
+	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
+	return [TKAttrTextViewProxyInterface sharedProxyWithAccesor:@selector(textView) attributes:attributes];
 }
 
 @end
