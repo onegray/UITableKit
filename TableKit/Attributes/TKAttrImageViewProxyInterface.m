@@ -50,9 +50,39 @@
 
 @dynamic image;
 @dynamic highlightedImage;
+@dynamic highlighted;
 @dynamic animationImages;
 @dynamic highlightedAnimationImages;
-@dynamic animationDuration;
+@dynamic animationDurationFloat;
 @dynamic animationRepeatCount;
+
+@end
+
+
+@implementation UIImageView (extensions)
+
+-(BOOL) highlighted 
+{
+	return [self isHighlighted];
+}
+
+-(CGFloat) animationDurationFloat
+{
+	return (CGFloat)self.animationDuration;
+}
+
+-(void) setAnimationDurationFloat:(CGFloat) animationDurationFloat
+{
+	self.animationDuration = (NSTimeInterval)animationDurationFloat;
+	if(animationDurationFloat > 0)
+	{
+		[self startAnimating];
+	}
+	else
+	{
+		[self stopAnimating];
+	}
+}
+
 
 @end

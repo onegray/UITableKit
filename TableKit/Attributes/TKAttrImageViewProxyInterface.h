@@ -30,10 +30,10 @@
 
 @property(nonatomic, retain, writeonly) UIImage *image;
 @property(nonatomic, retain, writeonly) UIImage *highlightedImage __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0);
+@property(nonatomic, assign, writeonly) BOOL highlighted;
 @property(nonatomic, retain, writeonly) NSArray *animationImages;
 @property(nonatomic, retain, writeonly) NSArray *highlightedAnimationImages __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_3_0);
-@property(nonatomic, assign, writeonly) NSTimeInterval animationDuration;
+@property(nonatomic, assign, writeonly) CGFloat animationDurationFloat; // Setting this attribute starts animation automatically
 @property(nonatomic, assign, writeonly) NSInteger animationRepeatCount;
-
 
 @end

@@ -24,6 +24,8 @@
 		TKStaticCell* staticCell = [TKStaticCell cellWithStyle:UITableViewCellStyleValue1 text:@"Static cell" detailText:@"details"];
 		staticCell.textLabel.textColor = [UIColor redColor];
 		staticCell.imageView.image = [UIImage imageNamed:@"coke.png"];
+		staticCell.imageView.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"apple.png"], [UIImage imageNamed:@"coke.png"], nil];
+		staticCell.imageView.animationDurationFloat = 0.5; // Set animationDuration interval and start animation
 		
 		TKTextFieldCell* textFieldCell = [TKTextFieldCell cellWithText:@"Text" placeholder:@"Enter text"];
 		textFieldCell.textField.keyboardType = UIKeyboardTypeEmailAddress;
