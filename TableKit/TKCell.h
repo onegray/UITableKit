@@ -42,6 +42,7 @@
 -(void) updateViewInTableView:(UITableView*)tableView;
 
 -(void) tableViewDidSelectCell:(UITableView*)tableView;
+-(void) tableViewAccessoryButtonTapped:(UITableView*)tableView;
 
 -(void) applyAttributesToCellView:(TKCellView*)cellView;
 

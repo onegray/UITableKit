@@ -87,6 +87,11 @@
 	
 }
 
+-(void) tableViewAccessoryButtonTapped:(UITableView*) tableView
+{
+	
+}
+
 
 -(void) addAttribute:(TKCellAttribute*)attr
 {

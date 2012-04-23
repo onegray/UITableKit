@@ -57,7 +57,7 @@
 
 +(TKSection*) sectionWithCells: (TKCell*)cell, ... NS_REQUIRES_NIL_TERMINATION;
 -(TKCell*) cellAtIndex:(int)cellIndex;
--(void) addCell:(TKCell*)cellHolder; 
+-(void) addCell:(TKCell*)cell; 
 -(void) removeCellAtIndex:(int)cellIndex;
 -(void) removeAllCells;
 -(void) insertCell:(TKCell*)cell atIndex:(int)cellIndex;
@@ -66,6 +66,7 @@
 -(CGFloat) heightForCellIndex:(int)cellIndex;
 
 -(void) tableView:(UITableView*)tableView didSelectCellWithIndex:(int)cellIndex;
+-(void) tableView:(UITableView*)tableView accessoryButtonTappedForCellWithIndex:(int)cellIndex;
 
 
 @end

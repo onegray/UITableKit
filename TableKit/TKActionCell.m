@@ -87,7 +87,7 @@
     return cellView;
 }
 
--(void) tableViewDidSelectCell:(UITableView*) tableView
+-(void) peformCellAction
 {
     if([target respondsToSelector:action])
 	{
@@ -103,5 +103,14 @@
     }
 }
 
+-(void) tableViewDidSelectCell:(UITableView*) tableView
+{
+	[self peformCellAction];
+}
+
+-(void) tableViewAccessoryButtonTapped:(UITableView *)tableView
+{
+	[self peformCellAction];
+}
 
 @end

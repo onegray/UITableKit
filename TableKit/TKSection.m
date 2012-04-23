@@ -74,9 +74,9 @@
 }
 
 
--(void) addCell:(TKCell*)cellHolder
+-(void) addCell:(TKCell*)cell
 {
-    [cells addObject:cellHolder];
+    [cells addObject:cell];
 }
 
 -(void) removeCellAtIndex:(int)cellIndex
@@ -111,20 +111,26 @@
 
 -(UITableViewCell*) cellWithIndex:(int)cellIndex forTableView:(UITableView*)tableView
 {
-    TKCell* cellHolder = [cells objectAtIndex:cellIndex];
-    return [cellHolder cellForTableView:tableView];
+    TKCell* cell = [cells objectAtIndex:cellIndex];
+    return [cell cellForTableView:tableView];
 }
 
 -(CGFloat) heightForCellIndex:(int)cellIndex
 {
-    TKCell* cellHolder = [cells objectAtIndex:cellIndex];
-    return [cellHolder cellHeight];
+    TKCell* cell = [cells objectAtIndex:cellIndex];
+    return [cell cellHeight];
 }
 
 -(void) tableView:(UITableView*)tableView didSelectCellWithIndex:(int)cellIndex
 {
-    TKCell* cellHolder = [cells objectAtIndex:cellIndex];
-    [cellHolder tableViewDidSelectCell:tableView];
+    TKCell* cell = [cells objectAtIndex:cellIndex];
+    [cell tableViewDidSelectCell:tableView];
+}
+
+-(void) tableView:(UITableView*)tableView accessoryButtonTappedForCellWithIndex:(int)cellIndex
+{
+    TKCell* cell = [cells objectAtIndex:cellIndex];
+    [cell tableViewAccessoryButtonTapped:tableView];
 }
 
 
