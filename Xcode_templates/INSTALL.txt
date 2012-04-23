@@ -1,0 +1,1 @@
+Move this UITableKit folder to ~/Library/Developer/Xcode/Templates/File Templates/
