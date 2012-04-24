@@ -70,7 +70,7 @@
     [super dealloc];
 }
 
--(void) updateViewInTableView:(UITableView*)tableView
+-(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	TKTextViewCellView* cellView = (TKTextViewCellView*)[self lookupCellViewInTableView:tableView];
 	[cellView updateWithText:text placeholder:placeholder];

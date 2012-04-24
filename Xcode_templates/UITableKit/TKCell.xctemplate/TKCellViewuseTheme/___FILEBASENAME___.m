@@ -18,7 +18,7 @@
 	cellView.textLabel.text = [self description];
 }
 
--(void) updateViewInTableView:(UITableView*)tableView
+-(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	___FILEBASENAME___View* cellView = (___FILEBASENAME___View*)[self lookupCellViewInTableView:tableView];
 	[self updateCellView:cellView];

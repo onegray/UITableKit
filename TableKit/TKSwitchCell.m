@@ -72,7 +72,7 @@
     return self;
 }
 
--(void) updateViewInTableView:(UITableView*)tableView
+-(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	TKSwitchCellView* cellView = (TKSwitchCellView*)[self lookupCellViewInTableView:tableView];
 	[cellView updateWithText:text detailText:detailText state:state];

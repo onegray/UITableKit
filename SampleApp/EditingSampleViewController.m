@@ -70,7 +70,7 @@
 		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 		
 		textFieldCell.text = nil;
-		[textFieldCell updateViewInTableView:self.tableView];
+		[textFieldCell updateCellViewInTableView:self.tableView];
 	}
 	return YES;
 }

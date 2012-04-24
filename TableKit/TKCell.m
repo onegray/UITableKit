@@ -77,7 +77,7 @@
 	return nil;
 }
 
--(void) updateViewInTableView:(UITableView*)tableView
+-(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	
 }

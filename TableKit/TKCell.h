@@ -39,7 +39,7 @@
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView;
 
 -(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView;
--(void) updateViewInTableView:(UITableView*)tableView;
+-(void) updateCellViewInTableView:(UITableView*)tableView;
 
 -(void) tableViewDidSelectCell:(UITableView*)tableView;
 -(void) tableViewAccessoryButtonTapped:(UITableView*)tableView;
