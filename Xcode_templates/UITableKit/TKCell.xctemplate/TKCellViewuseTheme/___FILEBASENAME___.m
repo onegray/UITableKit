@@ -26,21 +26,21 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    ___FILEBASENAME___View* cellView = [(NewTheme*)tableView.theme create___FILEBASENAME___View];
+	___FILEBASENAME___View* cellView = [(___VARIABLE_themeClass___*)tableView.theme create___FILEBASENAME___View];
 	cellView.owner = self;
 	[self applyAttributesToCellView:cellView];
 	[self updateCellView:cellView];
-    return cellView;
+	return cellView;
 }
 
 -(void) tableViewDidSelectCell:(UITableView*) tableView
 {
-	
+
 }
 
 -(void) tableViewAccessoryButtonTapped:(UITableView*) tableView
 {
-	
+
 }
 
 
