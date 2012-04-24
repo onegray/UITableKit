@@ -12,6 +12,9 @@
 		AB4CF18A1546FE4800BCDAC9 /* CustomTextFieldCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1831546FE4800BCDAC9 /* CustomTextFieldCellView.m */; };
 		AB4CF18C1546FE4800BCDAC9 /* CustomTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1871546FE4800BCDAC9 /* CustomTheme.m */; };
 		AB4CF19015471F7C00BCDAC9 /* paper.png in Resources */ = {isa = PBXBuildFile; fileRef = AB4CF18F15471F7C00BCDAC9 /* paper.png */; };
+		AB4CF1AF154746BA00BCDAC9 /* UserDefinedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1AB154746BA00BCDAC9 /* UserDefinedCell.m */; };
+		AB4CF1B0154746BA00BCDAC9 /* UserDefinedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1AD154746BA00BCDAC9 /* UserDefinedCellView.m */; };
+		AB4CF1B1154746BA00BCDAC9 /* UserDefinedCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */; };
 		ABD70877152DF94F0016FCFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70876152DF94F0016FCFD /* UIKit.framework */; };
 		ABD70879152DF94F0016FCFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70878152DF94F0016FCFD /* Foundation.framework */; };
 		ABD7087B152DF94F0016FCFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */; };
@@ -57,6 +60,11 @@
 		AB4CF1861546FE4800BCDAC9 /* CustomTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTheme.h; sourceTree = "<group>"; };
 		AB4CF1871546FE4800BCDAC9 /* CustomTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTheme.m; sourceTree = "<group>"; };
 		AB4CF18F15471F7C00BCDAC9 /* paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paper.png; sourceTree = "<group>"; };
+		AB4CF1AA154746BA00BCDAC9 /* UserDefinedCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefinedCell.h; sourceTree = "<group>"; };
+		AB4CF1AB154746BA00BCDAC9 /* UserDefinedCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefinedCell.m; sourceTree = "<group>"; };
+		AB4CF1AC154746BA00BCDAC9 /* UserDefinedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefinedCellView.h; sourceTree = "<group>"; };
+		AB4CF1AD154746BA00BCDAC9 /* UserDefinedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefinedCellView.m; sourceTree = "<group>"; };
+		AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDefinedCellView.xib; sourceTree = "<group>"; };
 		ABD70872152DF94F0016FCFD /* TableKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD70876152DF94F0016FCFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ABD70878152DF94F0016FCFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -140,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				AB4CF17D1546FE4800BCDAC9 /* CustomTheme */,
+				AB4CF1A9154746BA00BCDAC9 /* UserDefinedCell */,
 				AB4CF16A1546FC4300BCDAC9 /* ThemeSampleViewController.h */,
 				AB4CF16B1546FC4300BCDAC9 /* ThemeSampleViewController.m */,
 			);
@@ -157,6 +166,18 @@
 				AB4CF1871546FE4800BCDAC9 /* CustomTheme.m */,
 			);
 			path = CustomTheme;
+			sourceTree = "<group>";
+		};
+		AB4CF1A9154746BA00BCDAC9 /* UserDefinedCell */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CF1AA154746BA00BCDAC9 /* UserDefinedCell.h */,
+				AB4CF1AB154746BA00BCDAC9 /* UserDefinedCell.m */,
+				AB4CF1AC154746BA00BCDAC9 /* UserDefinedCellView.h */,
+				AB4CF1AD154746BA00BCDAC9 /* UserDefinedCellView.m */,
+				AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */,
+			);
+			path = UserDefinedCell;
 			sourceTree = "<group>";
 		};
 		ABD70867152DF94F0016FCFD = {
@@ -194,24 +215,24 @@
 			children = (
 				ABE4340F1531A252004401E9 /* DefaultTheme */,
 				ABFAE9E01544BBAB0092F845 /* Attributes */,
-				ABE4341C1531A252004401E9 /* TKActionCell.h */,
-				ABE4341D1531A252004401E9 /* TKActionCell.m */,
 				ABE4341E1531A252004401E9 /* TKCell.h */,
 				ABE4341F1531A252004401E9 /* TKCell.m */,
-				ABE434221531A252004401E9 /* TKCellView.h */,
-				ABE434231531A252004401E9 /* TKCellView.m */,
-				ABE434241531A252004401E9 /* TKSection.h */,
-				ABE434251531A252004401E9 /* TKSection.m */,
 				ABE434261531A252004401E9 /* TKStaticCell.h */,
 				ABE434271531A252004401E9 /* TKStaticCell.m */,
+				ABE4341C1531A252004401E9 /* TKActionCell.h */,
+				ABE4341D1531A252004401E9 /* TKActionCell.m */,
 				ABE434281531A252004401E9 /* TKSwitchCell.h */,
 				ABE434291531A252004401E9 /* TKSwitchCell.m */,
-				ABE4342A1531A252004401E9 /* TKTableViewController.h */,
-				ABE4342B1531A252004401E9 /* TKTableViewController.m */,
 				ABE4342C1531A252004401E9 /* TKTextFieldCell.h */,
 				ABE4342D1531A252004401E9 /* TKTextFieldCell.m */,
 				ABE4342E1531A252004401E9 /* TKTextViewCell.h */,
 				ABE4342F1531A252004401E9 /* TKTextViewCell.m */,
+				ABE434221531A252004401E9 /* TKCellView.h */,
+				ABE434231531A252004401E9 /* TKCellView.m */,
+				ABE434241531A252004401E9 /* TKSection.h */,
+				ABE434251531A252004401E9 /* TKSection.m */,
+				ABE4342A1531A252004401E9 /* TKTableViewController.h */,
+				ABE4342B1531A252004401E9 /* TKTableViewController.m */,
 				ABE434301531A252004401E9 /* TKTheme.h */,
 				ABE434311531A252004401E9 /* TKTheme.m */,
 			);
@@ -348,6 +369,7 @@
 				ABE434A615337813004401E9 /* apple.png in Resources */,
 				ABE434A815337822004401E9 /* coke.png in Resources */,
 				AB4CF19015471F7C00BCDAC9 /* paper.png in Resources */,
+				AB4CF1B1154746BA00BCDAC9 /* UserDefinedCellView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -390,6 +412,8 @@
 				AB4CF1881546FE4800BCDAC9 /* CustomGeneralCellView.m in Sources */,
 				AB4CF18A1546FE4800BCDAC9 /* CustomTextFieldCellView.m in Sources */,
 				AB4CF18C1546FE4800BCDAC9 /* CustomTheme.m in Sources */,
+				AB4CF1AF154746BA00BCDAC9 /* UserDefinedCell.m in Sources */,
+				AB4CF1B0154746BA00BCDAC9 /* UserDefinedCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

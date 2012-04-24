@@ -10,6 +10,7 @@
 #import "TKSection.h"
 #import "TKStaticCell.h"
 #import "TKTextFieldCell.h"
+#import "UserDefinedCell.h"
 #import "CustomTheme.h"
 
 @implementation ThemeSampleViewController
@@ -32,6 +33,9 @@
 		[section addCell:[TKStaticCell cellWithText:@"Custom Theme example"]];
 		[section addCell:[TKStaticCell cellWithStyle:UITableViewCellStyleValue1 text:@"Date" detailText:@"2012-01-01"]];
 		[section addCell:[TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Teft Field:" placeholder:@"placeholder"]];
+		
+		[section addCell:[[[UserDefinedCell alloc] initWithTitle:@"User defined cell with custom design"] autorelease]];
+		
 		self.sections = [NSArray arrayWithObjects:section, nil];
 	}
 }
