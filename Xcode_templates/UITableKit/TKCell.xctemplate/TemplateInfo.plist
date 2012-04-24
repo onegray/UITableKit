@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AllowedTypes</key>
+	<array>
+		<string>public.objective-c-source</string>
+	</array>
+	<key>DefaultCompletionName</key>
+	<string>MyCell</string>
+	<key>Description</key>
+	<string>Custom TableKit Cell classes</string>
+	<key>Kind</key>
+	<string>Xcode.IDEKit.TextSubstitutionFileTemplateKind</string>
+	<key>MainTemplateFile</key>
+	<string>TKCellView/___FILEBASENAME___.m</string>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>Description</key>
+			<string>The name of the cell class to create</string>
+			<key>Identifier</key>
+			<string>productName</string>
+			<key>Name</key>
+			<string>Cell Name</string>
+			<key>NotPersisted</key>
+			<true/>
+			<key>Required</key>
+			<true/>
+			<key>Type</key>
+			<string>text</string>
+		</dict>
+		<dict>
+			<key>Identifier</key>
+			<string>cellView</string>
+			<key>Type</key>
+			<string>popup</string>
+			<key>Name</key>
+			<string>Cell View</string>
+			<key>Default</key>
+			<string>TKCellView</string>
+			<key>Values</key>
+			<array>
+				<string>TKCellView</string>
+				<string>UITableViewCell</string>
+			</array>
+			<key>Required</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>true</string>
+			<key>Identifier</key>
+			<string>useTheme</string>
+			<key>Name</key>
+			<string>Use Theme for the Cell View</string>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>cellView</key>
+				<array>
+					<string>TKCellView</string>
+				</array>
+			</dict>
+			<key>Type</key>
+			<string>checkbox</string>
+		</dict>
+		<dict>
+			<key>Description</key>
+			<string>Theme Class for the Cell View</string>
+			<key>Identifier</key>
+			<string>themeClass</string>
+			<key>Name</key>
+			<string>Theme Class</string>
+			<key>Required</key>
+			<true/>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>useTheme</key>
+				<array>
+					<string>true</string>
+				</array>
+			</dict>
+			<key>Type</key>
+			<string>class</string>
+		</dict>
+	</array>
+	<key>Platforms</key>
+	<array>
+		<string>com.apple.platform.iphoneos</string>
+	</array>
+	<key>SortOrder</key>
+	<string>1</string>
+	<key>Summary</key>
+	<string>Custom TableKit Cell</string>
+	<key>backup</key>
+	<array>
+		<dict>
+			<key>Default</key>
+			<string>false</string>
+			<key>Identifier</key>
+			<string>useTheme</string>
+			<key>Name</key>
+			<string>Use theme</string>
+			<key>RequiredOptions</key>
+			<dict>
+				<key>withView</key>
+				<array>
+					<string>true</string>
+				</array>
+			</dict>
+			<key>Type</key>
+			<string>checkbox</string>
+		</dict>
+		<dict>
+			<key>Default</key>
+			<string>false</string>
+			<key>Identifier</key>
+			<string>withView</string>
+			<key>Name</key>
+			<string>With CellView class</string>
+			<key>Type</key>
+			<string>checkbox</string>
+		</dict>
+	</array>
+</dict>
+</plist>
