@@ -20,7 +20,7 @@
 			<key>Identifier</key>
 			<string>productName</string>
 			<key>Name</key>
-			<string>Theme Name</string>
+			<string>Theme Prefix</string>
 			<key>NotPersisted</key>
 			<true/>
 			<key>Required</key>

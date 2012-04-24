@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AB4CF16C1546FC4300BCDAC9 /* ThemeSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF16B1546FC4300BCDAC9 /* ThemeSampleViewController.m */; };
+		AB4CF1881546FE4800BCDAC9 /* CustomGeneralCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF17F1546FE4800BCDAC9 /* CustomGeneralCellView.m */; };
+		AB4CF18A1546FE4800BCDAC9 /* CustomTextFieldCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1831546FE4800BCDAC9 /* CustomTextFieldCellView.m */; };
+		AB4CF18C1546FE4800BCDAC9 /* CustomTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1871546FE4800BCDAC9 /* CustomTheme.m */; };
+		AB4CF19015471F7C00BCDAC9 /* paper.png in Resources */ = {isa = PBXBuildFile; fileRef = AB4CF18F15471F7C00BCDAC9 /* paper.png */; };
 		ABD70877152DF94F0016FCFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70876152DF94F0016FCFD /* UIKit.framework */; };
 		ABD70879152DF94F0016FCFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70878152DF94F0016FCFD /* Foundation.framework */; };
 		ABD7087B152DF94F0016FCFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */; };
@@ -43,6 +48,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB4CF16A1546FC4300BCDAC9 /* ThemeSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeSampleViewController.h; sourceTree = "<group>"; };
+		AB4CF16B1546FC4300BCDAC9 /* ThemeSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSampleViewController.m; sourceTree = "<group>"; };
+		AB4CF17E1546FE4800BCDAC9 /* CustomGeneralCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGeneralCellView.h; sourceTree = "<group>"; };
+		AB4CF17F1546FE4800BCDAC9 /* CustomGeneralCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomGeneralCellView.m; sourceTree = "<group>"; };
+		AB4CF1821546FE4800BCDAC9 /* CustomTextFieldCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTextFieldCellView.h; sourceTree = "<group>"; };
+		AB4CF1831546FE4800BCDAC9 /* CustomTextFieldCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTextFieldCellView.m; sourceTree = "<group>"; };
+		AB4CF1861546FE4800BCDAC9 /* CustomTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomTheme.h; sourceTree = "<group>"; };
+		AB4CF1871546FE4800BCDAC9 /* CustomTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomTheme.m; sourceTree = "<group>"; };
+		AB4CF18F15471F7C00BCDAC9 /* paper.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = paper.png; sourceTree = "<group>"; };
 		ABD70872152DF94F0016FCFD /* TableKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD70876152DF94F0016FCFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ABD70878152DF94F0016FCFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -122,6 +136,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AB4CF1691546FC4300BCDAC9 /* ThemeSampleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CF17D1546FE4800BCDAC9 /* CustomTheme */,
+				AB4CF16A1546FC4300BCDAC9 /* ThemeSampleViewController.h */,
+				AB4CF16B1546FC4300BCDAC9 /* ThemeSampleViewController.m */,
+			);
+			path = ThemeSampleViewController;
+			sourceTree = "<group>";
+		};
+		AB4CF17D1546FE4800BCDAC9 /* CustomTheme */ = {
+			isa = PBXGroup;
+			children = (
+				AB4CF17E1546FE4800BCDAC9 /* CustomGeneralCellView.h */,
+				AB4CF17F1546FE4800BCDAC9 /* CustomGeneralCellView.m */,
+				AB4CF1821546FE4800BCDAC9 /* CustomTextFieldCellView.h */,
+				AB4CF1831546FE4800BCDAC9 /* CustomTextFieldCellView.m */,
+				AB4CF1861546FE4800BCDAC9 /* CustomTheme.h */,
+				AB4CF1871546FE4800BCDAC9 /* CustomTheme.m */,
+			);
+			path = CustomTheme;
+			sourceTree = "<group>";
+		};
 		ABD70867152DF94F0016FCFD = {
 			isa = PBXGroup;
 			children = (
@@ -210,6 +247,7 @@
 				ABE434D315360156004401E9 /* AttributesSampleViewController.m */,
 				ABE434CB1535FC6A004401E9 /* EditingSampleViewController.h */,
 				ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */,
+				AB4CF1691546FC4300BCDAC9 /* ThemeSampleViewController */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -227,6 +265,7 @@
 		ABE434A4153377F9004401E9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AB4CF18F15471F7C00BCDAC9 /* paper.png */,
 				ABE434A515337813004401E9 /* apple.png */,
 				ABE434A715337822004401E9 /* coke.png */,
 			);
@@ -308,6 +347,7 @@
 			files = (
 				ABE434A615337813004401E9 /* apple.png in Resources */,
 				ABE434A815337822004401E9 /* coke.png in Resources */,
+				AB4CF19015471F7C00BCDAC9 /* paper.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +386,10 @@
 				ABFAE9F61544BBAB0092F845 /* TKAttrTextViewProxyInterface.m in Sources */,
 				ABFAE9F71544BBAB0092F845 /* TKAttrViewProxyInterface.m in Sources */,
 				ABFAE9F81544BBAB0092F845 /* TKCellAttribute.m in Sources */,
+				AB4CF16C1546FC4300BCDAC9 /* ThemeSampleViewController.m in Sources */,
+				AB4CF1881546FE4800BCDAC9 /* CustomGeneralCellView.m in Sources */,
+				AB4CF18A1546FE4800BCDAC9 /* CustomTextFieldCellView.m in Sources */,
+				AB4CF18C1546FE4800BCDAC9 /* CustomTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

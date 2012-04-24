@@ -9,6 +9,7 @@
 #import "RootViewController.h"
 #import "EditingSampleViewController.h"
 #import "AttributesSampleViewController.h"
+#import "ThemeSampleViewController.h"
 #import "TKSection.h"
 #import "TKActionCell.h"
 
@@ -27,7 +28,10 @@
 		TKActionCell* editingSampleCell = [TKActionCell cellWithText:@"Editing Sample" target:self action:@selector(onEditingSampleCell)];
 		editingSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, nil];
+		TKActionCell* themeSampleCell = [TKActionCell cellWithText:@"Custom Theme Sample" target:self action:@selector(onThemeSampleCell)];
+		themeSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, themeSampleCell, nil];
 		self.sections = [NSArray arrayWithObjects:section, nil];
 	}
 }
@@ -41,6 +45,12 @@
 -(void) onEditingSampleCell 
 {
 	EditingSampleViewController* vc = [[[EditingSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	[self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void) onThemeSampleCell 
+{
+	ThemeSampleViewController* vc = [[[ThemeSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
