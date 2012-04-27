@@ -23,18 +23,16 @@ Simple Usage
 --------------
 * **Define table structure**
 
-`	TKStaticCell* staticCell = [TKStaticCell cellWithText:@"Hello World!"];  
-	TKTextFieldCell* textCell = [TKTextFieldCell cellWithText:@"Editing Text"];  
-	TKSection* section = [TKSection sectionWithCells:staticCell, textCell, nil];  
-	NSArray* sections = [NSArray arrayWithObjects:section, nil];  
-`
+    TKStaticCell* staticCell = [TKStaticCell cellWithText:@"Hello World!"];  
+    TKTextFieldCell* textCell = [TKTextFieldCell cellWithText:@"Editing Text"];  
+    TKSection* section = [TKSection sectionWithCells:staticCell, textCell, nil];  
+    NSArray* sections = [NSArray arrayWithObjects:section, nil];  
 
 * **Customize cells by applying attributes**
 
-`	staticCell.tableViewCell.accessoryType = UITableViewCellAccessoryCheckmark;  
-	textCell.textField.font = [UIFont systemFontOfSize:20];  
-	textCell.textField.textColor = [UIColor redColor];  
-`
+    staticCell.tableViewCell.accessoryType = UITableViewCellAccessoryCheckmark;  
+    textCell.textField.font = [UIFont systemFontOfSize:20];  
+    textCell.textField.textColor = [UIColor redColor];  
 
 Advanced Usage
 --------------
