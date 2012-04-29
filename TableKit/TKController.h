@@ -1,8 +1,9 @@
 //
-//  TKTableViewController.h
+//  TKController.h
+//  TableKitSample
 //
-//  Created by Sergey Nikitenko on 6/8/11.
-//  Copyright 2011 Sergey Nikitenko. All rights reserved.
+//  Created by Sergey Nikitenko on 4/29/12.
+//  Copyright (c) 2012 Sergey Nikitenko. All rights reserved.
 //
 //  Permission is hereby granted, free of charge, to any person obtaining a copy
 //  of this software and associated documentation files (the "Software"), to deal
@@ -25,9 +26,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TKTableViewController : UITableViewController
+@interface TKController : NSObject <UITableViewDelegate, UITableViewDataSource>
 {
+	NSArray* sections;
 }
+
 @property (nonatomic, retain) NSArray* sections;
 
 @end

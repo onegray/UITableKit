@@ -24,141 +24,139 @@
 //
 
 #import "TKTableViewController.h"
-#import "TKCell.h"
-#import "TKCellView.h"
-#import "TKSection.h"
+#import "TKController.h"
+
+@interface TKTableViewController()
+@property (nonatomic, retain) TKController* controller;
+@end
 
 @implementation TKTableViewController
-@synthesize sections;
+@synthesize controller;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
     if (self)
 	{
-        // Custom initialization
+		controller = [[TKController alloc] init];
     }
     return self;
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+	self = [super initWithCoder:aDecoder];
+	if(self)
+	{
+		controller = [[TKController alloc] init];
+	}
+	return self;
+}
+
 - (void)dealloc
 {
-    [sections release];
+    [controller release];
     [super dealloc];
+}
+
+-(void) setSections:(NSArray *)sections
+{
+	[controller setSections:sections];
+}
+
+-(NSArray*) sections 
+{
+	return [controller sections];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-	return [sections count];
+	return [controller numberOfSectionsInTableView:tableView];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-	return [[sections objectAtIndex:section] headerHeight];
+	return [controller tableView:tableView heightForHeaderInSection:section];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
-	return [[sections objectAtIndex:section] footerHeight];
+	return [controller tableView:tableView heightForFooterInSection:section];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    return [[sections objectAtIndex:section] headerView];
+    return [controller tableView:tableView viewForHeaderInSection:section];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
-    return [[sections objectAtIndex:section] footerView];
+    return [controller tableView:tableView viewForFooterInSection:section];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
-    return [[sections objectAtIndex:section] headerTitle];
+    return [controller tableView:tableView titleForHeaderInSection:section];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
-    return [[sections objectAtIndex:section] footerTitle];
+    return [controller tableView:tableView titleForFooterInSection:section];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[sections objectAtIndex:section] cellCount];
+    return [controller tableView:tableView numberOfRowsInSection:section];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[[sections objectAtIndex:indexPath.section] cellAtIndex:indexPath.row] cellHeight];
+    return [controller tableView:tableView heightForRowAtIndexPath:indexPath];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[sections objectAtIndex:indexPath.section] cellWithIndex:indexPath.row forTableView:tableView];
+    return [controller tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-    [[sections objectAtIndex:newIndexPath.section] tableView:tableView didSelectCellWithIndex:newIndexPath.row];
+    return [controller tableView:tableView didSelectRowAtIndexPath:indexPath];
 }
 
 -(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
-    [[sections objectAtIndex:indexPath.section] tableView:tableView accessoryButtonTappedForCellWithIndex:indexPath.row];
+    return [controller tableView:tableView accessoryButtonTappedForRowWithIndexPath:indexPath];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return [[sections objectAtIndex:indexPath.section] allowsReorderingDuringEditing];
+    return [controller tableView:tableView canMoveRowAtIndexPath:indexPath];
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
+- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)src toProposedIndexPath:(NSIndexPath *)dst
 {
-	if(![[sections objectAtIndex:proposedDestinationIndexPath.section] allowsReorderingDuringEditing])
-	{
-		int dir = sourceIndexPath.section < proposedDestinationIndexPath.section ? -1 : 1; 
-		int i = proposedDestinationIndexPath.section + dir;
-		while ( i!=sourceIndexPath.section && [[sections objectAtIndex:i] allowsReorderingDuringEditing] )
-		{
-			i+=dir;
-		}
-		int row = dir > 0 ? 0 : [[sections objectAtIndex:i] cellCount]-1;
-		return [NSIndexPath indexPathForRow:row inSection:i];
-	}
-		
-    return proposedDestinationIndexPath;
+    return [controller tableView:tableView targetIndexPathForMoveFromRowAtIndexPath:src toProposedIndexPath:dst];
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
-	TKSection* sourceSection = [sections objectAtIndex:sourceIndexPath.section];
-	TKCell* cell = [[sourceSection cellAtIndex:sourceIndexPath.row] retain];
-	[sourceSection removeCellAtIndex:sourceIndexPath.row];
-	TKSection* destinationSection = [sections objectAtIndex:destinationIndexPath.section];
-	[destinationSection insertCell:cell atIndex:destinationIndexPath.row];
-	[cell release];
+    return [controller tableView:tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
 }
-
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	return ![[sections objectAtIndex:indexPath.section] preventIndentationDuringEditing];
+    return [controller tableView:tableView shouldIndentWhileEditingRowAtIndexPath:indexPath];
 }
 
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	TKCellView* cellView = (TKCellView*)[tableView cellForRowAtIndexPath:indexPath];
-	return !cellView.preventEditing && ![[sections objectAtIndex:indexPath.section] preventEditing];
+    return [controller tableView:tableView canEditRowAtIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(editingStyle==UITableViewCellEditingStyleDelete)
-	{
-        [[sections objectAtIndex:indexPath.section] removeCellAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }
+    return [controller tableView:tableView commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
 }
 
 @end
