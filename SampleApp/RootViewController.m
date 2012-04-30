@@ -10,6 +10,7 @@
 #import "EditingSampleViewController.h"
 #import "AttributesSampleViewController.h"
 #import "ThemeSampleViewController.h"
+#import "HugeTableSampleViewController.h"
 #import "TKSection.h"
 #import "TKActionCell.h"
 
@@ -31,7 +32,10 @@
 		TKActionCell* themeSampleCell = [TKActionCell cellWithText:@"Custom Theme Sample" target:self action:@selector(onThemeSampleCell)];
 		themeSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, themeSampleCell, nil];
+		TKActionCell* hugeTableSampleCell = [TKActionCell cellWithText:@"Huge Table Sample" target:self action:@selector(onHugeTableSampleCell)];
+		hugeTableSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, themeSampleCell, hugeTableSampleCell, nil];
 		self.sections = [NSArray arrayWithObjects:section, nil];
 	}
 }
@@ -51,6 +55,12 @@
 -(void) onThemeSampleCell 
 {
 	ThemeSampleViewController* vc = [[[ThemeSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	[self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void) onHugeTableSampleCell 
+{
+	HugeTableSampleViewController* vc = [[[HugeTableSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 

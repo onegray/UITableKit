@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		AB494EAA154DC0A700FADDDE /* TKController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB494EA9154DC0A700FADDDE /* TKController.m */; };
+		AB494EAF154F2BA200FADDDE /* HugeTableSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB494EAE154F2BA200FADDDE /* HugeTableSampleViewController.m */; };
 		AB4CF16C1546FC4300BCDAC9 /* ThemeSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF16B1546FC4300BCDAC9 /* ThemeSampleViewController.m */; };
 		AB4CF1881546FE4800BCDAC9 /* CustomGeneralCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF17F1546FE4800BCDAC9 /* CustomGeneralCellView.m */; };
 		AB4CF18A1546FE4800BCDAC9 /* CustomTextFieldCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1831546FE4800BCDAC9 /* CustomTextFieldCellView.m */; };
@@ -54,6 +55,8 @@
 /* Begin PBXFileReference section */
 		AB494EA8154DC0A700FADDDE /* TKController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKController.h; sourceTree = "<group>"; };
 		AB494EA9154DC0A700FADDDE /* TKController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKController.m; sourceTree = "<group>"; };
+		AB494EAD154F2BA200FADDDE /* HugeTableSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HugeTableSampleViewController.h; sourceTree = "<group>"; };
+		AB494EAE154F2BA200FADDDE /* HugeTableSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HugeTableSampleViewController.m; sourceTree = "<group>"; };
 		AB4CF16A1546FC4300BCDAC9 /* ThemeSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThemeSampleViewController.h; sourceTree = "<group>"; };
 		AB4CF16B1546FC4300BCDAC9 /* ThemeSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThemeSampleViewController.m; sourceTree = "<group>"; };
 		AB4CF17E1546FE4800BCDAC9 /* CustomGeneralCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomGeneralCellView.h; sourceTree = "<group>"; };
@@ -274,6 +277,8 @@
 				ABE434CB1535FC6A004401E9 /* EditingSampleViewController.h */,
 				ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */,
 				AB4CF1691546FC4300BCDAC9 /* ThemeSampleViewController */,
+				AB494EAD154F2BA200FADDDE /* HugeTableSampleViewController.h */,
+				AB494EAE154F2BA200FADDDE /* HugeTableSampleViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -420,6 +425,7 @@
 				AB4CF1AF154746BA00BCDAC9 /* UserDefinedCell.m in Sources */,
 				AB4CF1B0154746BA00BCDAC9 /* UserDefinedCellView.m in Sources */,
 				AB494EAA154DC0A700FADDDE /* TKController.m in Sources */,
+				AB494EAF154F2BA200FADDDE /* HugeTableSampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
