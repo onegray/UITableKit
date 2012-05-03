@@ -17,6 +17,13 @@
 		AB4CF1AF154746BA00BCDAC9 /* UserDefinedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1AB154746BA00BCDAC9 /* UserDefinedCell.m */; };
 		AB4CF1B0154746BA00BCDAC9 /* UserDefinedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1AD154746BA00BCDAC9 /* UserDefinedCellView.m */; };
 		AB4CF1B1154746BA00BCDAC9 /* UserDefinedCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */; };
+		AB874E58155308DA00FA3953 /* ReminderSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E57155308DA00FA3953 /* ReminderSampleViewController.m */; };
+		AB874E641553238E00FA3953 /* ReminderGeneralCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E5B1553238E00FA3953 /* ReminderGeneralCellView.m */; };
+		AB874E651553238E00FA3953 /* ReminderSwitchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E5D1553238E00FA3953 /* ReminderSwitchCellView.m */; };
+		AB874E661553238E00FA3953 /* ReminderTextFieldCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E5F1553238E00FA3953 /* ReminderTextFieldCellView.m */; };
+		AB874E671553238E00FA3953 /* ReminderTextViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E611553238E00FA3953 /* ReminderTextViewCellView.m */; };
+		AB874E681553238E00FA3953 /* ReminderTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E631553238E00FA3953 /* ReminderTheme.m */; };
+		AB874E6A1553332A00FA3953 /* reminder_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = AB874E691553332A00FA3953 /* reminder_bg.png */; };
 		ABD70877152DF94F0016FCFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70876152DF94F0016FCFD /* UIKit.framework */; };
 		ABD70879152DF94F0016FCFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70878152DF94F0016FCFD /* Foundation.framework */; };
 		ABD7087B152DF94F0016FCFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */; };
@@ -71,6 +78,19 @@
 		AB4CF1AC154746BA00BCDAC9 /* UserDefinedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefinedCellView.h; sourceTree = "<group>"; };
 		AB4CF1AD154746BA00BCDAC9 /* UserDefinedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefinedCellView.m; sourceTree = "<group>"; };
 		AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDefinedCellView.xib; sourceTree = "<group>"; };
+		AB874E56155308DA00FA3953 /* ReminderSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderSampleViewController.h; sourceTree = "<group>"; };
+		AB874E57155308DA00FA3953 /* ReminderSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderSampleViewController.m; sourceTree = "<group>"; };
+		AB874E5A1553238E00FA3953 /* ReminderGeneralCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderGeneralCellView.h; path = ReminderTheme/ReminderGeneralCellView.h; sourceTree = "<group>"; };
+		AB874E5B1553238E00FA3953 /* ReminderGeneralCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReminderGeneralCellView.m; path = ReminderTheme/ReminderGeneralCellView.m; sourceTree = "<group>"; };
+		AB874E5C1553238E00FA3953 /* ReminderSwitchCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderSwitchCellView.h; path = ReminderTheme/ReminderSwitchCellView.h; sourceTree = "<group>"; };
+		AB874E5D1553238E00FA3953 /* ReminderSwitchCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReminderSwitchCellView.m; path = ReminderTheme/ReminderSwitchCellView.m; sourceTree = "<group>"; };
+		AB874E5E1553238E00FA3953 /* ReminderTextFieldCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderTextFieldCellView.h; path = ReminderTheme/ReminderTextFieldCellView.h; sourceTree = "<group>"; };
+		AB874E5F1553238E00FA3953 /* ReminderTextFieldCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReminderTextFieldCellView.m; path = ReminderTheme/ReminderTextFieldCellView.m; sourceTree = "<group>"; };
+		AB874E601553238E00FA3953 /* ReminderTextViewCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderTextViewCellView.h; path = ReminderTheme/ReminderTextViewCellView.h; sourceTree = "<group>"; };
+		AB874E611553238E00FA3953 /* ReminderTextViewCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReminderTextViewCellView.m; path = ReminderTheme/ReminderTextViewCellView.m; sourceTree = "<group>"; };
+		AB874E621553238E00FA3953 /* ReminderTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderTheme.h; path = ReminderTheme/ReminderTheme.h; sourceTree = "<group>"; };
+		AB874E631553238E00FA3953 /* ReminderTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReminderTheme.m; path = ReminderTheme/ReminderTheme.m; sourceTree = "<group>"; };
+		AB874E691553332A00FA3953 /* reminder_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reminder_bg.png; sourceTree = "<group>"; };
 		ABD70872152DF94F0016FCFD /* TableKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD70876152DF94F0016FCFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ABD70878152DF94F0016FCFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -186,6 +206,33 @@
 			path = UserDefinedCell;
 			sourceTree = "<group>";
 		};
+		AB874E55155308DA00FA3953 /* ReminderSample */ = {
+			isa = PBXGroup;
+			children = (
+				AB874E59155322F800FA3953 /* ReminderTheme */,
+				AB874E56155308DA00FA3953 /* ReminderSampleViewController.h */,
+				AB874E57155308DA00FA3953 /* ReminderSampleViewController.m */,
+			);
+			path = ReminderSample;
+			sourceTree = "<group>";
+		};
+		AB874E59155322F800FA3953 /* ReminderTheme */ = {
+			isa = PBXGroup;
+			children = (
+				AB874E5A1553238E00FA3953 /* ReminderGeneralCellView.h */,
+				AB874E5B1553238E00FA3953 /* ReminderGeneralCellView.m */,
+				AB874E5C1553238E00FA3953 /* ReminderSwitchCellView.h */,
+				AB874E5D1553238E00FA3953 /* ReminderSwitchCellView.m */,
+				AB874E5E1553238E00FA3953 /* ReminderTextFieldCellView.h */,
+				AB874E5F1553238E00FA3953 /* ReminderTextFieldCellView.m */,
+				AB874E601553238E00FA3953 /* ReminderTextViewCellView.h */,
+				AB874E611553238E00FA3953 /* ReminderTextViewCellView.m */,
+				AB874E621553238E00FA3953 /* ReminderTheme.h */,
+				AB874E631553238E00FA3953 /* ReminderTheme.m */,
+			);
+			name = ReminderTheme;
+			sourceTree = "<group>";
+		};
 		ABD70867152DF94F0016FCFD = {
 			isa = PBXGroup;
 			children = (
@@ -277,6 +324,7 @@
 				ABE434CB1535FC6A004401E9 /* EditingSampleViewController.h */,
 				ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */,
 				AB4CF1691546FC4300BCDAC9 /* ThemeSampleViewController */,
+				AB874E55155308DA00FA3953 /* ReminderSample */,
 				AB494EAD154F2BA200FADDDE /* HugeTableSampleViewController.h */,
 				AB494EAE154F2BA200FADDDE /* HugeTableSampleViewController.m */,
 			);
@@ -286,6 +334,7 @@
 		ABE4349E1533779A004401E9 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				AB874E691553332A00FA3953 /* reminder_bg.png */,
 				ABE4349F153377AB004401E9 /* main.m */,
 				ABE434A0153377AB004401E9 /* TableKitSample-Info.plist */,
 				ABE434A1153377AB004401E9 /* TableKitSample-Prefix.pch */,
@@ -380,6 +429,7 @@
 				ABE434A815337822004401E9 /* coke.png in Resources */,
 				AB4CF19015471F7C00BCDAC9 /* paper.png in Resources */,
 				AB4CF1B1154746BA00BCDAC9 /* UserDefinedCellView.xib in Resources */,
+				AB874E6A1553332A00FA3953 /* reminder_bg.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -426,6 +476,12 @@
 				AB4CF1B0154746BA00BCDAC9 /* UserDefinedCellView.m in Sources */,
 				AB494EAA154DC0A700FADDDE /* TKController.m in Sources */,
 				AB494EAF154F2BA200FADDDE /* HugeTableSampleViewController.m in Sources */,
+				AB874E58155308DA00FA3953 /* ReminderSampleViewController.m in Sources */,
+				AB874E641553238E00FA3953 /* ReminderGeneralCellView.m in Sources */,
+				AB874E651553238E00FA3953 /* ReminderSwitchCellView.m in Sources */,
+				AB874E661553238E00FA3953 /* ReminderTextFieldCellView.m in Sources */,
+				AB874E671553238E00FA3953 /* ReminderTextViewCellView.m in Sources */,
+				AB874E681553238E00FA3953 /* ReminderTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

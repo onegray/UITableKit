@@ -11,6 +11,7 @@
 #import "AttributesSampleViewController.h"
 #import "ThemeSampleViewController.h"
 #import "HugeTableSampleViewController.h"
+#import "ReminderSampleViewController.h"
 #import "TKSection.h"
 #import "TKActionCell.h"
 
@@ -29,13 +30,16 @@
 		TKActionCell* editingSampleCell = [TKActionCell cellWithText:@"Editing Sample" target:self action:@selector(onEditingSampleCell)];
 		editingSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-		TKActionCell* themeSampleCell = [TKActionCell cellWithText:@"Custom Theme Sample" target:self action:@selector(onThemeSampleCell)];
+		TKActionCell* themeSampleCell = [TKActionCell cellWithText:@"Custom Theme Sample" target:self action:@selector(onCustomThemeSampleCell)];
 		themeSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
+		TKActionCell* reminderSampleCell = [TKActionCell cellWithText:@"Reminder Theme Sample" target:self action:@selector(onReminderThemeSampleCell)];
+		reminderSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
 		TKActionCell* hugeTableSampleCell = [TKActionCell cellWithText:@"Huge Table Sample" target:self action:@selector(onHugeTableSampleCell)];
 		hugeTableSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, themeSampleCell, hugeTableSampleCell, nil];
+		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, themeSampleCell, reminderSampleCell, hugeTableSampleCell, nil];
 		self.sections = [NSArray arrayWithObjects:section, nil];
 	}
 }
@@ -52,9 +56,15 @@
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
--(void) onThemeSampleCell 
+-(void) onCustomThemeSampleCell 
 {
 	ThemeSampleViewController* vc = [[[ThemeSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	[self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void) onReminderThemeSampleCell 
+{
+	ReminderSampleViewController* vc = [[[ReminderSampleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
