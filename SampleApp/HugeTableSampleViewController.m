@@ -21,7 +21,7 @@
 		UIColor* colors[3] = {[UIColor redColor], [UIColor purpleColor], [UIColor blueColor]};
 		
 		TKSection* section = [TKSection sectionWithCells:nil];
-		for(int i=0; i<10000; i++) 
+		for(int i=0; i<1000; i++) // It might take some significant time
 		{
 			NSString* cellStr = [[NSString alloc] initWithFormat:@"Cell %d", i];
 			TKStaticCell* cell = [[TKStaticCell alloc] initWithText:cellStr];

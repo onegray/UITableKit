@@ -26,10 +26,11 @@
 #import "TKStaticCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
+#import "TKAttrProxy.h"
 
 
-@interface TKAttrLabelProxyInterface(private)
-+(TKAttrLabelProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrLabelProxyInterface)
++(TKAttrLabelProxyInterface*) sharedLabelProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
 @implementation TKStaticCell
@@ -94,13 +95,13 @@
 -(TKAttrLabelProxyInterface*) textLabel
 {
 	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return (TKAttrLabelProxyInterface*)[TKAttrLabelProxyInterface sharedProxyWithAccesor:@selector(textLabel) attributes:attributes];
+	return [TKAttrProxy sharedLabelProxyWithAccessor:@selector(textLabel) attributes:attributes];
 }
 
 -(TKAttrLabelProxyInterface*) detailTextLabel
 {
 	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return (TKAttrLabelProxyInterface*)[TKAttrLabelProxyInterface sharedProxyWithAccesor:@selector(detailTextLabel) attributes:attributes];
+	return [TKAttrProxy sharedLabelProxyWithAccessor:@selector(detailTextLabel) attributes:attributes];
 }
 
 

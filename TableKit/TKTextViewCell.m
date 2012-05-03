@@ -26,9 +26,10 @@
 #import "TKTextViewCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
+#import "TKAttrProxy.h"
 
-@interface TKAttrTextViewProxyInterface(private)
-+(TKAttrTextViewProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrTextViewProxyInterface)
++(TKAttrTextViewProxyInterface*) sharedTextViewProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
 
@@ -96,7 +97,7 @@
 -(TKAttrTextViewProxyInterface*) textView
 {
 	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrTextViewProxyInterface sharedProxyWithAccesor:@selector(textView) attributes:attributes];
+	return [TKAttrProxy sharedTextViewProxyWithAccessor:@selector(textView) attributes:attributes];
 }
 
 @end

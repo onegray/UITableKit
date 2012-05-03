@@ -27,13 +27,13 @@
 #import "TKAttrViewProxyInterface.h"
 #import "TKAttrProxy.h"
 
-@interface TKAttrViewProxyInterface(private)
-+(TKAttrViewProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrViewProxyInterface)
++(TKAttrViewProxyInterface*) sharedViewProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
-@implementation TKAttrViewProxyInterface(private)
+@implementation TKAttrProxy(TKAttrViewProxyInterface)
 
-+(TKAttrViewProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes
++(TKAttrViewProxyInterface*) sharedViewProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes
 {
 	static TKAttrProxy* sharedProxy = nil;
 	if(!sharedProxy)

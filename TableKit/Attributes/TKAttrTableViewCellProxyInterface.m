@@ -27,13 +27,13 @@
 #import "TKAttrTableViewCellProxyInterface.h"
 #import "TKAttrProxy.h"
 
-@interface TKAttrTableViewCellProxyInterface(private)
-+(TKAttrTableViewCellProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrTableViewCellProxyInterface)
++(TKAttrTableViewCellProxyInterface*) sharedTableViewCellProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
-@implementation TKAttrTableViewCellProxyInterface(private)
+@implementation TKAttrProxy(TKAttrTableViewCellProxyInterface)
 
-+(TKAttrTableViewCellProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes
++(TKAttrTableViewCellProxyInterface*) sharedTableViewCellProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes
 {
 	static TKAttrProxy* sharedProxy = nil;
 	if(!sharedProxy)

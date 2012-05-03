@@ -27,13 +27,13 @@
 #import "TKAttrTextFieldProxyInterface.h"
 #import "TKAttrProxy.h"
 
-@interface TKAttrTextFieldProxyInterface(private)
-+(TKAttrTextFieldProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrTextFieldProxyInterface)
++(TKAttrTextFieldProxyInterface*) sharedTextFieldProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
-@implementation TKAttrTextFieldProxyInterface(private)
+@implementation TKAttrProxy(TKAttrTextFieldProxyInterface)
 
-+(TKAttrTextFieldProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes
++(TKAttrTextFieldProxyInterface*) sharedTextFieldProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes
 {
 	static TKAttrProxy* sharedProxy = nil;
 	if(!sharedProxy)

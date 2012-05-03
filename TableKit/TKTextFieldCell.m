@@ -26,9 +26,10 @@
 #import "TKTextFieldCell.h"
 #import "TKTheme.h"
 #import "TKCellView.h"
+#import "TKAttrProxy.h"
 
-@interface TKAttrTextFieldProxyInterface(private)
-+(TKAttrTextFieldProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrTextFieldProxyInterface)
++(TKAttrTextFieldProxyInterface*) sharedTextFieldProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
 
@@ -110,7 +111,7 @@
 -(TKAttrTextFieldProxyInterface*) textField
 {
 	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrTextFieldProxyInterface sharedProxyWithAccesor:@selector(textField) attributes:attributes];
+	return [TKAttrProxy sharedTextFieldProxyWithAccessor:@selector(textField) attributes:attributes];
 }
 
 @end

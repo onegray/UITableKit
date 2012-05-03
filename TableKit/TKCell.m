@@ -28,13 +28,14 @@
 #import "TKCellView.h"
 #import "TKTheme.h"
 #import "TKCellAttribute.h"
+#import "TKAttrProxy.h"
 
-@interface TKAttrTableViewCellProxyInterface(private)
-+(TKAttrTableViewCellProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrTableViewCellProxyInterface)
++(TKAttrTableViewCellProxyInterface*) sharedTableViewCellProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
-@interface TKAttrImageViewProxyInterface(private)
-+(TKAttrImageViewProxyInterface*) sharedProxyWithAccesor:(SEL)accessor attributes:(NSMutableArray*)attributes;
+@interface TKAttrProxy(TKAttrImageViewProxyInterface)
++(TKAttrImageViewProxyInterface*) sharedImageViewProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
 @implementation TKCell
@@ -135,13 +136,13 @@
 -(TKAttrTableViewCellProxyInterface*) tableViewCell
 {
 	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return (TKAttrTableViewCellProxyInterface*)[TKAttrTableViewCellProxyInterface sharedProxyWithAccesor:NULL attributes:attributes];
+	return [TKAttrProxy sharedTableViewCellProxyWithAccessor:NULL attributes:attributes];
 }
 
 -(TKAttrImageViewProxyInterface*) imageView
 {
 	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return (TKAttrImageViewProxyInterface*)[TKAttrImageViewProxyInterface sharedProxyWithAccesor:@selector(imageView) attributes:attributes];
+	return [TKAttrProxy sharedImageViewProxyWithAccessor:@selector(imageView) attributes:attributes];
 }
 
 // TKCellView specific attributes
