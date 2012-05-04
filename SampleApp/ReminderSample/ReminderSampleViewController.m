@@ -10,9 +10,17 @@
 #import "TKSection.h"
 #import "TKStaticCell.h"
 #import "TKSwitchCell.h"
+#import "TKTextFieldCell.h"
+#import "TKTextViewCell.h"
 #import "ReminderTheme.h"
 
 @implementation ReminderSampleViewController
+
+-(void) dealloc
+{
+	[tableController release];
+	[super dealloc];
+}
 
 -(void) loadView
 {
@@ -28,14 +36,16 @@
 {
     [super viewDidLoad];
 	
-	if(tableController==nil) 
+	if(tableController==nil)
 	{
 		tableController = [[TKController alloc] init];
 		TKStaticCell* staticCell1 = [TKStaticCell cellWithText:@"Thursday, Oct 13, 2011"];
 		TKStaticCell* staticCell2 = [TKStaticCell cellWithStyle:UITableViewCellStyleSubtitle text:@"Location" detailText:@"1227 N St NW Washington"];
 		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Track Location" state:YES];
+		TKTextFieldCell* textFieldCell = [TKTextFieldCell cellWithText:nil placeholder:@"Type here"];
+		TKTextViewCell* textViewCell = [TKTextViewCell cellWithText:nil placeholder:@"Type here"];
 		
-		TKSection* section = [TKSection sectionWithCells:staticCell1, staticCell2, switchCell, nil];
+		TKSection* section = [TKSection sectionWithCells:switchCell, textFieldCell, textViewCell, staticCell1, staticCell2, nil];
 		section.headerHeight = section.footerHeight = 0;
 		tableController.sections = [NSArray arrayWithObject:section];
 	}
