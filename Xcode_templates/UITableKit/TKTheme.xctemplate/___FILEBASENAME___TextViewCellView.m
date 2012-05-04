@@ -14,7 +14,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
-	{
+    {
 
     }
     return self;
@@ -22,14 +22,14 @@
 
 -(void) layoutSubviews
 {
-	[super layoutSubviews];
+    [super layoutSubviews];
 
 }
 
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)aPlaceholder;
 {
-	[super updateWithText:text placeholder:placeholder];
-	
+    [super updateWithText:text placeholder:aPlaceholder];
+
 }
 
 @end
