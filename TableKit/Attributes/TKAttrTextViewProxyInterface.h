@@ -25,9 +25,9 @@
 //
 
 
-#import "TKAttrViewProxyInterface.h"
+#import "TKAttrScrollViewProxyInterface.h"
 
-@interface TKAttrTextViewProxyInterface : TKAttrViewProxyInterface
+@interface TKAttrTextViewProxyInterface : TKAttrScrollViewProxyInterface
 
 @property(nonatomic, assign, writeonly) id<UITextViewDelegate> delegate;
 @property(nonatomic, retain, writeonly) UIFont *font;
