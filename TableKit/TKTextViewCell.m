@@ -38,37 +38,37 @@
 
 +(TKTextViewCell*) cellWithText:(NSString*)text
 {
-    return [[[self alloc] initWithText:text placeholder:nil] autorelease];
+	return [[[self alloc] initWithText:text placeholder:nil] autorelease];
 }
 
 +(id) cellWithText:(NSString*)text placeholder:(NSString*)placeholder
 {
-    return [[[self alloc] initWithText:text placeholder:placeholder] autorelease];
+	return [[[self alloc] initWithText:text placeholder:placeholder] autorelease];
 }
 
 -(id) initWithText:(NSString*)aText
 {
-    return [self initWithText:aText placeholder:nil];
+	return [self initWithText:aText placeholder:nil];
 }
 
 -(id) initWithText:(NSString*)aText placeholder:(NSString*)aPlaceholder
 {
-    self = [super init];
-    if(self)
+	self = [super init];
+	if(self)
 	{
-        self.text = aText;
+		self.text = aText;
 		self.placeholder = aPlaceholder;
-        cellHeight = 120;
-    }
-    return self;
+		cellHeight = 120;
+	}
+	return self;
 }
 
 -(void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-    [text release];
+	[text release];
 	[placeholder release];
-    [super dealloc];
+	[super dealloc];
 }
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
@@ -79,18 +79,36 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKTextViewCellView* cellView = [tableView.theme textViewCellView];
-    cellView.owner = self;
+	TKTextViewCellView* cellView = [tableView.theme textViewCellView];
+	cellView.owner = self;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChange:) name:UITextViewTextDidChangeNotification object:nil];
 	[cellView updateWithText:text placeholder:placeholder];
 	[self applyAttributesToCellView:cellView];
-    return cellView;
+	return cellView;
+}
+
+-(CGFloat) cellHeightForTableView:(UITableView *)tableView
+{
+	if(cellHeight==0)
+	{
+		TKTextViewCellView* cellView = (id)[tableView.theme cachedCellForSelector:@selector(textViewCellView) style:0];
+		[cellView updateWithText:text placeholder:placeholder];
+		[self applyAttributesToCellView:cellView];
+		
+		[tableView addSubview:cellView];
+		cellView.frame = tableView.bounds;
+		CGFloat height = [cellView cellHeight];
+		[cellView removeFromSuperview];
+		
+		return height;
+	}
+	return cellHeight;
 }
 
 -(void) textViewTextDidChange:(NSNotification*)notification
 {
-    self.text = [[notification object] text];
+	self.text = [[notification object] text];
 }
 
 

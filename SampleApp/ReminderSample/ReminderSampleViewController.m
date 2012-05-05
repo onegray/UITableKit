@@ -27,7 +27,8 @@
 	self.view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"reminder_bg.png"]];
 	tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
-	tableView.backgroundColor = [UIColor clearColor];	
+	tableView.separatorColor = [UIColor clearColor];
+	tableView.backgroundColor = [UIColor clearColor];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.view addSubview:tableView];
 }
@@ -39,13 +40,14 @@
 	if(tableController==nil)
 	{
 		tableController = [[TKController alloc] init];
-		TKStaticCell* staticCell1 = [TKStaticCell cellWithText:@"Thursday, Oct 13, 2011"];
-		TKStaticCell* staticCell2 = [TKStaticCell cellWithStyle:UITableViewCellStyleSubtitle text:@"Location" detailText:@"1227 N St NW Washington"];
+		TKStaticCell* staticCell = [TKStaticCell cellWithText:@"Thursday, Oct 13, 2011"];
 		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Track Location" state:YES];
-		TKTextFieldCell* textFieldCell = [TKTextFieldCell cellWithText:nil placeholder:@"Type here"];
 		TKTextViewCell* textViewCell = [TKTextViewCell cellWithText:nil placeholder:@"Type here"];
-		
-		TKSection* section = [TKSection sectionWithCells:switchCell, textFieldCell, textViewCell, staticCell1, staticCell2, nil];
+		textViewCell.cellHeight = 0; // Automatically adjust height
+		textViewCell.textView.scrollEnabled = NO;
+		textViewCell.textView.delegate = (id)self;
+				
+		TKSection* section = [TKSection sectionWithCells:staticCell, textViewCell, switchCell, nil];
 		section.headerHeight = section.footerHeight = 0;
 		tableController.sections = [NSArray arrayWithObject:section];
 	}
@@ -55,11 +57,29 @@
 	[tableView applyTheme:[[[ReminderTheme alloc] init] autorelease]];
 }
 
+- (BOOL)textView:(UITextView *)tv shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText
+{
+    if ([replacementText isEqualToString:@"\n"])
+	{
+        [tv resignFirstResponder];
+        return FALSE;
+    }
+	[self performSelector:@selector(recalcTableLayoutForTextView:) withObject:tv afterDelay:0];
+    return TRUE;    
+}
+
+-(void) recalcTableLayoutForTextView:(UITextView*)textView
+{
+	if(fabsf(textView.contentSize.height - textView.frame.size.height) > 3)
+	{
+		[tableView beginUpdates];
+		[tableView endUpdates];
+	}
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return YES;
 }
-
 
 @end

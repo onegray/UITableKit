@@ -62,6 +62,11 @@
     return nil;
 }
 
+-(CGFloat) cellHeightForTableView:(UITableView*)tableView
+{
+	return cellHeight;
+}
+
 -(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView
 {
 	NSArray* visibleCells = [tableView visibleCells];

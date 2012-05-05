@@ -26,6 +26,17 @@
 
 #import "TKDefaultTextViewCellView.h"
 
+// TKTextView is a workaround to fix scrolling on iOS 4.x
+@interface TKTextView : UITextView
+@end
+@implementation TKTextView
+-(void) setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
+{
+	[super setContentOffset:(self.scrollEnabled ? contentOffset : CGPointZero) animated:animated];
+}
+@end
+
+
 @implementation TKDefaultTextViewCellView
 @synthesize textView, placeholder;
 
@@ -34,7 +45,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-        textView = [[UITextView alloc] initWithFrame:CGRectZero];
+        textView = [[TKTextView alloc] initWithFrame:CGRectZero];
 		textView.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:textView];
@@ -89,6 +100,10 @@
 	textView.frame = CGRectMake(offset+2, 0, boundsSize.width-offset-4, boundsSize.height);
 }
 
+-(CGFloat) cellHeight
+{
+	return textView.contentSize.height+2;
+}
 
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)aPlaceholder;
 {

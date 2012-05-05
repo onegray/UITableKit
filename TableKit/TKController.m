@@ -80,7 +80,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[[sections objectAtIndex:indexPath.section] cellAtIndex:indexPath.row] cellHeight];
+    return [[[sections objectAtIndex:indexPath.section] cellAtIndex:indexPath.row] cellHeightForTableView:tableView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

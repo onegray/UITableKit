@@ -70,6 +70,7 @@
 @protocol TKTextViewCellViewProtocol <NSObject>
 -(UITextView*) textView;
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder;
+-(CGFloat) cellHeight;
 @end
 
 #define TKTextViewCellView TKCellView<TKTextViewCellViewProtocol>

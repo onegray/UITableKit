@@ -120,7 +120,7 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	if([ms numberOfArguments]>2)
 	{
 		NSAssert([ms numberOfArguments]==3, @"TKThemeCacheProxy supports only 1 param");
-		NSAssert([ms getArgumentTypeAtIndex:2][0]=='i', @"TKThemeCacheProxy supports only int params");
+		NSAssert([ms getArgumentTypeAtIndex:2][0]==@encode(int)[0], @"TKThemeCacheProxy supports only int params");
 		[invocation getArgument:&param atIndex:2];
 	}
 	
@@ -145,35 +145,50 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	}
 }
 
+-(void) fillCache:(CellCache*)cache invokeSelector:(SEL)selector
+{
+	TKCellView* cellView = nil;
+	id target = [themeImpl respondsToSelector:selector] ? themeImpl : defaultThemeImpl;
+	NSMethodSignature* ms = [target methodSignatureForSelector:selector];
+	
+	if([ms numberOfArguments]==2)
+	{
+		cellView = [target performSelector:selector];
+	}
+	else
+	{
+		NSAssert([ms numberOfArguments]==3, @"Invalid param num for selector %s", sel_getName(selector));
+		NSAssert([ms getArgumentTypeAtIndex:2][0]=='i', @"TKThemeCacheProxy supports only int params");
+		
+		NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:ms];
+		[invocation setSelector:selector];
+		[invocation invokeWithTarget:target];
+		[invocation getReturnValue:&cellView];
+	}
+	
+	[cellView setReuseIdentifier:cache->cellId];
+	cache->cellView = [cellView retain];
+	cache->class = [cellView class];
+}
+
 -(Class) cellClassForSelector:(SEL)selector style:(int)style
 {
 	CellCache* cache = [CellCache cacheForSelector:selector param:style];
 	if(!cache->class) 
 	{
-		TKCellView* cellView = nil;
-		id target = [themeImpl respondsToSelector:selector] ? themeImpl : defaultThemeImpl;
-		NSMethodSignature* ms = [target methodSignatureForSelector:selector];
-
-		if([ms numberOfArguments]==2)
-		{
-			cellView = [target performSelector:selector];
-		}
-		else
-		{
-			NSAssert([ms numberOfArguments]==3, @"Invalid param num for selector %s", sel_getName(selector));
-			NSAssert([ms getArgumentTypeAtIndex:2][0]=='i', @"TKThemeCacheProxy supports only int params");
-			
-			NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:ms];
-			[invocation setSelector:selector];
-			[invocation invokeWithTarget:target];
-			[invocation getReturnValue:&cellView];
-		}
-		
-		[cellView setReuseIdentifier:cache->cellId];
-		cache->cellView = [cellView retain];
-		cache->class = [cellView class];
+		[self fillCache:cache invokeSelector:selector];
 	}
 	return cache->class;
+}
+
+-(TKCellView*) cachedCellForSelector:(SEL)selector style:(int)style
+{
+	CellCache* cache = [CellCache cacheForSelector:selector param:style];
+	if(!cache->cellView)
+	{
+		[self fillCache:cache invokeSelector:selector];
+	}
+	return cache->cellView;
 }
 
 @end

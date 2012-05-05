@@ -43,6 +43,7 @@
 	id<TKThemeProtocol> themeImpl;
 }
 -(Class) cellClassForSelector:(SEL)selector style:(int)style;
+-(TKCellView*) cachedCellForSelector:(SEL)selector style:(int)style;
 
 @end
 
