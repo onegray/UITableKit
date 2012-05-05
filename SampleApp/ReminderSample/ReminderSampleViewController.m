@@ -28,6 +28,10 @@
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"reminder_bg.png"]];
 	tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
 	tableView.separatorColor = [UIColor clearColor];
+	if([tableView respondsToSelector:@selector(setBackgroundView:)])
+	{
+		tableView.backgroundView = nil;
+	}
 	tableView.backgroundColor = [UIColor clearColor];
 	tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	[self.view addSubview:tableView];
