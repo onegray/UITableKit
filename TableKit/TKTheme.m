@@ -109,6 +109,8 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	{
 		defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
 		signature = [defaultThemeImpl methodSignatureForSelector:selector];
+		NSAssert(signature!=nil, @"Applied theme %@ does not support method '%s'", 
+				 (themeImpl ? themeImpl : defaultThemeImpl), sel_getName(selector));
 	}
 	return signature;
 }
@@ -145,11 +147,13 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	}
 }
 
--(void) fillCache:(CellCache*)cache invokeSelector:(SEL)selector
+-(void) fillCache:(CellCache*)cache invokeSelector:(SEL)selector style:(int)style
 {
 	TKCellView* cellView = nil;
 	id target = [themeImpl respondsToSelector:selector] ? themeImpl : defaultThemeImpl;
 	NSMethodSignature* ms = [target methodSignatureForSelector:selector];
+	NSAssert(ms!=nil, @"Applied theme %@ does not support method '%s'",
+			 (themeImpl ? themeImpl : defaultThemeImpl), sel_getName(selector));
 	
 	if([ms numberOfArguments]==2)
 	{
@@ -158,10 +162,11 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	else
 	{
 		NSAssert([ms numberOfArguments]==3, @"Invalid param num for selector %s", sel_getName(selector));
-		NSAssert([ms getArgumentTypeAtIndex:2][0]=='i', @"TKThemeCacheProxy supports only int params");
+		NSAssert([ms getArgumentTypeAtIndex:2][0]==@encode(int)[0], @"TKThemeCacheProxy supports only int params");
 		
 		NSInvocation* invocation = [NSInvocation invocationWithMethodSignature:ms];
 		[invocation setSelector:selector];
+		[invocation setArgument:&style atIndex:2];
 		[invocation invokeWithTarget:target];
 		[invocation getReturnValue:&cellView];
 	}
@@ -176,7 +181,7 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	CellCache* cache = [CellCache cacheForSelector:selector param:style];
 	if(!cache->class) 
 	{
-		[self fillCache:cache invokeSelector:selector];
+		[self fillCache:cache invokeSelector:selector style:style];
 	}
 	return cache->class;
 }
@@ -186,7 +191,7 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	CellCache* cache = [CellCache cacheForSelector:selector param:style];
 	if(!cache->cellView)
 	{
-		[self fillCache:cache invokeSelector:selector];
+		[self fillCache:cache invokeSelector:selector style:style];
 	}
 	return cache->cellView;
 }
@@ -207,7 +212,7 @@ static TKThemeCacheProxy* cachedTheme = nil;
 		cachedTheme = [themeDict objectForKey:[NSValue valueWithPointer:self]];
 		if(!cachedTheme)
 		{
-			NSLog(@"No one theme was applied to %@, applying default theme", self);
+			NSLog(@"No one theme was applied to <UITableView: %p>, applying TKDefaultTheme.", self);
 			defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
 			[self applyTheme:defaultThemeImpl];
 		}
