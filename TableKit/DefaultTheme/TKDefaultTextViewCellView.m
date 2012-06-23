@@ -32,7 +32,7 @@
 @implementation TKTextView
 -(void) setContentOffset:(CGPoint)contentOffset animated:(BOOL)animated
 {
-	[super setContentOffset:(self.scrollEnabled ? contentOffset : CGPointZero) animated:animated];
+	[super setContentOffset:(self.scrollEnabled ? contentOffset : self.contentOffset) animated:animated];
 }
 @end
 
