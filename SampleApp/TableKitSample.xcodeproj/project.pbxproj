@@ -49,6 +49,7 @@
 		ABE434CD1535FC6A004401E9 /* EditingSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */; };
 		ABE434D11535FE0D004401E9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434D01535FE0D004401E9 /* RootViewController.m */; };
 		ABE434D415360157004401E9 /* AttributesSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434D315360156004401E9 /* AttributesSampleViewController.m */; };
+		ABF11AE11595DD6D00F49B8B /* DataSourceSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF11AE01595DD6D00F49B8B /* DataSourceSampleViewController.m */; };
 		ABF973121555098600F3DA70 /* TKAttrScrollViewProxyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF973111555098600F3DA70 /* TKAttrScrollViewProxyInterface.m */; };
 		ABFAE9F11544BBAB0092F845 /* TKAttrImageViewProxyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFAE9E21544BBAB0092F845 /* TKAttrImageViewProxyInterface.m */; };
 		ABFAE9F21544BBAB0092F845 /* TKAttrLabelProxyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFAE9E41544BBAB0092F845 /* TKAttrLabelProxyInterface.m */; };
@@ -139,6 +140,8 @@
 		ABE434D01535FE0D004401E9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RootViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		ABE434D215360156004401E9 /* AttributesSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AttributesSampleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		ABE434D315360156004401E9 /* AttributesSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AttributesSampleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		ABF11ADF1595DD6D00F49B8B /* DataSourceSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceSampleViewController.h; sourceTree = "<group>"; };
+		ABF11AE01595DD6D00F49B8B /* DataSourceSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceSampleViewController.m; sourceTree = "<group>"; };
 		ABF973101555098600F3DA70 /* TKAttrScrollViewProxyInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAttrScrollViewProxyInterface.h; sourceTree = "<group>"; };
 		ABF973111555098600F3DA70 /* TKAttrScrollViewProxyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAttrScrollViewProxyInterface.m; sourceTree = "<group>"; };
 		ABFAE9E11544BBAB0092F845 /* TKAttrImageViewProxyInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAttrImageViewProxyInterface.h; sourceTree = "<group>"; };
@@ -330,6 +333,8 @@
 				AB874E55155308DA00FA3953 /* ReminderSample */,
 				AB494EAD154F2BA200FADDDE /* HugeTableSampleViewController.h */,
 				AB494EAE154F2BA200FADDDE /* HugeTableSampleViewController.m */,
+				ABF11ADF1595DD6D00F49B8B /* DataSourceSampleViewController.h */,
+				ABF11AE01595DD6D00F49B8B /* DataSourceSampleViewController.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				AB874E671553238E00FA3953 /* ReminderTextViewCellView.m in Sources */,
 				AB874E681553238E00FA3953 /* ReminderTheme.m in Sources */,
 				ABF973121555098600F3DA70 /* TKAttrScrollViewProxyInterface.m in Sources */,
+				ABF11AE11595DD6D00F49B8B /* DataSourceSampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
