@@ -34,14 +34,19 @@
 
 @interface TKAttrViewProxyInterface
 
-@property(nonatomic, assign, writeonly) BOOL clipsToBounds;
+@property(nonatomic, assign, writeonly) NSInteger tag;
+@property(nonatomic, assign, writeonly)	BOOL clipsToBounds;
 @property(nonatomic, assign, writeonly) UIColor* backgroundColor;
 @property(nonatomic, assign, writeonly) CGFloat alpha;
 @property(nonatomic, assign, writeonly) BOOL opaque;
 @property(nonatomic, assign, writeonly) BOOL clearsContextBeforeDrawing;
 @property(nonatomic, assign, writeonly) BOOL hidden;
 @property(nonatomic, assign, writeonly) UIViewContentMode contentMode;
-
 @property(nonatomic, assign, writeonly) BOOL userInteractionEnabled;
+@property(nonatomic, assign, writeonly) CGFloat contentScaleFactor __OSX_AVAILABLE_STARTING(__MAC_NA,__IPHONE_4_0);
+@property(nonatomic, assign, writeonly) BOOL multipleTouchEnabled;
+@property(nonatomic, assign, writeonly) BOOL exclusiveTouch;
+@property(nonatomic, assign, writeonly) BOOL autoresizesSubviews;
+@property(nonatomic, assign, writeonly) UIViewAutoresizing autoresizingMask;
 
 @end

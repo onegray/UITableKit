@@ -48,6 +48,7 @@
 
 @implementation TKAttrViewProxyInterface
 
+@dynamic tag;
 @dynamic clipsToBounds;
 @dynamic backgroundColor;
 @dynamic alpha;
@@ -56,6 +57,11 @@
 @dynamic hidden;
 @dynamic contentMode;
 @dynamic userInteractionEnabled;
+@dynamic contentScaleFactor;
+@dynamic multipleTouchEnabled;
+@dynamic exclusiveTouch;
+@dynamic autoresizesSubviews;
+@dynamic autoresizingMask;
 
 @end
 
@@ -77,4 +83,15 @@
 	return [self isUserInteractionEnabled];
 }
 
+-(BOOL) multipleTouchEnabled
+{
+	return [self isMultipleTouchEnabled];
+}
+
+-(BOOL) exclusiveTouch
+{
+	return [self isExclusiveTouch];
+}
+
 @end
+
