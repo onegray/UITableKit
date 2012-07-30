@@ -78,6 +78,7 @@
 @dynamic keyboardAppearance;
 @dynamic returnKeyType;
 @dynamic enablesReturnKeyAutomatically;
+@dynamic secureTextEntry;
 
 @end
 
@@ -97,6 +98,11 @@
 -(BOOL) highlighted 
 {
 	return [self isHighlighted];
+}
+
+-(BOOL) secureTextEntry 
+{
+	return [self isSecureTextEntry];
 }
 
 @end

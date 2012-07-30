@@ -59,5 +59,6 @@
 @property(nonatomic, assign, writeonly) UIKeyboardAppearance keyboardAppearance;
 @property(nonatomic, assign, writeonly) UIReturnKeyType returnKeyType;
 @property(nonatomic, assign, writeonly) BOOL enablesReturnKeyAutomatically;
+@property(nonatomic, assign, writeonly) BOOL secureTextEntry;
 
 @end
