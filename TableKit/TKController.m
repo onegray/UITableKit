@@ -25,7 +25,7 @@
 //
 
 #import "TKController.h"
-#import "TKCell.h"
+#import "TKCellProtocol.h"
 #import "TKCellView.h"
 #import "TKSection.h"
 
@@ -124,7 +124,7 @@
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
 	TKSection* sourceSection = [sections objectAtIndex:sourceIndexPath.section];
-	TKCell* cell = [[sourceSection cellAtIndex:sourceIndexPath.row] retain];
+	id<TKCellProtocol> cell = [[sourceSection cellAtIndex:sourceIndexPath.row] retain];
 	[sourceSection removeCellAtIndex:sourceIndexPath.row];
 	TKSection* destinationSection = [sections objectAtIndex:destinationIndexPath.section];
 	[destinationSection insertCell:cell atIndex:destinationIndexPath.row];

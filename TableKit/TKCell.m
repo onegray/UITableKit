@@ -88,17 +88,6 @@
 	
 }
 
--(void) tableViewDidSelectCell:(UITableView*) tableView
-{
-	
-}
-
--(void) tableViewAccessoryButtonTapped:(UITableView*) tableView
-{
-	
-}
-
-
 -(void) addAttribute:(TKCellAttribute*)attr
 {
 	if(attributes==nil)

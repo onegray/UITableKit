@@ -62,6 +62,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AB205249160869AC00BDA203 /* TKCellProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TKCellProtocol.h; sourceTree = "<group>"; };
 		AB494EA8154DC0A700FADDDE /* TKController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKController.h; sourceTree = "<group>"; };
 		AB494EA9154DC0A700FADDDE /* TKController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKController.m; sourceTree = "<group>"; };
 		AB494EAD154F2BA200FADDDE /* HugeTableSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HugeTableSampleViewController.h; sourceTree = "<group>"; };
@@ -274,6 +275,7 @@
 			children = (
 				ABE4340F1531A252004401E9 /* DefaultTheme */,
 				ABFAE9E01544BBAB0092F845 /* Attributes */,
+				AB205249160869AC00BDA203 /* TKCellProtocol.h */,
 				ABE4341E1531A252004401E9 /* TKCell.h */,
 				ABE4341F1531A252004401E9 /* TKCell.m */,
 				ABE434261531A252004401E9 /* TKStaticCell.h */,

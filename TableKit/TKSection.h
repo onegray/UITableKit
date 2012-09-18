@@ -24,8 +24,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
-@class TKCell;
+#import "TKCellProtocol.h"
 
 @interface TKSection : NSObject {
     
@@ -55,15 +54,14 @@
 @property (nonatomic, assign) BOOL allowsReorderingDuringEditing;
 @property (nonatomic, assign) BOOL preventIndentationDuringEditing;
 
-+(TKSection*) sectionWithCells: (TKCell*)cell, ... NS_REQUIRES_NIL_TERMINATION;
--(TKCell*) cellAtIndex:(int)cellIndex;
--(void) addCell:(TKCell*)cell; 
++(TKSection*) sectionWithCells:(id<TKCellProtocol>)cell, ... NS_REQUIRES_NIL_TERMINATION;
+-(id<TKCellProtocol>) cellAtIndex:(int)cellIndex;
+-(void) addCell:(id<TKCellProtocol>)cell; 
 -(void) removeCellAtIndex:(int)cellIndex;
 -(void) removeAllCells;
--(void) insertCell:(TKCell*)cell atIndex:(int)cellIndex;
--(int) indexOfCell:(TKCell*)cell;
+-(void) insertCell:(id<TKCellProtocol>)cell atIndex:(int)cellIndex;
+-(int) indexOfCell:(id<TKCellProtocol>)cell;
 -(UITableViewCell*) cellWithIndex:(int)cellIndex forTableView:(UITableView*)tableView;
--(CGFloat) heightForCellIndex:(int)cellIndex;
 
 -(void) tableView:(UITableView*)tableView didSelectCellWithIndex:(int)cellIndex;
 -(void) tableView:(UITableView*)tableView accessoryButtonTappedForCellWithIndex:(int)cellIndex;

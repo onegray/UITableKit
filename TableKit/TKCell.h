@@ -24,26 +24,21 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TKCellProtocol.h"
 #import "TKAttrTableViewCellProxyInterface.h"
 #import "TKAttrImageViewProxyInterface.h"
 
 @class TKCellView;
 
-@interface TKCell : NSObject
+@interface TKCell : NSObject <TKCellProtocol>
 {
 	NSMutableArray* attributes;
 	CGFloat cellHeight;
 }
 @property (nonatomic, assign) CGFloat cellHeight;
 
--(UITableViewCell*) cellForTableView:(UITableView*)tableView;
--(CGFloat) cellHeightForTableView:(UITableView*)tableView;
-
 -(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView;
 -(void) updateCellViewInTableView:(UITableView*)tableView;
-
--(void) tableViewDidSelectCell:(UITableView*)tableView;
--(void) tableViewAccessoryButtonTapped:(UITableView*)tableView;
 
 -(void) applyAttributesToCellView:(TKCellView*)cellView;
 

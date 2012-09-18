@@ -24,13 +24,12 @@
 //
 
 #import "TKSection.h"
-#import "TKCell.h"
 
 @implementation TKSection
 @synthesize headerHeight, headerTitle, headerView, footerHeight, footerTitle, footerView;
 @synthesize preventEditing, allowsReorderingDuringEditing, preventIndentationDuringEditing;
 
-+(TKSection*) sectionWithCells: (TKCell*)cell, ...
++(TKSection*) sectionWithCells: (id<TKCellProtocol>)cell, ...
 {
 	TKSection* section = [[[TKSection alloc] init] autorelease];
 	
@@ -41,7 +40,7 @@
 		va_list args;
 		va_start(args,cell);
         
-		while( (cell = va_arg(args, TKCell*)) )
+		while( (cell = va_arg(args, id<TKCellProtocol>)) )
 		{
 			[section addCell:cell];
 		}
@@ -74,7 +73,7 @@
 }
 
 
--(void) addCell:(TKCell*)cell
+-(void) addCell:(id<TKCellProtocol>)cell
 {
     [cells addObject:cell];
 }
@@ -89,17 +88,17 @@
 	[cells removeAllObjects];
 }
 
--(TKCell*) cellAtIndex:(int)cellIndex
+-(id<TKCellProtocol>) cellAtIndex:(int)cellIndex
 {
     return [cells objectAtIndex:cellIndex];
 }
 
--(void) insertCell:(TKCell*)cell atIndex:(int)cellIndex
+-(void) insertCell:(id<TKCellProtocol>)cell atIndex:(int)cellIndex
 {
     [cells insertObject:cell atIndex:cellIndex];
 }
 
--(int) indexOfCell:(TKCell*)cell
+-(int) indexOfCell:(id<TKCellProtocol>)cell
 {
 	return [cells indexOfObject:cell];
 }
@@ -111,27 +110,24 @@
 
 -(UITableViewCell*) cellWithIndex:(int)cellIndex forTableView:(UITableView*)tableView
 {
-    TKCell* cell = [cells objectAtIndex:cellIndex];
+    id<TKCellProtocol> cell = [cells objectAtIndex:cellIndex];
     return [cell cellForTableView:tableView];
-}
-
--(CGFloat) heightForCellIndex:(int)cellIndex
-{
-    TKCell* cell = [cells objectAtIndex:cellIndex];
-    return [cell cellHeight];
 }
 
 -(void) tableView:(UITableView*)tableView didSelectCellWithIndex:(int)cellIndex
 {
-    TKCell* cell = [cells objectAtIndex:cellIndex];
-    [cell tableViewDidSelectCell:tableView];
+    id<TKCellProtocol> cell = [cells objectAtIndex:cellIndex];
+	if([cell respondsToSelector:@selector(tableViewDidSelectCell:)]) {
+		[cell tableViewDidSelectCell:tableView];
+	}
 }
 
 -(void) tableView:(UITableView*)tableView accessoryButtonTappedForCellWithIndex:(int)cellIndex
 {
-    TKCell* cell = [cells objectAtIndex:cellIndex];
-    [cell tableViewAccessoryButtonTapped:tableView];
+    id<TKCellProtocol> cell = [cells objectAtIndex:cellIndex];
+	if([cell respondsToSelector:@selector(tableViewAccessoryButtonTapped:)]) {
+		[cell tableViewAccessoryButtonTapped:tableView];
+	}
 }
-
 
 @end
