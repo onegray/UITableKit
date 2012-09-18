@@ -14,7 +14,7 @@
 
 @interface EditingSampleViewController ()
 @property (nonatomic, retain) TKTextFieldCell* textFieldCell;
-@property (nonatomic, retain) TKSection* planetsSection;
+@property (nonatomic, retain) TKMutableSection* planetsSection;
 @end
 
 @implementation EditingSampleViewController
@@ -34,7 +34,7 @@
 
 	if(self.sections==nil)
 	{
-		self.planetsSection = [[[TKSection alloc] init] autorelease];
+		self.planetsSection = [[[TKMutableSection alloc] init] autorelease];
 		planetsSection.preventIndentationDuringEditing = YES;
 		planetsSection.allowsReorderingDuringEditing = YES;
 		planetsSection.headerTitle = @"Solar System";
@@ -51,7 +51,6 @@
 
 		TKSwitchCell* editingModeCell = [TKSwitchCell cellWithText:@"Editing Mode" target:self action:@selector(onSwitchCell:)];
 		TKSection* editingModeSection = [TKSection sectionWithCells:editingModeCell, nil];
-		editingModeSection.preventEditing = YES;
 
 		self.sections = [NSArray arrayWithObjects:planetsSection, editingModeSection, nil];
 	}

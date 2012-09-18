@@ -27,7 +27,6 @@
 
 @implementation TKSection
 @synthesize headerHeight, headerTitle, headerView, footerHeight, footerTitle, footerView;
-@synthesize preventEditing, allowsReorderingDuringEditing, preventIndentationDuringEditing;
 
 +(TKSection*) sectionWithCells: (id<TKCellProtocol>)cell, ...
 {
@@ -131,3 +130,51 @@
 }
 
 @end
+
+
+@implementation TKMutableSection
+@synthesize disableEditing, allowsReorderingDuringEditing, preventIndentationDuringEditing;
+
++(TKMutableSection*) sectionWithCells: (id<TKCellProtocol>)cell, ...
+{
+	TKMutableSection* section = [[[TKMutableSection alloc] init] autorelease];
+	
+	if(cell)
+	{
+		[section addCell:cell];
+        
+		va_list args;
+		va_start(args,cell);
+        
+		while( (cell = va_arg(args, id<TKCellProtocol>)) )
+		{
+			[section addCell:cell];
+		}
+        
+		va_end(args);
+	}
+	return section;
+}
+
+@end
+
+
+@implementation TKSection (MutableSection)
+
+-(BOOL) disableEditing
+{
+	return YES;
+}
+
+-(BOOL) allowsReorderingDuringEditing
+{
+	return NO;
+}
+
+-(BOOL) preventIndentationDuringEditing
+{
+	return NO;
+}
+
+@end
+

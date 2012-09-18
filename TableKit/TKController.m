@@ -139,8 +139,13 @@
 
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
-	TKCellView* cellView = (TKCellView*)[tableView cellForRowAtIndexPath:indexPath];
-	return !cellView.preventEditing && ![[sections objectAtIndex:indexPath.section] preventEditing];
+	TKSection* section = [sections objectAtIndex:indexPath.section];
+	if(![(TKMutableSection*)section disableEditing])
+	{
+		TKCellView* cellView = (TKCellView*)[tableView cellForRowAtIndexPath:indexPath];
+		return !cellView.preventEditing;
+	}
+	return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath

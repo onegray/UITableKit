@@ -26,8 +26,11 @@
 #import <UIKit/UIKit.h>
 #import "TKCellProtocol.h"
 
+
+// WARNING!!!
+// TKSection disallows editing cells by user. If you need this functionality then use TKMutableSection instead.
+
 @interface TKSection : NSObject {
-    
     NSMutableArray* cells;
     
     CGFloat headerHeight;
@@ -35,11 +38,7 @@
     UIView* headerView;
     CGFloat footerHeight;
     NSString* footerTitle;
-    UIView* footerView;    
-	
-	BOOL preventEditing;
-	BOOL allowsReorderingDuringEditing;
-	BOOL preventIndentationDuringEditing;
+    UIView* footerView;
 }
 
 @property (nonatomic, readonly) int cellCount;
@@ -49,10 +48,6 @@
 @property (nonatomic, assign) CGFloat footerHeight;
 @property (nonatomic, retain) NSString* footerTitle;
 @property (nonatomic, retain) UIView* footerView;
-
-@property (nonatomic, assign) BOOL preventEditing;
-@property (nonatomic, assign) BOOL allowsReorderingDuringEditing;
-@property (nonatomic, assign) BOOL preventIndentationDuringEditing;
 
 +(TKSection*) sectionWithCells:(id<TKCellProtocol>)cell, ... NS_REQUIRES_NIL_TERMINATION;
 -(id<TKCellProtocol>) cellAtIndex:(int)cellIndex;
@@ -66,5 +61,28 @@
 -(void) tableView:(UITableView*)tableView didSelectCellWithIndex:(int)cellIndex;
 -(void) tableView:(UITableView*)tableView accessoryButtonTappedForCellWithIndex:(int)cellIndex;
 
+@end
+
+
+// TKMutableSection allows editing cells by user.
+
+@interface TKMutableSection : TKSection
+{
+	BOOL disableEditing;
+	BOOL allowsReorderingDuringEditing;
+	BOOL preventIndentationDuringEditing;
+}
+
++(TKMutableSection*) sectionWithCells:(id<TKCellProtocol>)cell, ... NS_REQUIRES_NIL_TERMINATION;
+
+@property (nonatomic, assign) BOOL disableEditing;
+@property (nonatomic, assign) BOOL allowsReorderingDuringEditing;
+@property (nonatomic, assign) BOOL preventIndentationDuringEditing;
 
 @end
+
+
+
+
+
+
