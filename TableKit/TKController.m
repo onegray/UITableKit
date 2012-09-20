@@ -85,7 +85,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [[sections objectAtIndex:indexPath.section] cellWithIndex:indexPath.row forTableView:tableView];
+    return [[sections objectAtIndex:indexPath.section] tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath

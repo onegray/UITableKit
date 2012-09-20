@@ -54,12 +54,36 @@
     self = [super init];
     if(self)
 	{
-        cells = [[NSMutableArray alloc] init];
-        headerHeight = 20;
-        footerHeight = 20;
+		headerHeight = 20;
+		footerHeight = 20;
     }
     return self;
 }
+
+-(id) initWithCells:(NSArray*)cellArray
+{
+    self = [super init];
+    if(self)
+	{
+		headerHeight = 20;
+		footerHeight = 20;
+		cells = [cellArray copy];
+    }
+    return self;
+}
+
+-(id) initWithMutableArrayOfCells:(NSMutableArray*)cellMutableArray
+{
+    self = [super init];
+    if(self)
+	{
+		headerHeight = 20;
+		footerHeight = 20;
+		cells = [cellMutableArray retain];
+    }
+    return self;
+}
+
 
 -(void) dealloc
 {
@@ -76,29 +100,58 @@
 	return cells;
 }
 
+-(void) addCellsFromArray:(NSArray *)cellArray
+{
+	if(![cells respondsToSelector:@selector(addObjectsFromArray:)]) {
+		NSMutableArray* mutableCells = [NSMutableArray arrayWithCapacity:cells.count+cellArray.count];
+		[mutableCells addObjectsFromArray:cells];
+		[cells release];
+		cells = [mutableCells retain];
+	}
+	[(NSMutableArray*)cells addObjectsFromArray:cellArray];
+}
+
 -(void) addCell:(id<TKCellProtocol>)cell
 {
-    [cells addObject:cell];
+	if(![cells respondsToSelector:@selector(addObject:)]) {
+		NSMutableArray* mutableCells = [NSMutableArray arrayWithCapacity:cells.count+1];
+		[mutableCells addObjectsFromArray:cells];
+		[cells release];
+		cells = [mutableCells retain];
+	}
+	[(NSMutableArray*)cells addObject:cell];
+}
+
+-(void) insertCell:(id<TKCellProtocol>)cell atIndex:(int)cellIndex
+{
+	if(![cells respondsToSelector:@selector(insertObject:atIndex:)]) {
+		NSMutableArray* mutableCells = [NSMutableArray arrayWithCapacity:cells.count+1];
+		[mutableCells addObjectsFromArray:cells];
+		[cells release];
+		cells = [mutableCells retain];
+	}
+    [(NSMutableArray*)cells insertObject:cell atIndex:cellIndex];
 }
 
 -(void) removeCellAtIndex:(int)cellIndex
 {
-    [cells removeObjectAtIndex:cellIndex];
+	if(![cells respondsToSelector:@selector(removeObjectAtIndex:)]) {
+		NSMutableArray* mutableCells = [NSMutableArray arrayWithArray:cells];
+		[cells release];
+		cells = [mutableCells retain];
+	}
+    [(NSMutableArray*)cells removeObjectAtIndex:cellIndex];
 }
 
 -(void) removeAllCells
 {
-	[cells removeAllObjects];
+	[cells release];
+	cells = nil;
 }
 
 -(id<TKCellProtocol>) cellAtIndex:(int)cellIndex
 {
     return [cells objectAtIndex:cellIndex];
-}
-
--(void) insertCell:(id<TKCellProtocol>)cell atIndex:(int)cellIndex
-{
-    [cells insertObject:cell atIndex:cellIndex];
 }
 
 -(int) indexOfCell:(id<TKCellProtocol>)cell
@@ -111,9 +164,11 @@
     return [cells count];
 }
 
--(UITableViewCell*) cellWithIndex:(int)cellIndex forTableView:(UITableView*)tableView
+
+
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    id<TKCellProtocol> cell = [cells objectAtIndex:cellIndex];
+    id<TKCellProtocol> cell = [cells objectAtIndex:indexPath.row];
     return [cell cellForTableView:tableView];
 }
 
@@ -181,4 +236,6 @@
 }
 
 @end
+
+
 

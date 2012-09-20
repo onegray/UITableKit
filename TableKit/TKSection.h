@@ -31,7 +31,8 @@
 // TKSection disallows editing cells by user. If you need this functionality then use TKMutableSection instead.
 
 @interface TKSection : NSObject {
-    NSMutableArray* cells;
+
+    NSArray* cells; // Actually it is NSArray or NSMutableArray
     
     CGFloat headerHeight;
     NSString* headerTitle;
@@ -50,16 +51,21 @@
 @property (nonatomic, retain) NSString* footerTitle;
 @property (nonatomic, retain) UIView* footerView;
 
+-(id) initWithCells:(NSArray*)cellArray;
+-(id) initWithMutableArrayOfCells:(NSMutableArray*)cellMutableArray; // Note, cellMutableArray can be changed
+
 +(TKSection*) sectionWithCells:(id<TKCellProtocol>)cell, ... NS_REQUIRES_NIL_TERMINATION;
 
 -(id<TKCellProtocol>) cellAtIndex:(int)cellIndex;
 -(void) addCell:(id<TKCellProtocol>)cell; 
+-(void) addCellsFromArray:(NSArray *)cellArray;
 -(void) removeCellAtIndex:(int)cellIndex;
 -(void) removeAllCells;
 -(void) insertCell:(id<TKCellProtocol>)cell atIndex:(int)cellIndex;
 -(int) indexOfCell:(id<TKCellProtocol>)cell;
--(UITableViewCell*) cellWithIndex:(int)cellIndex forTableView:(UITableView*)tableView;
 
+
+-(UITableViewCell*) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 -(void) tableView:(UITableView*)tableView didSelectCellWithIndex:(int)cellIndex;
 -(void) tableView:(UITableView*)tableView accessoryButtonTappedForCellWithIndex:(int)cellIndex;
 
@@ -83,6 +89,12 @@
 
 @end
 
+
+@interface TKSection (MutableSection)
+-(BOOL) disableEditing;
+-(BOOL) allowsReorderingDuringEditing;
+-(BOOL) preventIndentationDuringEditing;
+@end
 
 
 
