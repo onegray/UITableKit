@@ -41,6 +41,7 @@
     UIView* footerView;
 }
 
+@property (nonatomic, readonly) NSArray* cells;
 @property (nonatomic, readonly) int cellCount;
 @property (nonatomic, assign) CGFloat headerHeight;
 @property (nonatomic, retain) NSString* headerTitle;
@@ -50,6 +51,7 @@
 @property (nonatomic, retain) UIView* footerView;
 
 +(TKSection*) sectionWithCells:(id<TKCellProtocol>)cell, ... NS_REQUIRES_NIL_TERMINATION;
+
 -(id<TKCellProtocol>) cellAtIndex:(int)cellIndex;
 -(void) addCell:(id<TKCellProtocol>)cell; 
 -(void) removeCellAtIndex:(int)cellIndex;

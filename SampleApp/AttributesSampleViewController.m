@@ -44,6 +44,10 @@
 		TKSection* section = [TKSection sectionWithCells:staticCell, textFieldCell, switchCell, textViewCell, nil];
 		section.headerTitle = @"Section title";
 		
+		for(TKCell* cell in section.cells) {
+			cell.tableViewCell.selectionStyle = UITableViewCellSelectionStyleGray;
+		}
+		
 		self.sections = [NSArray arrayWithObjects:section, nil];	
 	}
 }

@@ -71,6 +71,10 @@
     [super dealloc];
 }
 
+-(NSArray*)cells
+{
+	return cells;
+}
 
 -(void) addCell:(id<TKCellProtocol>)cell
 {
