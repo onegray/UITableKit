@@ -17,6 +17,10 @@
 		AB4CF1AF154746BA00BCDAC9 /* UserDefinedCell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1AB154746BA00BCDAC9 /* UserDefinedCell.m */; };
 		AB4CF1B0154746BA00BCDAC9 /* UserDefinedCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB4CF1AD154746BA00BCDAC9 /* UserDefinedCellView.m */; };
 		AB4CF1B1154746BA00BCDAC9 /* UserDefinedCellView.xib in Resources */ = {isa = PBXBuildFile; fileRef = AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */; };
+		AB6A23D2160C62120004CD6C /* ModelSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A23D1160C62120004CD6C /* ModelSampleViewController.m */; };
+		AB6A23D8160C634C0004CD6C /* ProductModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A23D7160C634C0004CD6C /* ProductModel.m */; };
+		AB6A23DE160C67300004CD6C /* ProductModel+Cell.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A23DB160C67300004CD6C /* ProductModel+Cell.m */; };
+		AB6A23DF160C67300004CD6C /* ProductCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB6A23DD160C67300004CD6C /* ProductCellView.m */; };
 		AB874E58155308DA00FA3953 /* ReminderSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E57155308DA00FA3953 /* ReminderSampleViewController.m */; };
 		AB874E641553238E00FA3953 /* ReminderGeneralCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E5B1553238E00FA3953 /* ReminderGeneralCellView.m */; };
 		AB874E651553238E00FA3953 /* ReminderSwitchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E5D1553238E00FA3953 /* ReminderSwitchCellView.m */; };
@@ -24,6 +28,7 @@
 		AB874E671553238E00FA3953 /* ReminderTextViewCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E611553238E00FA3953 /* ReminderTextViewCellView.m */; };
 		AB874E681553238E00FA3953 /* ReminderTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AB874E631553238E00FA3953 /* ReminderTheme.m */; };
 		AB874E6A1553332A00FA3953 /* reminder_bg.png in Resources */ = {isa = PBXBuildFile; fileRef = AB874E691553332A00FA3953 /* reminder_bg.png */; };
+		ABC1F045160CF97700534C69 /* products.plist in Resources */ = {isa = PBXBuildFile; fileRef = ABC1F044160CF97700534C69 /* products.plist */; };
 		ABD70877152DF94F0016FCFD /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70876152DF94F0016FCFD /* UIKit.framework */; };
 		ABD70879152DF94F0016FCFD /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD70878152DF94F0016FCFD /* Foundation.framework */; };
 		ABD7087B152DF94F0016FCFD /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABD7087A152DF94F0016FCFD /* CoreGraphics.framework */; };
@@ -81,6 +86,14 @@
 		AB4CF1AC154746BA00BCDAC9 /* UserDefinedCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefinedCellView.h; sourceTree = "<group>"; };
 		AB4CF1AD154746BA00BCDAC9 /* UserDefinedCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefinedCellView.m; sourceTree = "<group>"; };
 		AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserDefinedCellView.xib; sourceTree = "<group>"; };
+		AB6A23D0160C62120004CD6C /* ModelSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelSampleViewController.h; sourceTree = "<group>"; };
+		AB6A23D1160C62120004CD6C /* ModelSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelSampleViewController.m; sourceTree = "<group>"; };
+		AB6A23D6160C634C0004CD6C /* ProductModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductModel.h; sourceTree = "<group>"; };
+		AB6A23D7160C634C0004CD6C /* ProductModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductModel.m; sourceTree = "<group>"; };
+		AB6A23DA160C67300004CD6C /* ProductModel+Cell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ProductModel+Cell.h"; sourceTree = "<group>"; };
+		AB6A23DB160C67300004CD6C /* ProductModel+Cell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "ProductModel+Cell.m"; sourceTree = "<group>"; };
+		AB6A23DC160C67300004CD6C /* ProductCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProductCellView.h; sourceTree = "<group>"; };
+		AB6A23DD160C67300004CD6C /* ProductCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProductCellView.m; sourceTree = "<group>"; };
 		AB874E56155308DA00FA3953 /* ReminderSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReminderSampleViewController.h; sourceTree = "<group>"; };
 		AB874E57155308DA00FA3953 /* ReminderSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReminderSampleViewController.m; sourceTree = "<group>"; };
 		AB874E5A1553238E00FA3953 /* ReminderGeneralCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderGeneralCellView.h; path = ReminderTheme/ReminderGeneralCellView.h; sourceTree = "<group>"; };
@@ -94,6 +107,7 @@
 		AB874E621553238E00FA3953 /* ReminderTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReminderTheme.h; path = ReminderTheme/ReminderTheme.h; sourceTree = "<group>"; };
 		AB874E631553238E00FA3953 /* ReminderTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReminderTheme.m; path = ReminderTheme/ReminderTheme.m; sourceTree = "<group>"; };
 		AB874E691553332A00FA3953 /* reminder_bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = reminder_bg.png; sourceTree = "<group>"; };
+		ABC1F044160CF97700534C69 /* products.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = products.plist; sourceTree = "<group>"; };
 		ABD70872152DF94F0016FCFD /* TableKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TableKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABD70876152DF94F0016FCFD /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		ABD70878152DF94F0016FCFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -211,6 +225,30 @@
 				AB4CF1AE154746BA00BCDAC9 /* UserDefinedCellView.xib */,
 			);
 			path = UserDefinedCell;
+			sourceTree = "<group>";
+		};
+		AB6A23CE160C618F0004CD6C /* ModelSample */ = {
+			isa = PBXGroup;
+			children = (
+				AB6A23D0160C62120004CD6C /* ModelSampleViewController.h */,
+				AB6A23D1160C62120004CD6C /* ModelSampleViewController.m */,
+				AB6A23D6160C634C0004CD6C /* ProductModel.h */,
+				AB6A23D7160C634C0004CD6C /* ProductModel.m */,
+				AB6A23D9160C66F30004CD6C /* ProductCell */,
+				ABC1F044160CF97700534C69 /* products.plist */,
+			);
+			path = ModelSample;
+			sourceTree = "<group>";
+		};
+		AB6A23D9160C66F30004CD6C /* ProductCell */ = {
+			isa = PBXGroup;
+			children = (
+				AB6A23DA160C67300004CD6C /* ProductModel+Cell.h */,
+				AB6A23DB160C67300004CD6C /* ProductModel+Cell.m */,
+				AB6A23DC160C67300004CD6C /* ProductCellView.h */,
+				AB6A23DD160C67300004CD6C /* ProductCellView.m */,
+			);
+			path = ProductCell;
 			sourceTree = "<group>";
 		};
 		AB874E55155308DA00FA3953 /* ReminderSample */ = {
@@ -337,6 +375,7 @@
 				AB494EAE154F2BA200FADDDE /* HugeTableSampleViewController.m */,
 				ABF11ADF1595DD6D00F49B8B /* DataSourceSampleViewController.h */,
 				ABF11AE01595DD6D00F49B8B /* DataSourceSampleViewController.m */,
+				AB6A23CE160C618F0004CD6C /* ModelSample */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -442,6 +481,7 @@
 				AB4CF19015471F7C00BCDAC9 /* paper.png in Resources */,
 				AB4CF1B1154746BA00BCDAC9 /* UserDefinedCellView.xib in Resources */,
 				AB874E6A1553332A00FA3953 /* reminder_bg.png in Resources */,
+				ABC1F045160CF97700534C69 /* products.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -496,6 +536,10 @@
 				AB874E681553238E00FA3953 /* ReminderTheme.m in Sources */,
 				ABF973121555098600F3DA70 /* TKAttrScrollViewProxyInterface.m in Sources */,
 				ABF11AE11595DD6D00F49B8B /* DataSourceSampleViewController.m in Sources */,
+				AB6A23D2160C62120004CD6C /* ModelSampleViewController.m in Sources */,
+				AB6A23D8160C634C0004CD6C /* ProductModel.m in Sources */,
+				AB6A23DE160C67300004CD6C /* ProductModel+Cell.m in Sources */,
+				AB6A23DF160C67300004CD6C /* ProductCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

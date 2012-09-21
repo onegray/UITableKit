@@ -13,6 +13,7 @@
 #import "HugeTableSampleViewController.h"
 #import "ReminderSampleViewController.h"
 #import "DataSourceSampleViewController.h"
+#import "ModelSampleViewController.h"
 #import "TKSection.h"
 #import "TKActionCell.h"
 
@@ -43,8 +44,11 @@
 		TKActionCell* dataSourceSampleCell = [TKActionCell cellWithText:@"Custom DataSource Sample" target:self action:@selector(onDataSourceTableSampleCell)];
 		dataSourceSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
+		TKActionCell* modelSampleCell = [TKActionCell cellWithText:@"Model Cell Sample" target:self action:@selector(omModelSampleCell)];
+		modelSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		
 		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, themeSampleCell,
-							  reminderSampleCell, hugeTableSampleCell, dataSourceSampleCell, nil];
+							  reminderSampleCell, hugeTableSampleCell, dataSourceSampleCell, modelSampleCell, nil];
 		self.sections = [NSArray arrayWithObjects:section, nil];
 	}
 }
@@ -82,6 +86,12 @@
 -(void) onDataSourceTableSampleCell 
 {
 	DataSourceSampleViewController* vc = [[[DataSourceSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	[self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void) omModelSampleCell 
+{
+	ModelSampleViewController* vc = [[[ModelSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 

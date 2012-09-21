@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Macbook Pro 15</string>
+		<key>description</key>
+		<string>15.4 LED-lacklit glossy display, Up to 2.7GHz quard-core Intel Core i7 processor</string>
+		<key>rating</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>iPhone 5 64GB</string>
+		<key>description</key>
+		<string>4 inch display, 64GB storage size</string>
+		<key>rating</key>
+		<integer>5</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Galaxy Note</string>
+		<key>description</key>
+		<string>5.3-inch Super AMOLED screen, 1.4GHz dual-core chip</string>
+		<key>rating</key>
+		<integer>3</integer>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Nokia Lumia 920</string>
+		<key>description</key>
+		<string>4.5-inch PureMotion HD Plus display, dual-core Qualcomm Snapdragon S4 processor</string>
+		<key>rating</key>
+		<integer>4</integer>
+	</dict>
+</array>
+</plist>
