@@ -51,7 +51,7 @@
 @property (nonatomic, retain) NSString* footerTitle;
 @property (nonatomic, retain) UIView* footerView;
 
--(id) initWithCells:(NSArray*)cellArray;
+-(id) initWithArrayOfCells:(NSArray*)cellArray;
 -(id) initWithMutableArrayOfCells:(NSMutableArray*)cellMutableArray; // Note, cellMutableArray can be changed
 
 +(TKSection*) sectionWithCells:(id<TKCellProtocol>)cell, ... NS_REQUIRES_NIL_TERMINATION;

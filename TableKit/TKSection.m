@@ -60,7 +60,7 @@
     return self;
 }
 
--(id) initWithCells:(NSArray*)cellArray
+-(id) initWithArrayOfCells:(NSArray*)cellArray
 {
     self = [super init];
     if(self)
