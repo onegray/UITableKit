@@ -74,7 +74,7 @@
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
-	TKSwitchCellView* cellView = (TKSwitchCellView*)[self lookupCellViewInTableView:tableView];
+	TKSwitchCellView* cellView = (TKSwitchCellView*)[tableView lookupCellViewForCell:self];
 	[cellView updateWithText:text detailText:detailText state:state];
 }
 

@@ -37,7 +37,6 @@
 }
 @property (nonatomic, assign) CGFloat cellHeight;
 
--(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView;
 -(void) updateCellViewInTableView:(UITableView*)tableView;
 
 -(void) applyAttributesToCellView:(TKCellView*)cellView;

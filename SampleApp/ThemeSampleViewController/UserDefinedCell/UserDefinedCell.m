@@ -39,7 +39,7 @@
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
-	UserDefinedCellView* cellView = (UserDefinedCellView*)[self lookupCellViewInTableView:tableView];
+	UserDefinedCellView* cellView = (UserDefinedCellView*)[tableView lookupCellViewForCell:self];
 	[self updateCellView:cellView];
 }
 
@@ -51,16 +51,5 @@
 	[self updateCellView:cellView];
 	return cellView;
 }
-
--(void) tableViewDidSelectCell:(UITableView*) tableView
-{
-
-}
-
--(void) tableViewAccessoryButtonTapped:(UITableView*) tableView
-{
-
-}
-
 
 @end

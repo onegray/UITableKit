@@ -24,6 +24,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TKCellProtocol.h"
 
 @class TKRollbackArribute;
 @interface TKCellView : UITableViewCell
@@ -74,4 +75,13 @@
 @end
 
 #define TKTextViewCellView TKCellView<TKTextViewCellViewProtocol>
+
+
+
+@interface UITableView (TKCellView)
+
+-(TKCellView*) lookupCellViewForCell:(id<TKCellProtocol>)cell;
+
+@end
+
 

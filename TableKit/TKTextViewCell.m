@@ -73,7 +73,7 @@
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
-	TKTextViewCellView* cellView = (TKTextViewCellView*)[self lookupCellViewInTableView:tableView];
+	TKTextViewCellView* cellView = (TKTextViewCellView*)[tableView lookupCellViewForCell:self];
 	[cellView updateWithText:text placeholder:placeholder];
 }
 

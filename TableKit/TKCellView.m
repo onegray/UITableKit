@@ -45,3 +45,20 @@
 }
 
 @end
+
+
+@implementation UITableView (TKCellView)
+
+-(TKCellView*) lookupCellViewForCell:(id<TKCellProtocol>)cell
+{
+	for(id cellView in self.visibleCells)
+	{
+		if([cellView isKindOfClass:[TKCellView class]] && [(TKCellView*)cellView owner] == self)
+		{
+			return (TKCellView*)cellView;
+		}
+	}
+	return nil;
+}
+
+@end

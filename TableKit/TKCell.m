@@ -67,22 +67,6 @@
 	return cellHeight;
 }
 
--(TKCellView*) lookupCellViewInTableView:(UITableView*)tableView
-{
-	NSArray* visibleCells = [tableView visibleCells];
-	for(id tvCell in visibleCells)
-	{
-		if([tvCell isKindOfClass:[TKCellView class]])
-		{
-			if([(TKCellView*)tvCell owner] == self) 
-			{
-				return (TKCellView*)tvCell;
-			}
-		}
-	}
-	return nil;
-}
-
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	
