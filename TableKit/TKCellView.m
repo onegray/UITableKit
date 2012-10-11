@@ -53,7 +53,7 @@
 {
 	for(id cellView in self.visibleCells)
 	{
-		if([cellView isKindOfClass:[TKCellView class]] && [(TKCellView*)cellView owner] == self)
+		if([cellView isKindOfClass:[TKCellView class]] && [(TKCellView*)cellView owner] == cell)
 		{
 			return (TKCellView*)cellView;
 		}
