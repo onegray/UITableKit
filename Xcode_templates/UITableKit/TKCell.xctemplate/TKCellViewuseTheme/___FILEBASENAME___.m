@@ -20,7 +20,7 @@
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
-	___FILEBASENAME___View* cellView = (___FILEBASENAME___View*)[self lookupCellViewInTableView:tableView];
+	___FILEBASENAME___View* cellView = (___FILEBASENAME___View*)[tableView lookupCellViewForCell:self];
 	[self updateCellView:cellView];
 }
 
