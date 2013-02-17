@@ -87,7 +87,7 @@ static CellCache** hashTable = NULL;
 @implementation TKThemeCacheProxy
 @synthesize tableView, themeImpl;
 
-static TKDefaultTheme* defaultThemeImpl = nil;
+static id<TKThemeProtocol> defaultThemeImpl = nil;
 
 -(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*)aTableView
 {
@@ -107,8 +107,8 @@ static TKDefaultTheme* defaultThemeImpl = nil;
 	NSMethodSignature* signature = [(id)themeImpl methodSignatureForSelector:selector];
 	if(!signature)
 	{
-		defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
-		signature = [defaultThemeImpl methodSignatureForSelector:selector];
+		//defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
+		signature = [(id)defaultThemeImpl methodSignatureForSelector:selector];
 		NSAssert(signature!=nil, @"Applied theme %@ does not support method '%s'", 
 				 (themeImpl ? themeImpl : defaultThemeImpl), sel_getName(selector));
 	}
@@ -205,6 +205,15 @@ static TKThemeCacheProxy* cachedTheme = nil;
 
 @implementation UITableView(theme)
 
++(void) setDefaultTheme:(id)theme
+{
+	if(defaultThemeImpl!=theme)
+	{
+		[defaultThemeImpl release];
+		defaultThemeImpl = [theme retain];
+	}
+}
+
 -(id) theme
 {
 	if(cachedTheme.tableView!=self)
@@ -212,17 +221,23 @@ static TKThemeCacheProxy* cachedTheme = nil;
 		cachedTheme = [themeDict objectForKey:[NSValue valueWithPointer:self]];
 		if(!cachedTheme)
 		{
-			NSLog(@"No one theme was applied to <UITableView: %p>, applying TKDefaultTheme.", self);
-			defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
+			if(!defaultThemeImpl) {
+				NSLog(@"No default theme was found. Setting TKDefaultTheme as default theme");
+				[UITableView setDefaultTheme:[[[TKDefaultTheme alloc] init] autorelease]];
+			}
 			[self applyTheme:defaultThemeImpl];
 		}
 	}
 	return cachedTheme;
 }
 
-
 -(void) applyTheme:(id)themeImpl
 {
+	if([themeImpl respondsToSelector:@selector(configureTableView:)])
+	{
+		[themeImpl configureTableView:self];
+	}
+	
 	TKThemeCacheProxy* theme = [[[TKThemeCacheProxy alloc] initWithTheme:themeImpl forTableView:self] autorelease];
 	
 	if(!themeDict)

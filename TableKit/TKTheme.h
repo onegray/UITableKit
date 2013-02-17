@@ -35,6 +35,8 @@
 -(TKTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle;
 -(TKTextViewCellView*) textViewCellView;
 
+-(void) configureTableView:(UITableView*)tableView;
+
 @end
 
 @interface TKThemeCacheProxy : NSProxy <TKThemeProtocol>
@@ -49,6 +51,7 @@
 
 
 @interface UITableView (theme)
++(void) setDefaultTheme:(id)theme;
 -(void) applyTheme:(id<TKThemeProtocol>)theme;
 @property (nonatomic, readonly) TKThemeCacheProxy* theme;
 @end
