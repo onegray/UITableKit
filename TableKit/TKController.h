@@ -33,4 +33,8 @@
 
 @property (nonatomic, retain) NSArray* sections;
 
+// Optional delegates for proxying UITableView delegate/dataSource methods
+@property (nonatomic, assign) id<UITableViewDelegate> delegate;
+@property (nonatomic, assign) id<UITableViewDataSource> dataSource;
+
 @end

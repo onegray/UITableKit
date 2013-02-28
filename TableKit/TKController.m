@@ -31,6 +31,7 @@
 
 @implementation TKController
 @synthesize sections;
+@synthesize delegate, dataSource;
 
 - (void)dealloc
 {
@@ -40,72 +41,117 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+	if([dataSource respondsToSelector:@selector(numberOfSectionsInTableView:)]) {
+		return [dataSource numberOfSectionsInTableView:tableView];
+	}
 	return [sections count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
+	if([delegate respondsToSelector:@selector(tableView:heightForHeaderInSection:)]) {
+		return [delegate tableView:tableView heightForHeaderInSection:section];
+	}
 	return [[sections objectAtIndex:section] headerHeight];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
+	if([delegate respondsToSelector:@selector(tableView:heightForFooterInSection:)]) {
+		return [delegate tableView:tableView heightForFooterInSection:section];
+	}
 	return [[sections objectAtIndex:section] footerHeight];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+	if([delegate respondsToSelector:@selector(tableView:viewForHeaderInSection:)]) {
+		return [delegate tableView:tableView viewForHeaderInSection:section];
+	}
     return [[sections objectAtIndex:section] headerView];
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
 {
+	if([delegate respondsToSelector:@selector(tableView:viewForFooterInSection:)]) {
+		return [delegate tableView:tableView viewForFooterInSection:section];
+	}
     return [[sections objectAtIndex:section] footerView];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
 {
+	if([dataSource respondsToSelector:@selector(tableView:titleForHeaderInSection:)]) {
+		return [dataSource tableView:tableView titleForHeaderInSection:section];
+	}
     return [[sections objectAtIndex:section] headerTitle];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section
 {
+	if([dataSource respondsToSelector:@selector(tableView:titleForFooterInSection:)]) {
+		return [dataSource tableView:tableView titleForFooterInSection:section];
+	}
     return [[sections objectAtIndex:section] footerTitle];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+	if([dataSource respondsToSelector:@selector(tableView:numberOfRowsInSection:)]) {
+		return [dataSource tableView:tableView numberOfRowsInSection:section];
+	}
     return [[sections objectAtIndex:section] cellCount];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if([delegate respondsToSelector:@selector(tableView:heightForRowAtIndexPath:)]) {
+		return [delegate tableView:tableView heightForRowAtIndexPath:indexPath];
+	}
     return [[[sections objectAtIndex:indexPath.section] cellAtIndex:indexPath.row] cellHeightForTableView:tableView];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if([dataSource respondsToSelector:@selector(tableView:cellForRowAtIndexPath:)]) {
+		return [dataSource tableView:tableView cellForRowAtIndexPath:indexPath];
+	}
     return [[sections objectAtIndex:indexPath.section] tableView:tableView cellForRowAtIndexPath:indexPath];
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)newIndexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if([delegate respondsToSelector:@selector(tableView:didSelectRowAtIndexPath:)]) {
+		[delegate tableView:tableView didSelectRowAtIndexPath:indexPath];
+		return;
+	}
     [tableView deselectRowAtIndexPath:[tableView indexPathForSelectedRow] animated:YES];
-    [[sections objectAtIndex:newIndexPath.section] tableView:tableView didSelectCellWithIndex:newIndexPath.row];
+    [[sections objectAtIndex:indexPath.section] tableView:tableView didSelectCellWithIndex:indexPath.row];
 }
 
 -(void) tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath
 {
+	if([delegate respondsToSelector:@selector(tableView:accessoryButtonTappedForRowWithIndexPath:)]) {
+		[delegate tableView:tableView accessoryButtonTappedForRowWithIndexPath:indexPath];
+		return;
+	}
     [[sections objectAtIndex:indexPath.section] tableView:tableView accessoryButtonTappedForCellWithIndex:indexPath.row];
 }
 
 - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if([dataSource respondsToSelector:@selector(tableView:canMoveRowAtIndexPath:)]) {
+		return [dataSource tableView:tableView canMoveRowAtIndexPath:indexPath];
+	}
 	return [[sections objectAtIndex:indexPath.section] allowsReorderingDuringEditing];
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
 {
+	if([delegate respondsToSelector:@selector(tableView:targetIndexPathForMoveFromRowAtIndexPath:toProposedIndexPath:)]) {
+		return [delegate tableView:tableView targetIndexPathForMoveFromRowAtIndexPath:sourceIndexPath toProposedIndexPath:proposedDestinationIndexPath];
+	}
+	
 	if(![[sections objectAtIndex:proposedDestinationIndexPath.section] allowsReorderingDuringEditing])
 	{
 		int dir = sourceIndexPath.section < proposedDestinationIndexPath.section ? -1 : 1; 
@@ -123,6 +169,11 @@
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
 {
+	if([dataSource respondsToSelector:@selector(tableView:moveRowAtIndexPath:toIndexPath:)]) {
+		[dataSource tableView:tableView moveRowAtIndexPath:sourceIndexPath toIndexPath:destinationIndexPath];
+		return;
+	}
+	
 	TKSection* sourceSection = [sections objectAtIndex:sourceIndexPath.section];
 	id<TKCellProtocol> cell = [[sourceSection cellAtIndex:sourceIndexPath.row] retain];
 	[sourceSection removeCellAtIndex:sourceIndexPath.row];
@@ -134,11 +185,18 @@
 
 - (BOOL)tableView:(UITableView *)tableView shouldIndentWhileEditingRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if([delegate respondsToSelector:@selector(tableView:shouldIndentWhileEditingRowAtIndexPath:)]) {
+		return [delegate tableView:tableView shouldIndentWhileEditingRowAtIndexPath:indexPath];
+	}
 	return ![[sections objectAtIndex:indexPath.section] preventIndentationDuringEditing];
 }
 
 -(BOOL) tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if([dataSource respondsToSelector:@selector(tableView:canEditRowAtIndexPath:)]) {
+		return [dataSource tableView:tableView canEditRowAtIndexPath:indexPath];
+	}
+	
 	TKSection* section = [sections objectAtIndex:indexPath.section];
 	if(![(TKMutableSection*)section disableEditing])
 	{
@@ -150,6 +208,11 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+	if([dataSource respondsToSelector:@selector(tableView:commitEditingStyle:forRowAtIndexPath:)]) {
+		[dataSource tableView:tableView commitEditingStyle:editingStyle forRowAtIndexPath:indexPath];
+		return;
+	}
+	
     if(editingStyle==UITableViewCellEditingStyleDelete)
 	{
         [[sections objectAtIndex:indexPath.section] removeCellAtIndex:indexPath.row];
