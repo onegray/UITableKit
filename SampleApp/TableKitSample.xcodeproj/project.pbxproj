@@ -54,6 +54,8 @@
 		ABE434CD1535FC6A004401E9 /* EditingSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434CC1535FC6A004401E9 /* EditingSampleViewController.m */; };
 		ABE434D11535FE0D004401E9 /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434D01535FE0D004401E9 /* RootViewController.m */; };
 		ABE434D415360157004401E9 /* AttributesSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE434D315360156004401E9 /* AttributesSampleViewController.m */; };
+		ABE45F7116E01E8000D80867 /* NibSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABE45F6F16E01E7F00D80867 /* NibSampleViewController.m */; };
+		ABE45F7216E01E8000D80867 /* NibSampleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = ABE45F7016E01E7F00D80867 /* NibSampleViewController.xib */; };
 		ABF11AE11595DD6D00F49B8B /* DataSourceSampleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF11AE01595DD6D00F49B8B /* DataSourceSampleViewController.m */; };
 		ABF973121555098600F3DA70 /* TKAttrScrollViewProxyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ABF973111555098600F3DA70 /* TKAttrScrollViewProxyInterface.m */; };
 		ABFAE9F11544BBAB0092F845 /* TKAttrImageViewProxyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFAE9E21544BBAB0092F845 /* TKAttrImageViewProxyInterface.m */; };
@@ -155,6 +157,9 @@
 		ABE434D01535FE0D004401E9 /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = RootViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		ABE434D215360156004401E9 /* AttributesSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = AttributesSampleViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		ABE434D315360156004401E9 /* AttributesSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = AttributesSampleViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		ABE45F6E16E01E7F00D80867 /* NibSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NibSampleViewController.h; sourceTree = "<group>"; };
+		ABE45F6F16E01E7F00D80867 /* NibSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NibSampleViewController.m; sourceTree = "<group>"; };
+		ABE45F7016E01E7F00D80867 /* NibSampleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NibSampleViewController.xib; sourceTree = "<group>"; };
 		ABF11ADF1595DD6D00F49B8B /* DataSourceSampleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSourceSampleViewController.h; sourceTree = "<group>"; };
 		ABF11AE01595DD6D00F49B8B /* DataSourceSampleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSourceSampleViewController.m; sourceTree = "<group>"; };
 		ABF973101555098600F3DA70 /* TKAttrScrollViewProxyInterface.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKAttrScrollViewProxyInterface.h; sourceTree = "<group>"; };
@@ -375,6 +380,9 @@
 				AB494EAE154F2BA200FADDDE /* HugeTableSampleViewController.m */,
 				ABF11ADF1595DD6D00F49B8B /* DataSourceSampleViewController.h */,
 				ABF11AE01595DD6D00F49B8B /* DataSourceSampleViewController.m */,
+				ABE45F6E16E01E7F00D80867 /* NibSampleViewController.h */,
+				ABE45F6F16E01E7F00D80867 /* NibSampleViewController.m */,
+				ABE45F7016E01E7F00D80867 /* NibSampleViewController.xib */,
 				AB6A23CE160C618F0004CD6C /* ModelSample */,
 			);
 			name = Classes;
@@ -482,6 +490,7 @@
 				AB4CF1B1154746BA00BCDAC9 /* UserDefinedCellView.xib in Resources */,
 				AB874E6A1553332A00FA3953 /* reminder_bg.png in Resources */,
 				ABC1F045160CF97700534C69 /* products.plist in Resources */,
+				ABE45F7216E01E8000D80867 /* NibSampleViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -540,6 +549,7 @@
 				AB6A23D8160C634C0004CD6C /* ProductModel.m in Sources */,
 				AB6A23DE160C67300004CD6C /* ProductModel+Cell.m in Sources */,
 				AB6A23DF160C67300004CD6C /* ProductCellView.m in Sources */,
+				ABE45F7116E01E8000D80867 /* NibSampleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

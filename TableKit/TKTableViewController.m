@@ -27,36 +27,71 @@
 #import "TKController.h"
 
 @interface TKTableViewController()
+{
+	UITableView* _tableView;
+}
 @property (nonatomic, retain) TKController* controller;
 @end
 
 @implementation TKTableViewController
 @synthesize controller;
+@synthesize tableView = _tableView;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
-    if (self)
-	{
-		controller = [[TKController alloc] init];
+    if (self) {
+		if(!controller) {
+			controller = [[TKController alloc] init];
+		}
     }
     return self;
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-	self = [super initWithCoder:aDecoder];
-	if(self)
-	{
-		controller = [[TKController alloc] init];
-	}
-	return self;
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+		if(!controller) {
+			controller = [[TKController alloc] init];
+		}
+    }
+    return self;
 }
 
 - (void)dealloc
 {
+	[_tableView release];
     [controller release];
     [super dealloc];
+}
+
+-(void) loadView
+{
+	NSString* nibName = [self nibName];
+	if(!nibName) {
+		NSString* className = NSStringFromClass([self class]);
+		if([self.nibBundle pathForResource:className ofType:@"nib"]!=nil) {
+			nibName = className;
+		}
+	}
+	
+	if(!nibName) {
+		[super loadView];
+	} else {
+		[self.nibBundle loadNibNamed:nibName owner:self options:nil];
+		NSAssert([self isViewLoaded], @"%@ loaded the '%@' nib but the view outlet was not set.", self, nibName);
+	}
+	
+	if(!_tableView && [self.view isKindOfClass:[UITableView class]]) {
+		self.tableView = (UITableView*)self.view;
+	}
+}
+
+-(void) viewDidUnload
+{
+	[super viewDidUnload];
+	self.tableView = nil;
 }
 
 -(void) setSections:(NSArray *)sections

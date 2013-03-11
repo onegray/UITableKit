@@ -28,6 +28,10 @@
 @interface TKTableViewController : UITableViewController
 {
 }
+
 @property (nonatomic, retain) NSArray* sections;
+
+// optional explicit tableView outlet is helpful when the tableView is not a root view in XIB 
+@property (nonatomic, retain) IBOutlet UITableView* tableView;
 
 @end

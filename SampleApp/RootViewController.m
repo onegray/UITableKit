@@ -14,6 +14,7 @@
 #import "ReminderSampleViewController.h"
 #import "DataSourceSampleViewController.h"
 #import "ModelSampleViewController.h"
+#import "NibSampleViewController.h"
 #import "TKSection.h"
 #import "TKActionCell.h"
 
@@ -44,11 +45,14 @@
 		TKActionCell* dataSourceSampleCell = [TKActionCell cellWithText:@"Custom DataSource Sample" target:self action:@selector(onDataSourceTableSampleCell)];
 		dataSourceSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 
-		TKActionCell* modelSampleCell = [TKActionCell cellWithText:@"Model Cell Sample" target:self action:@selector(omModelSampleCell)];
+		TKActionCell* modelSampleCell = [TKActionCell cellWithText:@"Model Cell Sample" target:self action:@selector(onModelSampleCell)];
 		modelSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-		
+
+		TKActionCell* nibSampleCell = [TKActionCell cellWithText:@"Nib Cell Sample" target:self action:@selector(onNibSampleCell)];
+		nibSampleCell.tableViewCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+
 		TKSection* section = [TKSection sectionWithCells:attributesSampleCell, editingSampleCell, themeSampleCell,
-							  reminderSampleCell, hugeTableSampleCell, dataSourceSampleCell, modelSampleCell, nil];
+							  reminderSampleCell, hugeTableSampleCell, dataSourceSampleCell, modelSampleCell, nibSampleCell, nil];
 		self.sections = [NSArray arrayWithObjects:section, nil];
 	}
 }
@@ -89,9 +93,17 @@
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
--(void) omModelSampleCell 
+-(void) onModelSampleCell
 {
 	ModelSampleViewController* vc = [[[ModelSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	[self.navigationController pushViewController:vc animated:YES];
+}
+
+-(void) onNibSampleCell
+{
+	NibSampleViewController* vc = [[[NibSampleViewController alloc] initWithNibName:@"NibSampleViewController" bundle:nil] autorelease];
+	//NibSampleViewController* vc = [[[NibSampleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+	//NibSampleViewController* vc = [[[NibSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
