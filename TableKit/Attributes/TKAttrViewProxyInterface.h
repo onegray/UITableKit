@@ -32,6 +32,7 @@
 #define writeonly
 #endif
 
+NS_ROOT_CLASS
 @interface TKAttrViewProxyInterface
 
 @property(nonatomic, assign, writeonly) NSInteger tag;

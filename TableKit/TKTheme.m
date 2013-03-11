@@ -54,7 +54,7 @@ static CellCache** hashTable = NULL;
 
 +(CellCache*) cacheForSelector:(SEL)sel param:(int)param
 {
-	int ind = ((int)sel + param) % HASH_TABLE_SIZE;
+	int ind = ((int)(void*)sel + param) % HASH_TABLE_SIZE;
 	CellCache* root = hashTable[ind];
 	while(root)
 	{
