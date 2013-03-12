@@ -80,8 +80,12 @@ SEL sel_getterFromSetter(SEL setter)
 	{
 		id arg = 0;
 		[invocation getArgument:&arg atIndex:2];
-		attr = [[TKCellObjectAttribute alloc] initWithAccessor:accessor getter:getter setter:setter value:arg];
-	} 
+		if(setter == @selector(setDelegate:)) { // 'delegate' property must not retain object
+			attr = [[TKCellScalarAttribute alloc] initWithAccessor:accessor getter:getter setter:setter value:&arg];
+		} else {
+			attr = [[TKCellObjectAttribute alloc] initWithAccessor:accessor getter:getter setter:setter value:arg];
+		}
+	}
 	NSAssert(attr!=nil, @"Unsupported argument type: %s", argType);
 
 	[attributes removeObject:attr];

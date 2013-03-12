@@ -37,7 +37,7 @@ NS_ROOT_CLASS
 
 @property(nonatomic, assign, writeonly) NSInteger tag;
 @property(nonatomic, assign, writeonly)	BOOL clipsToBounds;
-@property(nonatomic, assign, writeonly) UIColor* backgroundColor;
+@property(nonatomic, retain, writeonly) UIColor* backgroundColor;
 @property(nonatomic, assign, writeonly) CGFloat alpha;
 @property(nonatomic, assign, writeonly) BOOL opaque;
 @property(nonatomic, assign, writeonly) BOOL clearsContextBeforeDrawing;
