@@ -27,7 +27,7 @@
 #import "TKCellView.h"
 
 @protocol TKThemeProtocol <NSObject>
-@optional // if method is not implemented it will be forwarded to default theme
+@optional // if method is not implemented it will be forwarded to builtin TKDefaultTheme
 
 -(TKGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle;
 -(TKGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle;
@@ -39,19 +39,15 @@
 
 @end
 
+
 @interface TKThemeCacheProxy : NSProxy <TKThemeProtocol>
-{
-	UITableView* tableView;
-	id<TKThemeProtocol> themeImpl;
-}
 -(Class) cellClassForSelector:(SEL)selector style:(int)style;
 -(TKCellView*) cachedCellForSelector:(SEL)selector style:(int)style;
-
 @end
 
 
 @interface UITableView (theme)
-+(void) setDefaultTheme:(id)theme;
++(void) setDefaultTheme:(id<TKThemeProtocol>)theme;
 -(void) applyTheme:(id<TKThemeProtocol>)theme;
 @property (nonatomic, readonly) TKThemeCacheProxy* theme;
 @end

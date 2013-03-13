@@ -40,19 +40,55 @@
 	NSString* cellId;
 	CellCache* next;
 }
-+(void) initHashTable;
 @end
 
 @implementation CellCache
-#define HASH_TABLE_SIZE 31
-static CellCache** hashTable = NULL;
+@end
 
-+(void) initHashTable
+
+#define HASH_TABLE_SIZE 31
+
+static TKThemeCacheProxy* cachedTheme = nil;
+
+@interface TKThemeCacheProxy()
 {
-	hashTable = hashTable ? hashTable : (CellCache**)calloc(HASH_TABLE_SIZE, sizeof(void*));
+@public
+	UITableView* tableView;
+	id<TKThemeProtocol> themeImpl;
+	CellCache* hashTable[HASH_TABLE_SIZE];
+}
+-(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*) tableView;
+@end
+
+@implementation TKThemeCacheProxy
+static TKDefaultTheme* builtinDefaultThemeImpl = nil;
+static id<TKThemeProtocol> userDefaultThemeImpl = nil;
+
+-(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*)aTableView
+{
+	themeImpl = [theme retain];
+	tableView = aTableView;
+	memset(hashTable, 0, sizeof(hashTable));
+	return self;
 }
 
-+(CellCache*) cacheForSelector:(SEL)sel param:(int)param
+-(void) dealloc
+{
+	for(int i=0; i<HASH_TABLE_SIZE; i++) {
+		while(hashTable[i]) {
+			CellCache* obj = hashTable[i];
+			hashTable[i] = hashTable[i]->next;
+			[obj release];
+		}
+	}
+	if(cachedTheme==self) {
+		cachedTheme = nil;
+	}
+	[themeImpl release];
+	[super dealloc];
+}
+
+-(CellCache*) cacheForSelector:(SEL)sel param:(int)param
 {
 	int ind = ((int)(void*)sel + param) % HASH_TABLE_SIZE;
 	CellCache* root = hashTable[ind];
@@ -66,7 +102,8 @@ static CellCache** hashTable = NULL;
 	}
 	
 	root = [[CellCache alloc] init];
-	root->cellId = [[NSString alloc] initWithFormat:@"%s%d", sel_getName(sel), param];
+	root->cellId = [[NSString alloc] initWithFormat:@"%s.%s%d",
+					class_getName([themeImpl class]), sel_getName(sel), param];
 	root->keySel = sel;
 	root->keyParam = param;
 	root->next = hashTable[ind];
@@ -75,42 +112,16 @@ static CellCache** hashTable = NULL;
 	return root;
 }
 
-@end
-
-
-@interface TKThemeCacheProxy()
--(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*) tableView;
-@property (nonatomic, assign) UITableView* tableView;
-@property (nonatomic, retain) id<TKThemeProtocol> themeImpl;
-@end
-
-@implementation TKThemeCacheProxy
-@synthesize tableView, themeImpl;
-
-static id<TKThemeProtocol> defaultThemeImpl = nil;
-
--(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*)aTableView
-{
-	self.themeImpl = theme;
-	self.tableView = aTableView;
-	return self;
-}
-
--(void) dealloc
-{
-	[themeImpl release];
-	[super dealloc];
-}
-
 - (NSMethodSignature*) methodSignatureForSelector:(SEL)selector
 {
 	NSMethodSignature* signature = [(id)themeImpl methodSignatureForSelector:selector];
 	if(!signature)
 	{
-		//defaultThemeImpl = defaultThemeImpl ? defaultThemeImpl : [[TKDefaultTheme alloc] init];
-		signature = [(id)defaultThemeImpl methodSignatureForSelector:selector];
-		NSAssert(signature!=nil, @"Applied theme %@ does not support method '%s'", 
-				 (themeImpl ? themeImpl : defaultThemeImpl), sel_getName(selector));
+		if(!builtinDefaultThemeImpl) {
+			builtinDefaultThemeImpl = [[TKDefaultTheme alloc] init];
+		}
+		signature = [(id)builtinDefaultThemeImpl methodSignatureForSelector:selector];
+		NSAssert(signature!=nil, @"Applied theme %@ does not support method '%s'", themeImpl, sel_getName(selector));
 	}
 	return signature;
 }
@@ -126,7 +137,7 @@ static id<TKThemeProtocol> defaultThemeImpl = nil;
 		[invocation getArgument:&param atIndex:2];
 	}
 	
-	CellCache* cache = [CellCache cacheForSelector:invocation.selector param:param];
+	CellCache* cache = [self cacheForSelector:invocation.selector param:param];
 	TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:cache->cellId];
 	if(cellView) 
 	{
@@ -140,7 +151,7 @@ static id<TKThemeProtocol> defaultThemeImpl = nil;
 	}
 	else
 	{
-		id target = [themeImpl respondsToSelector:invocation.selector] ? themeImpl : defaultThemeImpl;
+		id target = [themeImpl respondsToSelector:invocation.selector] ? themeImpl : builtinDefaultThemeImpl;
 		[invocation invokeWithTarget:target];
 		[invocation getReturnValue:&cellView];
 		[cellView setReuseIdentifier:cache->cellId];
@@ -150,10 +161,9 @@ static id<TKThemeProtocol> defaultThemeImpl = nil;
 -(void) fillCache:(CellCache*)cache invokeSelector:(SEL)selector style:(int)style
 {
 	TKCellView* cellView = nil;
-	id target = [themeImpl respondsToSelector:selector] ? themeImpl : defaultThemeImpl;
+	id target = [themeImpl respondsToSelector:selector] ? themeImpl : builtinDefaultThemeImpl;
 	NSMethodSignature* ms = [target methodSignatureForSelector:selector];
-	NSAssert(ms!=nil, @"Applied theme %@ does not support method '%s'",
-			 (themeImpl ? themeImpl : defaultThemeImpl), sel_getName(selector));
+	NSAssert(ms!=nil, @"Applied theme %@ does not support method '%s'", themeImpl, sel_getName(selector));
 	
 	if([ms numberOfArguments]==2)
 	{
@@ -178,7 +188,7 @@ static id<TKThemeProtocol> defaultThemeImpl = nil;
 
 -(Class) cellClassForSelector:(SEL)selector style:(int)style
 {
-	CellCache* cache = [CellCache cacheForSelector:selector param:style];
+	CellCache* cache = [self cacheForSelector:selector param:style];
 	if(!cache->class) 
 	{
 		[self fillCache:cache invokeSelector:selector style:style];
@@ -188,7 +198,7 @@ static id<TKThemeProtocol> defaultThemeImpl = nil;
 
 -(TKCellView*) cachedCellForSelector:(SEL)selector style:(int)style
 {
-	CellCache* cache = [CellCache cacheForSelector:selector param:style];
+	CellCache* cache = [self cacheForSelector:selector param:style];
 	if(!cache->cellView)
 	{
 		[self fillCache:cache invokeSelector:selector style:style];
@@ -200,32 +210,32 @@ static id<TKThemeProtocol> defaultThemeImpl = nil;
 
 
 
-static NSMutableDictionary* themeDict = nil;
-static TKThemeCacheProxy* cachedTheme = nil;
-
 @implementation UITableView(theme)
+static char TV_THEME_KEY;
 
-+(void) setDefaultTheme:(id)theme
++(void) setDefaultTheme:(id<TKThemeProtocol>)theme
 {
-	if(defaultThemeImpl!=theme)
-	{
-		[defaultThemeImpl release];
-		defaultThemeImpl = [theme retain];
+	if(userDefaultThemeImpl!=theme) {
+		[userDefaultThemeImpl release];
+		userDefaultThemeImpl = [theme retain];
 	}
 }
 
 -(id) theme
 {
-	if(cachedTheme.tableView!=self)
+	if(!cachedTheme || cachedTheme->tableView!=self)
 	{
-		cachedTheme = [themeDict objectForKey:[NSValue valueWithPointer:self]];
+		cachedTheme = objc_getAssociatedObject(self, &TV_THEME_KEY);
 		if(!cachedTheme)
 		{
-			if(!defaultThemeImpl) {
+			if(!userDefaultThemeImpl) {
 				NSLog(@"No default theme was found. Setting TKDefaultTheme as default theme");
-				[UITableView setDefaultTheme:[[[TKDefaultTheme alloc] init] autorelease]];
+				if(!builtinDefaultThemeImpl) {
+					builtinDefaultThemeImpl = [[TKDefaultTheme alloc] init];
+				}
+				[UITableView setDefaultTheme:builtinDefaultThemeImpl];
 			}
-			[self applyTheme:defaultThemeImpl];
+			[self applyTheme:userDefaultThemeImpl];
 		}
 	}
 	return cachedTheme;
@@ -233,41 +243,13 @@ static TKThemeCacheProxy* cachedTheme = nil;
 
 -(void) applyTheme:(id)themeImpl
 {
-	if([themeImpl respondsToSelector:@selector(configureTableView:)])
-	{
+	TKThemeCacheProxy* themeProxy = [[[TKThemeCacheProxy alloc] initWithTheme:themeImpl forTableView:self] autorelease];
+	objc_setAssociatedObject(self, &TV_THEME_KEY, themeProxy, OBJC_ASSOCIATION_RETAIN);
+	cachedTheme = themeProxy;
+
+	if([themeImpl respondsToSelector:@selector(configureTableView:)]) {
 		[themeImpl configureTableView:self];
 	}
-	
-	TKThemeCacheProxy* theme = [[[TKThemeCacheProxy alloc] initWithTheme:themeImpl forTableView:self] autorelease];
-	
-	if(!themeDict)
-	{
-		themeDict = [[NSMutableDictionary alloc] initWithCapacity:1];
-		[CellCache initHashTable];
-	}
-	[themeDict setObject:theme forKey:[NSValue valueWithPointer:self]];
-	cachedTheme = theme;
-	
-	// Overloading dealloc from category
-	if( class_getInstanceMethod([self class], @selector(original_dealloc)) == NULL ) 
-	{
-		Method deallocMethod = class_getInstanceMethod([self class], @selector(dealloc));
-		class_addMethod([self class], @selector(original_dealloc), method_getImplementation(deallocMethod), method_getTypeEncoding(deallocMethod));
-		
-		Method overloadedDeallocMethod = class_getInstanceMethod([self class], @selector(overloaded_dealloc));
-		method_exchangeImplementations(deallocMethod, overloadedDeallocMethod);
-	}
-}
-
--(void) overloaded_dealloc
-{
-	if(cachedTheme.tableView==self)
-	{
-		cachedTheme = nil;
-	}
-	[themeDict removeObjectForKey:[NSValue valueWithPointer:self]];
-	
-	[self performSelector:@selector(original_dealloc)];
 }
 
 @end
