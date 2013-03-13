@@ -18,15 +18,12 @@
 +(UserDefinedCellView*) loadCellFromNib
 {
 	UIViewController* vc = [[[UIViewController alloc] initWithNibName:@"UserDefinedCellView" bundle:nil] autorelease];
-	UserDefinedCellView* cellView = (UserDefinedCellView*)vc.view;
-	cellView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper.png"]];
-	return cellView;
+	return (UserDefinedCellView*)vc.view;
 }
 
 -(void) layoutSubviews
 {
 	[super layoutSubviews];
-	
 }
 
 -(void) dealloc
@@ -40,8 +37,23 @@
 @implementation CustomTheme(UserDefinedCellView)
 -(UserDefinedCellView*) createUserDefinedCellView
 {
-	return [UserDefinedCellView loadCellFromNib];
+	UserDefinedCellView* cellView = [UserDefinedCellView loadCellFromNib];
+	cellView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper.png"]];
+	return cellView;
 }
 @end
 
+
+@implementation TKDefaultTheme(UserDefinedCellView)
+-(UserDefinedCellView*) createUserDefinedCellView
+{
+	UserDefinedCellView* cellView = [UserDefinedCellView loadCellFromNib];
+	for(UIView* v in cellView.contentView.subviews) {
+		if([v isKindOfClass:[UILabel class]]) {
+			[(UILabel*)v setFont:[UIFont systemFontOfSize:17]];
+		}
+	}
+	return cellView;
+}
+@end
 

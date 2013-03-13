@@ -9,6 +9,7 @@
 #import "CustomTheme.h"
 #import "CustomGeneralCellView.h"
 #import "CustomTextFieldCellView.h"
+#import "CustomSwitchCellView.h"
 
 @implementation CustomTheme
 
@@ -22,6 +23,11 @@
 	CustomGeneralCellView* cellView = [[CustomGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 	cellView.selectionStyle = UITableViewCellSelectionStyleBlue;
 	return [cellView autorelease];
+}
+
+-(CustomSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
+{
+	return [[[CustomSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
 }
 
 -(CustomTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle

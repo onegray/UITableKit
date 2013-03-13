@@ -66,6 +66,7 @@
 		ABFAE9F61544BBAB0092F845 /* TKAttrTextViewProxyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFAE9EC1544BBAB0092F845 /* TKAttrTextViewProxyInterface.m */; };
 		ABFAE9F71544BBAB0092F845 /* TKAttrViewProxyInterface.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFAE9EE1544BBAB0092F845 /* TKAttrViewProxyInterface.m */; };
 		ABFAE9F81544BBAB0092F845 /* TKCellAttribute.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFAE9F01544BBAB0092F845 /* TKCellAttribute.m */; };
+		ABFC3BC916F1240D00332A86 /* CustomSwitchCellView.m in Sources */ = {isa = PBXBuildFile; fileRef = ABFC3BC816F1240D00332A86 /* CustomSwitchCellView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -180,6 +181,8 @@
 		ABFAE9EE1544BBAB0092F845 /* TKAttrViewProxyInterface.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKAttrViewProxyInterface.m; sourceTree = "<group>"; };
 		ABFAE9EF1544BBAB0092F845 /* TKCellAttribute.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TKCellAttribute.h; sourceTree = "<group>"; };
 		ABFAE9F01544BBAB0092F845 /* TKCellAttribute.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TKCellAttribute.m; sourceTree = "<group>"; };
+		ABFC3BC716F1240C00332A86 /* CustomSwitchCellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSwitchCellView.h; sourceTree = "<group>"; };
+		ABFC3BC816F1240D00332A86 /* CustomSwitchCellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSwitchCellView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -214,6 +217,8 @@
 				AB4CF17F1546FE4800BCDAC9 /* CustomGeneralCellView.m */,
 				AB4CF1821546FE4800BCDAC9 /* CustomTextFieldCellView.h */,
 				AB4CF1831546FE4800BCDAC9 /* CustomTextFieldCellView.m */,
+				ABFC3BC716F1240C00332A86 /* CustomSwitchCellView.h */,
+				ABFC3BC816F1240D00332A86 /* CustomSwitchCellView.m */,
 				AB4CF1861546FE4800BCDAC9 /* CustomTheme.h */,
 				AB4CF1871546FE4800BCDAC9 /* CustomTheme.m */,
 			);
@@ -550,6 +555,7 @@
 				AB6A23DE160C67300004CD6C /* ProductModel+Cell.m in Sources */,
 				AB6A23DF160C67300004CD6C /* ProductCellView.m in Sources */,
 				ABE45F7116E01E8000D80867 /* NibSampleViewController.m in Sources */,
+				ABFC3BC916F1240D00332A86 /* CustomSwitchCellView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

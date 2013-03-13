@@ -10,34 +10,46 @@
 #import "TKSection.h"
 #import "TKStaticCell.h"
 #import "TKTextFieldCell.h"
+#import "TKSwitchCell.h"
 #import "UserDefinedCell.h"
 #import "CustomTheme.h"
+#import "TKDefaultTheme.h"
 
 @implementation ThemeSampleViewController
 
--(void) dealloc
-{
-	[super dealloc];
-}
-
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-
+	[super viewDidLoad];
 	[self.tableView applyTheme:[[[CustomTheme alloc ] init] autorelease]];
-	self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 	
 	if(self.sections==nil)
 	{
 		TKSection* section = [TKSection sectionWithCells:nil];
 		[section addCell:[TKStaticCell cellWithText:@"Custom Theme example"]];
 		[section addCell:[TKStaticCell cellWithStyle:UITableViewCellStyleValue1 text:@"Date" detailText:@"2012-01-01"]];
-		[section addCell:[TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Teft Field:" placeholder:@"placeholder"]];
-		
+		[section addCell:[TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Teft Field" placeholder:@"placeholder"]];
 		[section addCell:[[[UserDefinedCell alloc] initWithTitle:@"User defined cell with custom design"] autorelease]];
 		
-		self.sections = [NSArray arrayWithObjects:section, nil];
+		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Custom Theme" state:YES target:self action:@selector(onSwitchState:)];
+		TKSection* switchSection = [TKSection sectionWithCells:switchCell, nil];
+		switchSection.footerTitle = @"Hint: tap the switch to change theme";
+
+		self.sections = [NSArray arrayWithObjects:section, switchSection, nil];
 	}
+}
+
+-(void) onSwitchState:(BOOL)state
+{
+	if(state == YES)
+	{
+		[self.tableView applyTheme:[[[CustomTheme alloc ] init] autorelease]];
+	}
+	else
+	{
+		[self.tableView applyTheme:[[[TKDefaultTheme alloc ] init] autorelease]];
+	}
+
+	[self.tableView reloadData];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
