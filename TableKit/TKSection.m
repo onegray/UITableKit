@@ -30,7 +30,7 @@
 
 +(TKSection*) sectionWithCells: (id<TKCellProtocol>)cell, ...
 {
-	TKSection* section = [[[TKSection alloc] init] autorelease];
+	TKSection* section = [[TKSection alloc] init];
 	
 	if(cell)
 	{
@@ -79,20 +79,9 @@
 	{
 		headerHeight = 20;
 		footerHeight = 20;
-		cells = [cellMutableArray retain];
+		cells = cellMutableArray;
     }
     return self;
-}
-
-
--(void) dealloc
-{
-    [cells release];
-    [headerTitle release];
-    [headerView release];
-    [footerTitle release];
-    [footerView release];
-    [super dealloc];
 }
 
 -(NSArray*)cells
@@ -105,8 +94,7 @@
 	if(![cells respondsToSelector:@selector(addObjectsFromArray:)]) {
 		NSMutableArray* mutableCells = [NSMutableArray arrayWithCapacity:cells.count+cellArray.count];
 		[mutableCells addObjectsFromArray:cells];
-		[cells release];
-		cells = [mutableCells retain];
+		cells = mutableCells;
 	}
 	[(NSMutableArray*)cells addObjectsFromArray:cellArray];
 }
@@ -116,8 +104,7 @@
 	if(![cells respondsToSelector:@selector(addObject:)]) {
 		NSMutableArray* mutableCells = [NSMutableArray arrayWithCapacity:cells.count+1];
 		[mutableCells addObjectsFromArray:cells];
-		[cells release];
-		cells = [mutableCells retain];
+		cells = mutableCells;
 	}
 	[(NSMutableArray*)cells addObject:cell];
 }
@@ -127,8 +114,7 @@
 	if(![cells respondsToSelector:@selector(insertObject:atIndex:)]) {
 		NSMutableArray* mutableCells = [NSMutableArray arrayWithCapacity:cells.count+1];
 		[mutableCells addObjectsFromArray:cells];
-		[cells release];
-		cells = [mutableCells retain];
+		cells = mutableCells;
 	}
     [(NSMutableArray*)cells insertObject:cell atIndex:cellIndex];
 }
@@ -137,15 +123,13 @@
 {
 	if(![cells respondsToSelector:@selector(removeObjectAtIndex:)]) {
 		NSMutableArray* mutableCells = [NSMutableArray arrayWithArray:cells];
-		[cells release];
-		cells = [mutableCells retain];
+		cells = mutableCells;
 	}
     [(NSMutableArray*)cells removeObjectAtIndex:cellIndex];
 }
 
 -(void) removeAllCells
 {
-	[cells release];
 	cells = nil;
 }
 
@@ -196,7 +180,7 @@
 
 +(TKMutableSection*) sectionWithCells: (id<TKCellProtocol>)cell, ...
 {
-	TKMutableSection* section = [[[TKMutableSection alloc] init] autorelease];
+	TKMutableSection* section = [[TKMutableSection alloc] init];
 	
 	if(cell)
 	{

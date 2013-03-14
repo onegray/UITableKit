@@ -27,22 +27,26 @@
 #import <UIKit/UIKit.h>
 #import "TKDefaultTextFieldCellView.h"
 
+@interface TKDefaultTextFieldCellView ()
+{
+	UITableViewCellStyle _cellStyle;
+}
+@end
+
 @implementation TKDefaultTextFieldCellView
-@synthesize textField;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-		cellStyle = style;
-		textField = [[UITextField alloc] initWithFrame:CGRectZero];
-		textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;		
-		textField.textAlignment = style==UITableViewCellStyleValue1 ? UITextAlignmentRight : UITextAlignmentLeft;
+		_cellStyle = style;
+		_textField = [[UITextField alloc] initWithFrame:CGRectZero];
+		_textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+		_textField.textAlignment = style==UITableViewCellStyleValue1 ? UITextAlignmentRight : UITextAlignmentLeft;
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
-		textField.delegate = (id)self;
-		[self.contentView addSubview:textField];
-		[textField release];
+		_textField.delegate = (id)self;
+		[self.contentView addSubview:_textField];
     }
     return self;
 }
@@ -59,14 +63,14 @@
 	CGSize boundsSize = self.contentView.bounds.size;
 	CGFloat offset = 0;
 	
-	if(cellStyle == UITableViewCellStyleValue1)
+	if(_cellStyle == UITableViewCellStyleValue1)
 	{
 		offset = CGRectGetMaxX(self.textLabel.frame);
 		if(offset==0) {
 			offset = CGRectGetMaxX(self.imageView.frame);
 		}
 	}
-	else if(cellStyle == UITableViewCellStyleValue2)
+	else if(_cellStyle == UITableViewCellStyleValue2)
 	{
 		offset = CGRectGetMaxX(self.textLabel.frame)-4;
 	}
@@ -74,16 +78,16 @@
 	{
 		offset = CGRectGetMaxX(self.imageView.frame);
 	}
-	textField.frame = CGRectMake(offset+10, 0, boundsSize.width-offset-20, boundsSize.height);
+	_textField.frame = CGRectMake(offset+10, 0, boundsSize.width-offset-20, boundsSize.height);
 	
-	[self.contentView bringSubviewToFront:textField];
+	[self.contentView bringSubviewToFront:_textField];
 }
 
 -(void) updateWithTitle:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder
 {
 	self.textLabel.text = title;
-    textField.text = text;
-    textField.placeholder = placeholder;
+    _textField.text = text;
+    _textField.placeholder = placeholder;
 }
 
 @end

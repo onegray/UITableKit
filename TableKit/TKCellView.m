@@ -26,22 +26,18 @@
 #import "TKCellView.h"
 #import "TKCellAttribute.h"
 
-@implementation TKCellView
-@synthesize owner;
-@synthesize preventEditing;
-@synthesize reuseIdentifier=tableViewCellReuseId;
-@synthesize rollbackArribute;
-
--(void) dealloc 
+@interface TKCellView()
 {
-	[tableViewCellReuseId release];
-	[rollbackArribute release];
-	[super dealloc];
+	NSString* _tableViewCellReuseId;
 }
+@end
+
+@implementation TKCellView
+@synthesize reuseIdentifier=_tableViewCellReuseId;
 
 -(BOOL) isEditing
 {
-	return !preventEditing && [super isEditing];
+	return !_preventEditing && [super isEditing];
 }
 
 @end

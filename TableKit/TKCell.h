@@ -31,10 +31,7 @@
 @class TKCellView;
 
 @interface TKCell : NSObject <TKCellProtocol>
-{
-	NSMutableArray* attributes;
-	CGFloat cellHeight;
-}
+
 @property (nonatomic, assign) CGFloat cellHeight;
 
 -(void) updateCellViewInTableView:(UITableView*)tableView;
@@ -45,6 +42,9 @@
 @property (nonatomic, readonly) TKAttrImageViewProxyInterface* imageView;
 
 -(void) setPreventEditing:(BOOL)preventEditing;
+
+@property (nonatomic, readonly) NSMutableArray* attributes;
+
 
 @end
 

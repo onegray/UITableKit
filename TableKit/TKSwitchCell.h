@@ -28,9 +28,7 @@
 
 
 @interface TKSwitchCell : TKActionCell
-{
-    BOOL state;
-}
+
 @property (nonatomic, assign) BOOL state;
 
 +(id) cellWithText:(NSString*)text state:(BOOL)state;

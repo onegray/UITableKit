@@ -38,23 +38,30 @@
 +(TKAttrImageViewProxyInterface*) sharedImageViewProxyWithAccessor:(SEL)accessor attributes:(NSMutableArray*)attributes;
 @end
 
+@interface TKCell()
+{
+	NSMutableArray* _attributes;
+}
+@end
+
 @implementation TKCell
-@synthesize cellHeight;
 
 -(id) init
 {
 	self = [super init];
 	if(self)
 	{
-		cellHeight = 44;
+		_cellHeight = 44;
 	}
 	return self;
 }
 
--(void) dealloc 
+-(NSMutableArray*) attributes
 {
-	[attributes release];
-	[super dealloc];
+	if(!_attributes) {
+		_attributes = [[NSMutableArray alloc] initWithCapacity:1];
+	}
+	return _attributes;
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
@@ -64,7 +71,7 @@
 
 -(CGFloat) cellHeightForTableView:(UITableView*)tableView
 {
-	return cellHeight;
+	return _cellHeight;
 }
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
@@ -74,15 +81,15 @@
 
 -(void) addAttribute:(TKCellAttribute*)attr
 {
-	if(attributes==nil)
+	if(_attributes==nil)
 	{
-		attributes = [[NSMutableArray alloc] initWithCapacity:1];
+		_attributes = [[NSMutableArray alloc] initWithCapacity:1];
 	}
 	else
 	{
-		[attributes removeObject:attr];
+		[_attributes removeObject:attr];
 	}
-	[attributes addObject:attr];
+	[_attributes addObject:attr];
 }
 
 -(void) applyAttributesToCellView:(TKCellView*)cellView
@@ -93,14 +100,14 @@
 		[cellView.rollbackArribute clean];
 	}
 
-	if(attributes)
+	if(_attributes)
 	{
 		if(!cellView.rollbackArribute)
 		{
-			cellView.rollbackArribute = [[[TKRollbackArribute alloc] init] autorelease];
+			cellView.rollbackArribute = [[TKRollbackArribute alloc] init];
 		}
 		
-		for(TKCellAttribute* attr in attributes)
+		for(TKCellAttribute* attr in _attributes)
 		{
 			id v = [attr getRollbackValue:cellView];
 			if(v) {
@@ -113,14 +120,12 @@
 
 -(TKAttrTableViewCellProxyInterface*) tableViewCell
 {
-	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrProxy sharedTableViewCellProxyWithAccessor:NULL attributes:attributes];
+	return [TKAttrProxy sharedTableViewCellProxyWithAccessor:NULL attributes:self.attributes];
 }
 
 -(TKAttrImageViewProxyInterface*) imageView
 {
-	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrProxy sharedImageViewProxyWithAccessor:@selector(imageView) attributes:attributes];
+	return [TKAttrProxy sharedImageViewProxyWithAccessor:@selector(imageView) attributes:self.attributes];
 }
 
 // TKCellView specific attributes
@@ -128,7 +133,6 @@
 {
 	TKCellAttribute* attr = [[TKCellScalarAttribute alloc] initWithAccessor:NULL getter:@selector(preventEditing) setter:@selector(setPreventEditing:) value:&preventEditing];
 	[self addAttribute:attr];
-	[attr release];
 }
 
 

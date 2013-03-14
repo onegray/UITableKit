@@ -30,21 +30,20 @@
 
 
 @implementation TKSwitchCell
-@synthesize state;
 
 +(id) cellWithText:(NSString*)text state:(BOOL)state
 {
-    return [[[self alloc] initWithText:text state:state target:nil action:NULL] autorelease];
+    return [[self alloc] initWithText:text state:state target:nil action:NULL];
 }
 
 +(id) cellWithText:(NSString*)text state:(BOOL)state target:(id)target action:(SEL)selector
 {
-    return [[[self alloc] initWithText:text state:state target:target action:selector] autorelease];
+    return [[self alloc] initWithText:text state:state target:target action:selector];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText state:(BOOL)aState
 {
-	return [[[self alloc] initWithStyle:aCellStyle text:aText detailText:aDetailText state:aState] autorelease];
+	return [[self alloc] initWithStyle:aCellStyle text:aText detailText:aDetailText state:aState];
 }
 
 -(id) initWithText:(NSString*)aText state:(BOOL)aState
@@ -57,7 +56,7 @@
     self = [super initWithText:aText target:aTarget action:selector];
     if(self)
 	{
-        self.state = aState;
+        _state = aState;
     }
     return self;
 }
@@ -67,7 +66,7 @@
     self = [super initWithStyle:aCellStyle text:aText detailText:aDetailText];
     if(self)
 	{
-        self.state = aState;
+        _state = aState;
     }
     return self;
 }
@@ -75,7 +74,7 @@
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	TKSwitchCellView* cellView = (TKSwitchCellView*)[tableView lookupCellViewForCell:self];
-	[cellView updateWithText:text detailText:detailText state:state];
+	[cellView updateWithText:text detailText:detailText state:_state];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
@@ -84,7 +83,7 @@
 	cellView.owner = self;
 	[cellView.switchButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
 	[cellView.switchButton addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];
-	[cellView updateWithText:text detailText:detailText state:state];
+	[cellView updateWithText:text detailText:detailText state:_state];
 	[self applyAttributesToCellView:cellView];
     return cellView;
 }
@@ -99,21 +98,21 @@
 
 -(void) onSwitchBtn:(UISwitch*)sender
 {
-    state = [sender isOn];
+    _state = [sender isOn];
 	
-	NSMethodSignature* methodSignature = [target methodSignatureForSelector:action];
+	NSMethodSignature* methodSignature = [self.target methodSignatureForSelector:self.action];
 	if(methodSignature)
 	{
 		NSInvocation* inv = [NSInvocation invocationWithMethodSignature:methodSignature];
-		[inv setTarget:target];
-		[inv setSelector:action];
+		[inv setTarget:self.target];
+		[inv setSelector:self.action];
 		if([methodSignature numberOfArguments]==2)
 		{
 			[inv invoke];
 		}
 		else if([methodSignature numberOfArguments]==2+1)
 		{
-			[inv setArgument:&state atIndex:2];
+			[inv setArgument:&_state atIndex:2];
 			[inv invoke];
 		}
 	}

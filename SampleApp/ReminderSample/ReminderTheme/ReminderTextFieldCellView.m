@@ -16,7 +16,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-		UIView* cellBackView = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+		UIView* cellBackView = [[UIView alloc] initWithFrame:CGRectZero];
 		cellBackView.backgroundColor = [UIColor clearColor];
 		cellBackView.layer.borderWidth=1;
 		cellBackView.layer.borderColor = [UIColor colorWithRed:0.85 green:0.85 blue:0.85 alpha:1.0].CGColor;
@@ -26,7 +26,7 @@
 		self.textLabel.textColor = [UIColor darkGrayColor];
 		self.textLabel.backgroundColor = [UIColor clearColor];
 		self.detailTextLabel.backgroundColor = [UIColor clearColor];
-		textField.backgroundColor = [UIColor clearColor];
+		self.textField.backgroundColor = [UIColor clearColor];
     }
     return self;
 }

@@ -608,6 +608,8 @@
 		ABD70891152DF94F0016FCFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableKitSample-Prefix.pch";
 				INFOPLIST_FILE = "TableKitSample-Info.plist";
@@ -620,6 +622,8 @@
 		ABD70892152DF94F0016FCFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_OBJCPP_ARC_ABI = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TableKitSample-Prefix.pch";
 				INFOPLIST_FILE = "TableKitSample-Info.plist";

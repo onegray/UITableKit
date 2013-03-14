@@ -19,21 +19,13 @@
 	if(self)
 	{
 		self.title = titleText;
-		cellHeight = 90;
+		self.cellHeight = 90;
 	}
 	return self;
 }
 
--(void) dealloc
-{
-	[title release];
-	[super dealloc];
-}
-
 -(void) updateCellView:(UserDefinedCellView*) cellView
 {
-	//TODO: Update cellView with cell data
-
 	cellView.titleLabel.text = title;
 }
 

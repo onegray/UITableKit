@@ -38,7 +38,10 @@
 	if(accessor)
 	{
 		NSAssert([target respondsToSelector:accessor], @"Unresponded TKCellAttribute accessor");
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 		target = [target performSelector:accessor];
+#pragma clang diagnostic pop
 		if(!target) {
 			return; // accessor returns nil if property isn't initialized, for ex. cell.imageView might be nil
 		}
@@ -82,15 +85,9 @@
 		accessor = accessorSelector;
 		getter = getterSelector;
 		setter = setterSelector;
-		objectValue = [value retain];
+		objectValue = value;
 	}
 	return self;
-}
-
--(void) dealloc
-{
-	[objectValue release];
-	[super dealloc];
 }
 
 -(void) apply:(id)target value:(id)v
@@ -104,6 +101,9 @@
 {
 	[self invokeOnTarget:target withArgument:&objectValue];
 }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 
 -(id) getRollbackValue:(id)target
 {
@@ -120,6 +120,8 @@
 
 	return v ? v : [NSNull null];
 }
+
+#pragma clang diagnostic pop
 
 @end
 
@@ -152,6 +154,9 @@
 	[self invokeOnTarget:target withArgument:&scalarValue];
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
 -(id) getRollbackValue:(id)target
 {
 	if(accessor)
@@ -160,10 +165,12 @@
 		target = [target performSelector:accessor];
 	}
 	NSAssert([target respondsToSelector:getter], @"Unresponded TKCellScalarAttribute selector");
-	void* v = [target performSelector:getter];
+	void* v = (__bridge void*)[target performSelector:getter];
 	
 	return [NSValue valueWithPointer:v];
 }
+
+#pragma clang diagnostic pop
 
 @end
 
@@ -187,13 +194,6 @@
 {
 	[attributes removeAllObjects];
 	[values removeAllObjects];
-}
-
--(void) dealloc
-{
-	[attributes release];
-	[values release];
-	[super dealloc];
 }
 
 -(void) addAttribute:(TKCellAttribute*)attr withRollbackValue:(id)v

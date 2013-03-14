@@ -27,13 +27,6 @@
 #import "TKCellView.h"
 
 @interface TKDefaultTextFieldCellView : TKTextFieldCellView
-{
-	UITextField* textField;
-	UITableViewCellStyle cellStyle;
-}
-
 @property (nonatomic, readonly) UITextField* textField;
-
 -(void) updateWithTitle:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
-
 @end

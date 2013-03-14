@@ -16,29 +16,29 @@
 
 -(ReminderGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[ReminderGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[ReminderGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 -(ReminderGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
 	ReminderGeneralCellView* cellView = [[ReminderGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 	cellView.selectionStyle = UITableViewCellSelectionStyleBlue;
-	return [cellView autorelease];
+	return cellView;
 }
 
 -(ReminderSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[ReminderSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[ReminderSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 -(ReminderTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[ReminderTextFieldCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[ReminderTextFieldCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 -(ReminderTextViewCellView*) textViewCellView
 {
-	return [[[ReminderTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	return [[ReminderTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 }
 
 @end

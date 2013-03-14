@@ -28,16 +28,11 @@
 
 @class TKRollbackArribute;
 @interface TKCellView : UITableViewCell
-{
-	id owner;
-	BOOL preventEditing;
-	NSString* tableViewCellReuseId;
-	TKRollbackArribute* rollbackArribute;
-}
+
 @property (nonatomic, assign) id owner;
 @property (nonatomic, assign) BOOL preventEditing;
 @property (nonatomic, copy) NSString* reuseIdentifier;
-@property (nonatomic, retain) TKRollbackArribute* rollbackArribute;
+@property (nonatomic, strong) TKRollbackArribute* rollbackArribute;
 
 @end
 

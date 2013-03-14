@@ -18,15 +18,6 @@
 @end
 
 @implementation EditingSampleViewController
-@synthesize planetsSection, textFieldCell;
-
--(void) dealloc
-{
-	[planetsSection release];
-	[textFieldCell release];
-	[super dealloc];
-}
-
 
 - (void)viewDidLoad
 {
@@ -34,53 +25,50 @@
 
 	if(self.sections==nil)
 	{
-		self.planetsSection = [[[TKMutableSection alloc] init] autorelease];
-		planetsSection.preventIndentationDuringEditing = YES;
-		planetsSection.allowsReorderingDuringEditing = YES;
-		planetsSection.headerTitle = @"Solar System";
+		_planetsSection = [[TKMutableSection alloc] init];
+		_planetsSection.preventIndentationDuringEditing = YES;
+		_planetsSection.allowsReorderingDuringEditing = YES;
+		_planetsSection.headerTitle = @"Solar System";
 
-		[planetsSection addCell:[TKStaticCell cellWithText:@"Mercury"]];
-		[planetsSection addCell:[TKStaticCell cellWithText:@"Venus"]];
-		[planetsSection addCell:[TKStaticCell cellWithText:@"Earth"]];
-		[planetsSection addCell:[TKStaticCell cellWithText:@"Mars"]];
+		[_planetsSection addCell:[TKStaticCell cellWithText:@"Mercury"]];
+		[_planetsSection addCell:[TKStaticCell cellWithText:@"Venus"]];
+		[_planetsSection addCell:[TKStaticCell cellWithText:@"Earth"]];
+		[_planetsSection addCell:[TKStaticCell cellWithText:@"Mars"]];
 
 		self.textFieldCell = [TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Add New:" placeholder:@"Enter Text"];
-		textFieldCell.textField.delegate = (id)self;
-		[textFieldCell setPreventEditing:YES];
-		[planetsSection addCell:textFieldCell];
+		_textFieldCell.textField.delegate = (id)self;
+		[_textFieldCell setPreventEditing:YES];
+		[_planetsSection addCell:_textFieldCell];
 
 		TKSwitchCell* editingModeCell = [TKSwitchCell cellWithText:@"Editing Mode" target:self action:@selector(onSwitchCell:)];
 		TKSection* editingModeSection = [TKSection sectionWithCells:editingModeCell, nil];
 
-		self.sections = [NSArray arrayWithObjects:planetsSection, editingModeSection, nil];
+		self.sections = [NSArray arrayWithObjects:_planetsSection, editingModeSection, nil];
 	}
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
 	[textField resignFirstResponder];
-	if([textFieldCell.text length] > 0) 
+	if([_textFieldCell.text length] > 0)
 	{
-		int newRowIndex = [planetsSection indexOfCell:textFieldCell];
-		TKStaticCell* customPlanetCell = [TKStaticCell cellWithText:textFieldCell.text];
-		[planetsSection insertCell:customPlanetCell atIndex:newRowIndex];
+		int newRowIndex = [_planetsSection indexOfCell:_textFieldCell];
+		TKStaticCell* customPlanetCell = [TKStaticCell cellWithText:_textFieldCell.text];
+		[_planetsSection insertCell:customPlanetCell atIndex:newRowIndex];
 		
 		NSIndexPath* indexPath = [NSIndexPath indexPathForRow:newRowIndex inSection:0];
 		[self.tableView insertRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationBottom];
 		
-		textFieldCell.text = nil;
-		[textFieldCell updateCellViewInTableView:self.tableView];
+		_textFieldCell.text = nil;
+		[_textFieldCell updateCellViewInTableView:self.tableView];
 	}
 	return YES;
 }
-
 
 -(void)onSwitchCell:(BOOL)state
 {
 	self.tableView.editing = state;
 }
-
-
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

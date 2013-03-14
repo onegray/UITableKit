@@ -28,21 +28,20 @@
 #import "TKTheme.h"
 
 @implementation TKActionCell
-@synthesize target, action;
 
 +(id) cellWithTarget:(id)aTarget action:(SEL)selector
 {
-    return [[[self alloc] initWithText:nil target:aTarget action:selector] autorelease];
+    return [[self alloc] initWithText:nil target:aTarget action:selector];
 }
 
 +(id) cellWithText:(NSString*)aText target:(id)aTarget action:(SEL)selector
 {
-    return [[[self alloc] initWithText:aText target:aTarget action:selector] autorelease];
+    return [[self alloc] initWithText:aText target:aTarget action:selector];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText target:(id)aTarget action:(SEL)selector
 {
-	return [[[self alloc] initWithStyle:cellStyle text:text detailText:detailText target:aTarget action:selector] autorelease];
+	return [[self alloc] initWithStyle:cellStyle text:text detailText:detailText target:aTarget action:selector];
 }
 
 -(id) initWithTarget:(id)aTarget action:(SEL)selector;
@@ -55,8 +54,8 @@
 	self = [super initWithText:aText];
 	if(self)
 	{
-		target = aTarget;
-		action = selector;
+		_target = aTarget;
+		_action = selector;
 	}
 	return self;
 }
@@ -66,16 +65,16 @@
 	self = [super initWithStyle:aCellStyle text:aText detailText:aDetailText];
 	if(self)
 	{
-		target = aTarget;
-		action = selector;
+		_target = aTarget;
+		_action = selector;
 	}
 	return self;
 }
 
 -(void) setTarget:(id)aTarget action:(SEL)selector
 {
-	target = aTarget;
-	action = selector;
+	_target = aTarget;
+	_action = selector;
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
@@ -87,21 +86,26 @@
     return cellView;
 }
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+
 -(void) peformCellAction
 {
-    if([target respondsToSelector:action])
+    if([_target respondsToSelector:_action])
 	{
-		NSMethodSignature* methodSignature = [target methodSignatureForSelector:action];
+		NSMethodSignature* methodSignature = [_target methodSignatureForSelector:_action];
 		if([methodSignature numberOfArguments]==2+1)
 		{
-            [target performSelector:action withObject:self];
+            [_target performSelector:_action withObject:self];
 		}
 		else if([methodSignature numberOfArguments]==2)
 		{
-            [target performSelector:action];
+            [_target performSelector:_action];
 		}
     }
 }
+
+#pragma clang diagnostic pop
 
 -(void) tableViewDidSelectCell:(UITableView*) tableView
 {

@@ -27,8 +27,6 @@
 			TKStaticCell* cell = [[TKStaticCell alloc] initWithText:cellStr];
 			cell.textLabel.textColor = colors[i%3];
 			[section addCell:cell];
-			[cell release];
-			[cellStr release];
 		}
 
 		self.sections = [NSArray arrayWithObjects:section, nil];	

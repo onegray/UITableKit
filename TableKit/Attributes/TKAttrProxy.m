@@ -78,7 +78,7 @@ SEL sel_getterFromSetter(SEL setter)
 	} 
 	else if(argType[0]==@encode(id)[0])
 	{
-		id arg = 0;
+		__unsafe_unretained id arg = 0;
 		[invocation getArgument:&arg atIndex:2];
 		if(setter == @selector(setDelegate:)) { // 'delegate' property must not retain object
 			attr = [[TKCellScalarAttribute alloc] initWithAccessor:accessor getter:getter setter:setter value:&arg];
@@ -90,7 +90,6 @@ SEL sel_getterFromSetter(SEL setter)
 
 	[attributes removeObject:attr];
 	[attributes addObject:attr];
-	[attr release];
 	
 	preparedForSingleCall = NO;
 }

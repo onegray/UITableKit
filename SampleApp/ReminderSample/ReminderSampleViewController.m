@@ -16,17 +16,11 @@
 
 @implementation ReminderSampleViewController
 
--(void) dealloc
-{
-	[tableController release];
-	[super dealloc];
-}
-
 -(void) loadView
 {
-	self.view = [[[UIView alloc] initWithFrame:CGRectZero] autorelease];
+	self.view = [[UIView alloc] initWithFrame:CGRectZero];
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"reminder_bg.png"]];
-	tableView = [[[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped] autorelease];
+	tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 	tableView.separatorColor = [UIColor clearColor];
 	if([tableView respondsToSelector:@selector(setBackgroundView:)])
 	{
@@ -58,7 +52,7 @@
 	
 	tableView.delegate = tableController;
 	tableView.dataSource = tableController;
-	[tableView applyTheme:[[[ReminderTheme alloc] init] autorelease]];
+	[tableView applyTheme:[[ReminderTheme alloc] init]];
 }
 
 - (BOOL)textView:(UITextView *)tv shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText

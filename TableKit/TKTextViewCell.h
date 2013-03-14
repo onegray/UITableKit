@@ -28,10 +28,7 @@
 #import "TKAttrTextViewProxyInterface.h"
 
 @interface TKTextViewCell : TKCell
-{
-    NSString* text;
-    NSString* placeholder;
-}
+
 @property (nonatomic, retain) NSString* text;
 @property (nonatomic, retain) NSString* placeholder;
 

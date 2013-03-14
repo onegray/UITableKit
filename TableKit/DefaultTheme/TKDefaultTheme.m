@@ -36,30 +36,30 @@
 
 -(TKDefaultGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[TKDefaultGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[TKDefaultGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 -(TKDefaultGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
 	TKDefaultGeneralCellView* cellView = [[TKDefaultGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 	cellView.selectionStyle = UITableViewCellSelectionStyleBlue;
-	return [cellView autorelease];
+	return cellView;
 }
 
 -(TKDefaultSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[TKDefaultSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[TKDefaultSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 
 -(TKDefaultTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[TKDefaultTextFieldCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[TKDefaultTextFieldCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 -(TKDefaultTextViewCellView*) textViewCellView
 {
-	return [[[TKDefaultTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	return [[TKDefaultTextViewCellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 }
 
 @end

@@ -34,16 +34,15 @@
 
 
 @implementation TKTextViewCell
-@synthesize text, placeholder;
 
 +(TKTextViewCell*) cellWithText:(NSString*)text
 {
-	return [[[self alloc] initWithText:text placeholder:nil] autorelease];
+	return [[self alloc] initWithText:text placeholder:nil];
 }
 
 +(id) cellWithText:(NSString*)text placeholder:(NSString*)placeholder
 {
-	return [[[self alloc] initWithText:text placeholder:placeholder] autorelease];
+	return [[self alloc] initWithText:text placeholder:placeholder];
 }
 
 -(id) initWithText:(NSString*)aText
@@ -58,7 +57,7 @@
 	{
 		self.text = aText;
 		self.placeholder = aPlaceholder;
-		cellHeight = 120;
+		self.cellHeight = 120;
 	}
 	return self;
 }
@@ -66,15 +65,12 @@
 -(void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[text release];
-	[placeholder release];
-	[super dealloc];
 }
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	TKTextViewCellView* cellView = (TKTextViewCellView*)[tableView lookupCellViewForCell:self];
-	[cellView updateWithText:text placeholder:placeholder];
+	[cellView updateWithText:_text placeholder:_placeholder];
 }
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
@@ -83,17 +79,17 @@
 	cellView.owner = self;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChange:) name:UITextViewTextDidChangeNotification object:nil];
-	[cellView updateWithText:text placeholder:placeholder];
+	[cellView updateWithText:_text placeholder:_placeholder];
 	[self applyAttributesToCellView:cellView];
 	return cellView;
 }
 
 -(CGFloat) cellHeightForTableView:(UITableView *)tableView
 {
-	if(cellHeight==0)
+	if(self.cellHeight==0)
 	{
 		TKTextViewCellView* cellView = (id)[tableView.theme cachedCellForSelector:@selector(textViewCellView) style:0];
-		[cellView updateWithText:text placeholder:placeholder];
+		[cellView updateWithText:_text placeholder:_placeholder];
 		[self applyAttributesToCellView:cellView];
 		
 		[tableView addSubview:cellView];
@@ -103,7 +99,7 @@
 		
 		return height;
 	}
-	return cellHeight;
+	return self.cellHeight;
 }
 
 -(void) textViewTextDidChange:(NSNotification*)notification
@@ -114,8 +110,7 @@
 
 -(TKAttrTextViewProxyInterface*) textView
 {
-	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrProxy sharedTextViewProxyWithAccessor:@selector(textView) attributes:attributes];
+	return [TKAttrProxy sharedTextViewProxyWithAccessor:@selector(textView) attributes:self.attributes];
 }
 
 @end

@@ -20,7 +20,7 @@
 - (void)viewDidLoad
 {
 	[super viewDidLoad];
-	[self.tableView applyTheme:[[[CustomTheme alloc ] init] autorelease]];
+	[self.tableView applyTheme:[[CustomTheme alloc ] init]];
 	
 	if(self.sections==nil)
 	{
@@ -28,7 +28,7 @@
 		[section addCell:[TKStaticCell cellWithText:@"Custom Theme example"]];
 		[section addCell:[TKStaticCell cellWithStyle:UITableViewCellStyleValue1 text:@"Date" detailText:@"2012-01-01"]];
 		[section addCell:[TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Teft Field" placeholder:@"placeholder"]];
-		[section addCell:[[[UserDefinedCell alloc] initWithTitle:@"User defined cell with custom design"] autorelease]];
+		[section addCell:[[UserDefinedCell alloc] initWithTitle:@"User defined cell with custom design"]];
 		
 		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Custom Theme" state:YES target:self action:@selector(onSwitchState:)];
 		TKSection* switchSection = [TKSection sectionWithCells:switchCell, nil];
@@ -42,11 +42,11 @@
 {
 	if(state == YES)
 	{
-		[self.tableView applyTheme:[[[CustomTheme alloc ] init] autorelease]];
+		[self.tableView applyTheme:[[CustomTheme alloc ] init]];
 	}
 	else
 	{
-		[self.tableView applyTheme:[[[TKDefaultTheme alloc ] init] autorelease]];
+		[self.tableView applyTheme:[[TKDefaultTheme alloc ] init]];
 	}
 
 	[self.tableView reloadData];

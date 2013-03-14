@@ -38,21 +38,19 @@
 
 
 @implementation TKDefaultTextViewCellView
-@synthesize textView, placeholder;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-        textView = [[TKTextView alloc] initWithFrame:CGRectZero];
-		textView.backgroundColor = [UIColor clearColor];
+        _textView = [[TKTextView alloc] initWithFrame:CGRectZero];
+		_textView.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:textView];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:textView];
-		textView.delegate = (id)self;
-        [self.contentView addSubview:textView];
-		[textView release];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:_textView];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:_textView];
+		_textView.delegate = (id)self;
+        [self.contentView addSubview:_textView];
     }
     return self;
 }
@@ -60,8 +58,6 @@
 -(void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[placeholder release];
-	[super dealloc];
 }
 
 - (BOOL)textView:(UITextView *)tw shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText
@@ -76,19 +72,19 @@
 
 -(void) textViewTextDidBeginEditing:(NSNotification*)notification
 {
-	if(textView.textColor!=[UIColor blackColor])
+	if(_textView.textColor!=[UIColor blackColor])
 	{
-		textView.textColor = [UIColor blackColor];
-		textView.text = nil;
+		_textView.textColor = [UIColor blackColor];
+		_textView.text = nil;
 	}
 }
 
 -(void) textViewTextDidEndEditing:(NSNotification*)notification
 {
-	if([textView.text length]==0)
+	if([_textView.text length]==0)
 	{
-		textView.textColor = [UIColor lightGrayColor];
-		textView.text = placeholder;
+		_textView.textColor = [UIColor lightGrayColor];
+		_textView.text = _placeholder;
 	}
 }
 
@@ -97,23 +93,23 @@
 	[super layoutSubviews];
 	CGSize boundsSize = self.contentView.bounds.size;
 	CGFloat offset = self.imageView.frame.origin.x + self.imageView.frame.size.width;
-	textView.frame = CGRectMake(offset+2, 0, boundsSize.width-offset-4, boundsSize.height);
+	_textView.frame = CGRectMake(offset+2, 0, boundsSize.width-offset-4, boundsSize.height);
 }
 
 -(CGFloat) cellHeight
 {
-	return textView.contentSize.height+2;
+	return _textView.contentSize.height+2;
 }
 
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)aPlaceholder;
 {
-	textView.text = text;
+	_textView.text = text;
 	self.placeholder = aPlaceholder;
 
 	if([text length]==0)
 	{
-		textView.textColor = [UIColor lightGrayColor];
-		textView.text = placeholder;
+		_textView.textColor = [UIColor lightGrayColor];
+		_textView.text = _placeholder;
 	}
 }
 

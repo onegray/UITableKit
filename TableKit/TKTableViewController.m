@@ -59,13 +59,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-	[_tableView release];
-    [controller release];
-    [super dealloc];
-}
-
 -(void) loadView
 {
 	NSString* nibName = [self nibName];

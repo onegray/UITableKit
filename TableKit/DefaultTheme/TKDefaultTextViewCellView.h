@@ -27,13 +27,7 @@
 #import "TKCellView.h"
 
 @interface TKDefaultTextViewCellView : TKTextViewCellView
-{
-	UITextView* textView;
-	NSString* placeholder;
-}
 @property (nonatomic, readonly) UITextView* textView;
-@property (nonatomic, retain) NSString* placeholder;
-
+@property (nonatomic, strong) NSString* placeholder;
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder;
-
 @end

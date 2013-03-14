@@ -19,7 +19,6 @@
 @end
 
 @implementation ModelSampleViewController
-@synthesize products;
 
 -(id) initWithStyle:(UITableViewStyle)style
 {
@@ -30,20 +29,14 @@
 	return self;
 }
 
--(void) dealloc
-{
-	[products release];
-	[super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
-																							target:self action:@selector(onSaveBtn:)] autorelease];
+	self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave
+																							target:self action:@selector(onSaveBtn:)];
 	if(self.sections==nil)
 	{
-		TKSection* section = [[[TKSection alloc] initWithArrayOfCells:self.products] autorelease];
+		TKSection* section = [[TKSection alloc] initWithArrayOfCells:self.products];
 		section.footerTitle = @"Hint: rate the products and save";
 		self.sections = [NSArray arrayWithObjects:section, nil];	
 	}
@@ -71,7 +64,6 @@
 	for(NSDictionary* productDictionary in productsArray) {
 		ProductModel* product = [[ProductModel alloc] initWithDictionary:productDictionary];
 		[loadedProducts addObject:product];
-		[product release];
 	}
 	self.products = loadedProducts;
 }

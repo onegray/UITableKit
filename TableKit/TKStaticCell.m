@@ -38,12 +38,12 @@
 
 +(id) cellWithText:(NSString*)aText
 {
-    return [[[self alloc] initWithText:aText] autorelease];
+    return [[self alloc] initWithText:aText];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText
 {
-	return [[[self alloc] initWithStyle:cellStyle text:text detailText:detailText] autorelease];
+	return [[self alloc] initWithStyle:cellStyle text:text detailText:detailText];
 }
 
 -(id) initWithText:(NSString*)aText
@@ -69,14 +69,6 @@
     return self;
 }
 
-
--(void) dealloc
-{
-    [text release];
-	[detailText release];
-    [super dealloc];
-}
-
 -(void) updateCellViewInTableView:(UITableView*)tableView
 {
 	TKGeneralCellView* cellView = (TKGeneralCellView*)[tableView lookupCellViewForCell:self];
@@ -94,14 +86,12 @@
 
 -(TKAttrLabelProxyInterface*) textLabel
 {
-	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrProxy sharedLabelProxyWithAccessor:@selector(textLabel) attributes:attributes];
+	return [TKAttrProxy sharedLabelProxyWithAccessor:@selector(textLabel) attributes:self.attributes];
 }
 
 -(TKAttrLabelProxyInterface*) detailTextLabel
 {
-	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrProxy sharedLabelProxyWithAccessor:@selector(detailTextLabel) attributes:attributes];
+	return [TKAttrProxy sharedLabelProxyWithAccessor:@selector(detailTextLabel) attributes:self.attributes];
 }
 
 

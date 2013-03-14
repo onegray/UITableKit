@@ -15,12 +15,6 @@
 
 @implementation DataSourceSampleViewController
 
--(void) dealloc
-{
-	[textFieldCell release];
-	[super dealloc];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];

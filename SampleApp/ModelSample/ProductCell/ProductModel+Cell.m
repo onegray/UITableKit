@@ -17,7 +17,7 @@
 	ProductCellView* cellView = (ProductCellView*)[tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(!cellView)
 	{
-		cellView = [[[ProductCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseId] autorelease];
+		cellView = [[ProductCellView alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:reuseId];
 	}
 	[cellView setProduct:self];
     return cellView;

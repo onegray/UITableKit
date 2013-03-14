@@ -27,10 +27,7 @@
 #import "TKStaticCell.h"
 
 @interface TKActionCell : TKStaticCell
-{
-    id target;
-    SEL action;
-}
+
 @property (nonatomic, assign) id target;
 @property (nonatomic, assign) SEL action;
 

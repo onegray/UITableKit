@@ -17,19 +17,13 @@
 
 +(UserDefinedCellView*) loadCellFromNib
 {
-	UIViewController* vc = [[[UIViewController alloc] initWithNibName:@"UserDefinedCellView" bundle:nil] autorelease];
+	UIViewController* vc = [[UIViewController alloc] initWithNibName:@"UserDefinedCellView" bundle:nil];
 	return (UserDefinedCellView*)vc.view;
 }
 
 -(void) layoutSubviews
 {
 	[super layoutSubviews];
-}
-
--(void) dealloc
-{
-	[titleLabel release];
-	[super dealloc];
 }
 
 @end

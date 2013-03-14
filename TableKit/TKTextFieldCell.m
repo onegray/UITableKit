@@ -38,17 +38,17 @@
 
 +(TKTextFieldCell*) cellWithText:(NSString*)text placeholder:(NSString*)placeholder
 {
-    return [[[self alloc] initWithText:text placeholder:placeholder] autorelease];
+    return [[self alloc] initWithText:text placeholder:placeholder];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title placeholder:(NSString*)placeholder
 {
-	return [[[self alloc] initWithStyle:style title:title text:nil placeholder:placeholder] autorelease];
+	return [[self alloc] initWithStyle:style title:title text:nil placeholder:placeholder];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder;
 {
-	return [[[self alloc] initWithStyle:style title:title text:text placeholder:placeholder] autorelease];
+	return [[self alloc] initWithStyle:style title:title text:text placeholder:placeholder];
 }
 
 -(id) initWithText:(NSString*)aText placeholder:(NSString*)aPlaceholder
@@ -77,10 +77,6 @@
 -(void) dealloc
 {
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[title release];
-    [text release];
-    [placeholder release];
-    [super dealloc];
 }
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
@@ -110,8 +106,7 @@
 
 -(TKAttrTextFieldProxyInterface*) textField
 {
-	attributes = attributes ? attributes : [[NSMutableArray alloc] initWithCapacity:1];
-	return [TKAttrProxy sharedTextFieldProxyWithAccessor:@selector(textField) attributes:attributes];
+	return [TKAttrProxy sharedTextFieldProxyWithAccessor:@selector(textField) attributes:self.attributes];
 }
 
 @end

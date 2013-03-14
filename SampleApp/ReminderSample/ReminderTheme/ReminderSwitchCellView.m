@@ -18,7 +18,6 @@
 	{
         switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
 		self.accessoryView = switchButton;
-		[switchButton release];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;

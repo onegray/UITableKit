@@ -59,51 +59,49 @@
 
 -(void) onAttributesSampleCell 
 {
-	AttributesSampleViewController* vc = [[[AttributesSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	AttributesSampleViewController* vc = [[AttributesSampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) onEditingSampleCell 
 {
-	EditingSampleViewController* vc = [[[EditingSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	EditingSampleViewController* vc = [[EditingSampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) onCustomThemeSampleCell 
 {
-	ThemeSampleViewController* vc = [[[ThemeSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	ThemeSampleViewController* vc = [[ThemeSampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) onReminderThemeSampleCell 
 {
-	ReminderSampleViewController* vc = [[[ReminderSampleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
+	ReminderSampleViewController* vc = [[ReminderSampleViewController alloc] initWithNibName:nil bundle:nil];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) onHugeTableSampleCell 
 {
-	HugeTableSampleViewController* vc = [[[HugeTableSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	HugeTableSampleViewController* vc = [[HugeTableSampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) onDataSourceTableSampleCell 
 {
-	DataSourceSampleViewController* vc = [[[DataSourceSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	DataSourceSampleViewController* vc = [[DataSourceSampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) onModelSampleCell
 {
-	ModelSampleViewController* vc = [[[ModelSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	ModelSampleViewController* vc = [[ModelSampleViewController alloc] initWithStyle:UITableViewStyleGrouped];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 
 -(void) onNibSampleCell
 {
-	NibSampleViewController* vc = [[[NibSampleViewController alloc] initWithNibName:@"NibSampleViewController" bundle:nil] autorelease];
-	//NibSampleViewController* vc = [[[NibSampleViewController alloc] initWithNibName:nil bundle:nil] autorelease];
-	//NibSampleViewController* vc = [[[NibSampleViewController alloc] initWithStyle:UITableViewStyleGrouped] autorelease];
+	NibSampleViewController* vc = [[NibSampleViewController alloc] initWithNibName:@"NibSampleViewController" bundle:nil];
 	[self.navigationController pushViewController:vc animated:YES];
 }
 

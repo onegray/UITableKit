@@ -36,37 +36,42 @@
 	SEL keySel;
 	int keyParam;
 	Class class;
-	TKCellView* cellView;
-	NSString* cellId;
-	CellCache* next;
+	__strong TKCellView* cellView;
+	__strong NSString* cellId;
+	__strong CellCache* next;
 }
 @end
 
 @implementation CellCache
+
+- (void)dealloc
+{
+	//NSLog(@"dealloc %@", self);
+}
 @end
 
 
 #define HASH_TABLE_SIZE 31
 
-static TKThemeCacheProxy* cachedTheme = nil;
+static __unsafe_unretained TKThemeCacheProxy* cachedTheme = nil;
 
 @interface TKThemeCacheProxy()
 {
 @public
-	UITableView* tableView;
-	id<TKThemeProtocol> themeImpl;
-	CellCache* hashTable[HASH_TABLE_SIZE];
+	__unsafe_unretained UITableView* tableView;
+	__strong id<TKThemeProtocol> themeImpl;
+	__strong CellCache* hashTable[HASH_TABLE_SIZE];
 }
 -(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*) tableView;
 @end
 
 @implementation TKThemeCacheProxy
-static TKDefaultTheme* builtinDefaultThemeImpl = nil;
-static id<TKThemeProtocol> userDefaultThemeImpl = nil;
+static __strong TKDefaultTheme* builtinDefaultThemeImpl = nil;
+static __strong id<TKThemeProtocol> userDefaultThemeImpl = nil;
 
 -(id) initWithTheme:(id<TKThemeProtocol>)theme forTableView:(UITableView*)aTableView
 {
-	themeImpl = [theme retain];
+	themeImpl = theme;
 	tableView = aTableView;
 	memset(hashTable, 0, sizeof(hashTable));
 	return self;
@@ -74,18 +79,9 @@ static id<TKThemeProtocol> userDefaultThemeImpl = nil;
 
 -(void) dealloc
 {
-	for(int i=0; i<HASH_TABLE_SIZE; i++) {
-		while(hashTable[i]) {
-			CellCache* obj = hashTable[i];
-			hashTable[i] = hashTable[i]->next;
-			[obj release];
-		}
-	}
 	if(cachedTheme==self) {
 		cachedTheme = nil;
 	}
-	[themeImpl release];
-	[super dealloc];
 }
 
 -(CellCache*) cacheForSelector:(SEL)sel param:(int)param
@@ -138,7 +134,7 @@ static id<TKThemeProtocol> userDefaultThemeImpl = nil;
 	}
 	
 	CellCache* cache = [self cacheForSelector:invocation.selector param:param];
-	TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:cache->cellId];
+	__unsafe_unretained TKCellView* cellView = (TKCellView*)[tableView dequeueReusableCellWithIdentifier:cache->cellId];
 	if(cellView) 
 	{
 		[invocation setReturnValue:&cellView];
@@ -146,7 +142,6 @@ static id<TKThemeProtocol> userDefaultThemeImpl = nil;
 	else if(cache->cellView)
 	{
 		[invocation setReturnValue:&(cache->cellView)];
-		[cache->cellView autorelease];
 		cache->cellView = nil;
 	}
 	else
@@ -158,16 +153,20 @@ static id<TKThemeProtocol> userDefaultThemeImpl = nil;
 	}
 }
 
+
 -(void) fillCache:(CellCache*)cache invokeSelector:(SEL)selector style:(int)style
 {
-	TKCellView* cellView = nil;
+	__unsafe_unretained TKCellView* cellView = nil;
 	id target = [themeImpl respondsToSelector:selector] ? themeImpl : builtinDefaultThemeImpl;
 	NSMethodSignature* ms = [target methodSignatureForSelector:selector];
 	NSAssert(ms!=nil, @"Applied theme %@ does not support method '%s'", themeImpl, sel_getName(selector));
 	
 	if([ms numberOfArguments]==2)
 	{
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
 		cellView = [target performSelector:selector];
+#pragma clang diagnostic pop
 	}
 	else
 	{
@@ -182,7 +181,7 @@ static id<TKThemeProtocol> userDefaultThemeImpl = nil;
 	}
 	
 	[cellView setReuseIdentifier:cache->cellId];
-	cache->cellView = [cellView retain];
+	cache->cellView = cellView;
 	cache->class = [cellView class];
 }
 
@@ -215,10 +214,7 @@ static char TV_THEME_KEY;
 
 +(void) setDefaultTheme:(id<TKThemeProtocol>)theme
 {
-	if(userDefaultThemeImpl!=theme) {
-		[userDefaultThemeImpl release];
-		userDefaultThemeImpl = [theme retain];
-	}
+	userDefaultThemeImpl = theme;
 }
 
 -(id) theme
@@ -243,7 +239,7 @@ static char TV_THEME_KEY;
 
 -(void) applyTheme:(id)themeImpl
 {
-	TKThemeCacheProxy* themeProxy = [[[TKThemeCacheProxy alloc] initWithTheme:themeImpl forTableView:self] autorelease];
+	TKThemeCacheProxy* themeProxy = [[TKThemeCacheProxy alloc] initWithTheme:themeImpl forTableView:self];
 	objc_setAssociatedObject(self, &TV_THEME_KEY, themeProxy, OBJC_ASSOCIATION_RETAIN);
 	cachedTheme = themeProxy;
 

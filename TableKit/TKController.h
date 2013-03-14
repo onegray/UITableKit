@@ -27,9 +27,6 @@
 #import <UIKit/UIKit.h>
 
 @interface TKController : NSObject <UITableViewDelegate, UITableViewDataSource>
-{
-	NSArray* sections;
-}
 
 @property (nonatomic, retain) NSArray* sections;
 

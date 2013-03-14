@@ -10,9 +10,6 @@
 #import "TKDefaultTextViewCellView.h"
 
 @interface ReminderTextViewCellView : TKDefaultTextViewCellView
-{
-
-}
 
 -(void) updateWithText:(NSString*)text placeholder:(NSString*)placeholder;
 

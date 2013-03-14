@@ -9,7 +9,6 @@
 #import "ProductModel.h"
 
 @implementation ProductModel
-@synthesize title, description, rating;
 
 -(id) initWithDictionary:(NSDictionary*)dictionary
 {
@@ -25,17 +24,10 @@
 -(NSDictionary*) serializeToDictionary
 {
 	NSMutableDictionary* dictionary = [NSMutableDictionary dictionaryWithCapacity:3];
-	[dictionary setObject:title forKey:@"title"];
-	[dictionary setObject:description forKey:@"description"];
-	[dictionary setObject:[NSNumber numberWithInt:rating] forKey:@"rating"];
+	[dictionary setObject:_title forKey:@"title"];
+	[dictionary setObject:_description forKey:@"description"];
+	[dictionary setObject:[NSNumber numberWithInt:_rating] forKey:@"rating"];
 	return dictionary;
-}
-
--(void) dealloc
-{
-	[title release];
-	[description release];
-	[super dealloc];
 }
 
 @end

@@ -15,24 +15,24 @@
 
 -(CustomGeneralCellView*) generalCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[CustomGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[CustomGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 -(CustomGeneralCellView*) actionCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
 	CustomGeneralCellView* cellView = [[CustomGeneralCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 	cellView.selectionStyle = UITableViewCellSelectionStyleBlue;
-	return [cellView autorelease];
+	return cellView;
 }
 
 -(CustomSwitchCellView*) switchCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[CustomSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[CustomSwitchCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 -(CustomTextFieldCellView*) textFieldCellViewWithStyle:(UITableViewCellStyle)cellStyle
 {
-	return [[[CustomTextFieldCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil] autorelease];
+	return [[CustomTextFieldCellView alloc] initWithStyle:cellStyle reuseIdentifier:nil];
 }
 
 @end
