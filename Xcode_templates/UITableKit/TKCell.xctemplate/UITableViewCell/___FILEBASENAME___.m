@@ -16,7 +16,7 @@
 	UITableViewCell* cellView = [tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(!cellView)
 	{
-		cellView = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+		cellView = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
 		
 		//TODO: customize cellView immutable properties
 		cellView.selectionStyle = UITableViewCellSelectionStyleNone;

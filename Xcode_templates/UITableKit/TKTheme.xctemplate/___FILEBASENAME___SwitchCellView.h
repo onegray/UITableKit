@@ -9,9 +9,7 @@
 #import "TKCellView.h"
 
 @interface ___FILEBASENAME___SwitchCellView : TKSwitchCellView
-{
-	UISwitch* switchButton;	
-}
+
 @property (nonatomic, readonly) UISwitch* switchButton;
 
 -(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;

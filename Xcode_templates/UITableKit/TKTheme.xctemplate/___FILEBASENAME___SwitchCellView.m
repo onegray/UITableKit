@@ -9,16 +9,14 @@
 #import "___FILEBASENAME___SwitchCellView.h"
 
 @implementation ___FILEBASENAME___SwitchCellView
-@synthesize switchButton;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) 
 	{
-        switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
-		self.accessoryView = switchButton;
-		[switchButton release];
+        _switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+		self.accessoryView = _switchButton;
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
@@ -28,7 +26,7 @@
 {
 	self.textLabel.text = text;
 	self.detailTextLabel.text = detailText;
-	switchButton.on = state;
+	self.switchButton.on = state;
 }
 
 @end

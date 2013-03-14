@@ -29,7 +29,7 @@
 	___FILEBASENAME___View* cellView = (___FILEBASENAME___View*)[tableView dequeueReusableCellWithIdentifier:reuseId];
 	if(!cellView)
 	{
-		cellView = [[[___FILEBASENAME___View alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId] autorelease];
+		cellView = [[___FILEBASENAME___View alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseId];
 	}
 	cellView.owner = self;
 	[self applyAttributesToCellView:cellView];

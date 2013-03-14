@@ -34,7 +34,7 @@
 @implementation ___VARIABLE_themeClass___(___FILEBASENAME___View)
 -(___FILEBASENAME___View*) create___FILEBASENAME___View
 {
-	return [[[___FILEBASENAME___View alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	return [[___FILEBASENAME___View alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 }
 @end
 

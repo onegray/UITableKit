@@ -34,7 +34,7 @@
 @implementation ___VARIABLE_themeClass___(___VARIABLE_categoryClass:identifier___CellView)
 -(___VARIABLE_categoryClass:identifier___CellView*) create___VARIABLE_categoryClass:identifier___CellView
 {
-	return [[[___VARIABLE_categoryClass:identifier___CellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+	return [[___VARIABLE_categoryClass:identifier___CellView alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 }
 @end
 
