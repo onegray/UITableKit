@@ -30,7 +30,7 @@
 		[section addCell:[TKTextFieldCell cellWithStyle:UITableViewCellStyleValue2 title:@"Teft Field" placeholder:@"placeholder"]];
 		[section addCell:[[UserDefinedCell alloc] initWithTitle:@"User defined cell with custom design"]];
 		
-		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Custom Theme" state:YES target:self action:@selector(onSwitchState:)];
+		TKSwitchCell* switchCell = [TKSwitchCell cellWithText:@"Custom Theme" state:YES target:self action:@selector(onSwitchCell:)];
 		TKSection* switchSection = [TKSection sectionWithCells:switchCell, nil];
 		switchSection.footerTitle = @"Hint: tap the switch to change theme";
 
@@ -38,9 +38,9 @@
 	}
 }
 
--(void) onSwitchState:(BOOL)state
+-(void) onSwitchCell:(TKSwitchCell*)cell
 {
-	if(state == YES)
+	if(cell.state == YES)
 	{
 		[self.tableView applyTheme:[[CustomTheme alloc ] init]];
 	}

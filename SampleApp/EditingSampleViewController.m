@@ -40,7 +40,10 @@
 		[_textFieldCell setPreventEditing:YES];
 		[_planetsSection addCell:_textFieldCell];
 
-		TKSwitchCell* editingModeCell = [TKSwitchCell cellWithText:@"Editing Mode" target:self action:@selector(onSwitchCell:)];
+		__unsafe_unretained EditingSampleViewController* weakSelf = self;
+		TKSwitchCell* editingModeCell = [TKSwitchCell cellWithText:@"Editing Mode" handler:^(TKSwitchCell *cell) {
+			weakSelf.tableView.editing = cell.state;
+		}];
 		TKSection* editingModeSection = [TKSection sectionWithCells:editingModeCell, nil];
 
 		self.sections = [NSArray arrayWithObjects:_planetsSection, editingModeSection, nil];
@@ -63,11 +66,6 @@
 		[_textFieldCell updateCellViewInTableView:self.tableView];
 	}
 	return YES;
-}
-
--(void)onSwitchCell:(BOOL)state
-{
-	self.tableView.editing = state;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

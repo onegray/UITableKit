@@ -29,14 +29,14 @@
 
 @implementation TKActionCell
 
-+(id) cellWithTarget:(id)aTarget action:(SEL)selector
-{
-    return [[self alloc] initWithText:nil target:aTarget action:selector];
-}
-
 +(id) cellWithText:(NSString*)aText target:(id)aTarget action:(SEL)selector
 {
     return [[self alloc] initWithText:aText target:aTarget action:selector];
+}
+
++(id) cellWithText:(NSString*)aText handler:(void(^)(id cell))handler
+{
+    return [[self alloc] initWithText:aText handler:handler];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText target:(id)aTarget action:(SEL)selector
@@ -44,10 +44,11 @@
 	return [[self alloc] initWithStyle:cellStyle text:text detailText:detailText target:aTarget action:selector];
 }
 
--(id) initWithTarget:(id)aTarget action:(SEL)selector;
++(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText handler:(void(^)(id cell))handler
 {
-	return [self initWithText:nil target:aTarget action:selector];
+	return [[self alloc] initWithStyle:cellStyle text:text detailText:detailText handler:handler];
 }
+
 
 -(id) initWithText:(NSString*)aText target:(id)aTarget action:(SEL)selector;
 {
@@ -56,6 +57,16 @@
 	{
 		_target = aTarget;
 		_action = selector;
+	}
+	return self;
+}
+
+-(id) initWithText:(NSString*)aText handler:(void(^)(id cell))handler
+{
+	self = [super initWithText:aText];
+	if(self)
+	{
+		self.handler = handler;
 	}
 	return self;
 }
@@ -70,6 +81,17 @@
 	}
 	return self;
 }
+
+-(id) initWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText handler:(void(^)(id cell))handler
+{
+	self = [super initWithStyle:aCellStyle text:aText detailText:aDetailText];
+	if(self)
+	{
+		self.handler = handler;
+	}
+	return self;
+}
+
 
 -(void) setTarget:(id)aTarget action:(SEL)selector
 {
@@ -86,11 +108,15 @@
     return cellView;
 }
 
+-(void) performCellAction
+{
+	if(_handler)
+	{
+		_handler(self);
+	}
+	
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-
--(void) peformCellAction
-{
     if([_target respondsToSelector:_action])
 	{
 		NSMethodSignature* methodSignature = [_target methodSignatureForSelector:_action];
@@ -103,18 +129,17 @@
             [_target performSelector:_action];
 		}
     }
-}
-
 #pragma clang diagnostic pop
+}
 
 -(void) tableViewDidSelectCell:(UITableView*) tableView
 {
-	[self peformCellAction];
+	[self performCellAction];
 }
 
 -(void) tableViewAccessoryButtonTapped:(UITableView *)tableView
 {
-	[self peformCellAction];
+	[self performCellAction];
 }
 
 @end

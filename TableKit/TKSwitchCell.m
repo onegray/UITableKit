@@ -41,6 +41,11 @@
     return [[self alloc] initWithText:text state:state target:target action:selector];
 }
 
++(id) cellWithText:(NSString*)text state:(BOOL)state handler:(void(^)(id cell))handler
+{
+    return [[self alloc] initWithText:text state:state handler:handler];
+}
+
 +(id) cellWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText state:(BOOL)aState
 {
 	return [[self alloc] initWithStyle:aCellStyle text:aText detailText:aDetailText state:aState];
@@ -54,6 +59,16 @@
 -(id) initWithText:(NSString*)aText state:(BOOL)aState target:(id)aTarget action:(SEL)selector
 {
     self = [super initWithText:aText target:aTarget action:selector];
+    if(self)
+	{
+        _state = aState;
+    }
+    return self;
+}
+
+-(id) initWithText:(NSString*)aText state:(BOOL)aState handler:(void(^)(id cell))handler
+{
+    self = [super initWithText:aText handler:handler];
     if(self)
 	{
         _state = aState;
@@ -88,6 +103,12 @@
     return cellView;
 }
 
+-(void) onSwitchBtn:(UISwitch*)sender
+{
+    _state = [sender isOn];
+	[self performCellAction];
+}
+
 -(void) tableViewDidSelectCell:(UITableView*)tableView
 {
 }
@@ -96,10 +117,13 @@
 {
 }
 
--(void) onSwitchBtn:(UISwitch*)sender
+-(void) performCellAction
 {
-    _state = [sender isOn];
-	
+	if(self.handler)
+	{
+		self.handler(self);
+	}
+
 	NSMethodSignature* methodSignature = [self.target methodSignatureForSelector:self.action];
 	if(methodSignature)
 	{
@@ -112,12 +136,17 @@
 		}
 		else if([methodSignature numberOfArguments]==2+1)
 		{
-			[inv setArgument:&_state atIndex:2];
-			[inv invoke];
+			const char* argType = [methodSignature getArgumentTypeAtIndex:2];
+			if(argType[0]==@encode(BOOL)[0]) {
+				[inv setArgument:&_state atIndex:2];
+				[inv invoke];
+			} else if(argType[0]==@encode(id)[0]) {
+				__unsafe_unretained id unsafeSelf = self;
+				[inv setArgument:&unsafeSelf atIndex:2];
+				[inv invoke];
+			}
 		}
 	}
 }
-
-
 
 @end

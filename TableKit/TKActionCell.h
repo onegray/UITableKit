@@ -30,14 +30,20 @@
 
 @property (nonatomic, assign) id target;
 @property (nonatomic, assign) SEL action;
+@property (nonatomic, copy) void(^handler)(id cell);
 
-+(id) cellWithTarget:(id)target action:(SEL)selector;
++(id) cellWithText:(NSString*)aText handler:(void(^)(id cell))handler;
 +(id) cellWithText:(NSString*)text target:(id)target action:(SEL)selector;
-+(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText target:(id)target action:(SEL)selector;
++(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText handler:(void(^)(id cell))handler;
++(id) cellWithStyle:(UITableViewCellStyle)style text:(NSString*)text detailText:(NSString*)detailText target:(id)target action:(SEL)action;
 
--(id) initWithTarget:(id)target action:(SEL)selector;
+-(id) initWithText:(NSString*)text handler:(void(^)(id cell))handler;
 -(id) initWithText:(NSString*)text target:(id)target action:(SEL)selector;
+-(id) initWithStyle:(UITableViewCellStyle)style text:(NSString*)text detailText:(NSString*)detailText target:(id)target action:(SEL)action;
+-(id) initWithStyle:(UITableViewCellStyle)style text:(NSString*)text detailText:(NSString*)detailText handler:(void(^)(id cell))handler;
 
 -(void) setTarget:(id)target action:(SEL)selector;
+
+-(void) performCellAction;
 
 @end

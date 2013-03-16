@@ -32,10 +32,12 @@
 @property (nonatomic, assign) BOOL state;
 
 +(id) cellWithText:(NSString*)text state:(BOOL)state;
++(id) cellWithText:(NSString*)text state:(BOOL)state handler:(void(^)(id cell))handler;
 +(id) cellWithText:(NSString*)text state:(BOOL)state target:(id)aTarget action:(SEL)selector;
 +(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
 
 -(id) initWithText:(NSString*)text state:(BOOL)state;
+-(id) initWithText:(NSString*)text state:(BOOL)state handler:(void(^)(id cell))handler;
 -(id) initWithText:(NSString*)text state:(BOOL)state target:(id)aTarget action:(SEL)selector;
 -(id) initWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
 
