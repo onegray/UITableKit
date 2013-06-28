@@ -68,7 +68,7 @@
 	}
 	else if(cellStyle == UITableViewCellStyleValue2)
 	{
-		offset = self.indentationLevel*self.indentationWidth + 73;
+		offset = CGRectGetMaxX(self.textLabel.frame)-4;
 	}
 	else
 	{
