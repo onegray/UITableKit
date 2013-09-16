@@ -31,12 +31,12 @@
 
 +(id) cellWithText:(NSString*)aText target:(id)aTarget action:(SEL)selector
 {
-    return [[self alloc] initWithText:aText target:aTarget action:selector];
+	return [[self alloc] initWithText:aText target:aTarget action:selector];
 }
 
 +(id) cellWithText:(NSString*)aText handler:(void(^)(id cell))handler
 {
-    return [[self alloc] initWithText:aText handler:handler];
+	return [[self alloc] initWithText:aText handler:handler];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText target:(id)aTarget action:(SEL)selector
@@ -101,11 +101,11 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKGeneralCellView* cellView = [tableView.theme actionCellViewWithStyle:cellStyle];
-	cellView.owner = self;
+	TKGeneralCellView* cellView = [tableView.theme actionCellViewWithStyle:cellStyle];
+	cellView.cellRef = (id)self;
 	[cellView updateWithText:text detailText:detailText];
 	[self applyAttributesToCellView:cellView];
-    return cellView;
+	return cellView;
 }
 
 -(void) performCellAction
@@ -117,18 +117,18 @@
 	
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-    if([_target respondsToSelector:_action])
+	if([_target respondsToSelector:_action])
 	{
 		NSMethodSignature* methodSignature = [_target methodSignatureForSelector:_action];
 		if([methodSignature numberOfArguments]==2+1)
 		{
-            [_target performSelector:_action withObject:self];
+			[_target performSelector:_action withObject:self];
 		}
 		else if([methodSignature numberOfArguments]==2)
 		{
-            [_target performSelector:_action];
+			[_target performSelector:_action];
 		}
-    }
+	}
 #pragma clang diagnostic pop
 }
 

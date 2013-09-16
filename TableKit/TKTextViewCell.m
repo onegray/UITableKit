@@ -76,9 +76,7 @@
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
 	TKTextViewCellView* cellView = [tableView.theme textViewCellView];
-	cellView.owner = self;
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChange:) name:UITextViewTextDidChangeNotification object:nil];
+	cellView.cellRef = (id)self;
 	[cellView updateWithText:_text placeholder:_placeholder];
 	[self applyAttributesToCellView:cellView];
 	return cellView;
@@ -102,11 +100,10 @@
 	return self.cellHeight;
 }
 
--(void) textViewTextDidChange:(NSNotification*)notification
+-(void) onCellViewDidUpdate:(TKTextViewCellView*)cellView
 {
-	self.text = [[notification object] text];
+	self.text = cellView.textView.text;
 }
-
 
 -(TKAttrTextViewProxyInterface*) textView
 {

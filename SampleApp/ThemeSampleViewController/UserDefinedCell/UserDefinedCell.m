@@ -38,7 +38,7 @@
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
 	UserDefinedCellView* cellView = [(CustomTheme*)tableView.theme createUserDefinedCellView];
-	cellView.owner = self;
+	cellView.cellRef = (id)self;
 	[self applyAttributesToCellView:cellView];
 	[self updateCellView:cellView];
 	return cellView;

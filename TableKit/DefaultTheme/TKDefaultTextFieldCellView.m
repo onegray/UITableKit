@@ -37,8 +37,8 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) 
+	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+	if (self)
 	{
 		_cellStyle = style;
 		_textField = [[UITextField alloc] initWithFrame:CGRectZero];
@@ -47,14 +47,30 @@
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
 		_textField.delegate = (id)self;
 		[self.contentView addSubview:_textField];
-    }
-    return self;
+
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:)
+													 name:UITextFieldTextDidChangeNotification object:_textField];
+
+	}
+	return self;
+}
+
+- (void)dealloc
+{
+	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 -(BOOL)textFieldShouldReturn:(UITextField *)tf
 {
-    [tf resignFirstResponder];
-    return YES;
+	[tf resignFirstResponder];
+	return YES;
+}
+
+-(void) textFieldTextDidChange:(NSNotification*)notification
+{
+	if([self.cellRef respondsToSelector:@selector(onCellViewDidUpdate:)]) {
+		[self.cellRef onCellViewDidUpdate:self];
+	}
 }
 
 -(void) layoutSubviews
@@ -62,7 +78,7 @@
 	[super layoutSubviews];
 	CGSize boundsSize = self.contentView.bounds.size;
 	CGFloat offset = 0;
-	
+
 	if(_cellStyle == UITableViewCellStyleValue1)
 	{
 		offset = CGRectGetMaxX(self.textLabel.frame);
@@ -79,15 +95,15 @@
 		offset = CGRectGetMaxX(self.imageView.frame);
 	}
 	_textField.frame = CGRectMake(offset+10, 0, boundsSize.width-offset-20, boundsSize.height);
-	
+
 	[self.contentView bringSubviewToFront:_textField];
 }
 
 -(void) updateWithTitle:(NSString*)title text:(NSString*)text placeholder:(NSString*)placeholder
 {
 	self.textLabel.text = title;
-    _textField.text = text;
-    _textField.placeholder = placeholder;
+	_textField.text = text;
+	_textField.placeholder = placeholder;
 }
 
 @end

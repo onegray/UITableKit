@@ -12,21 +12,18 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self)
+	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+	if (self)
 	{
-        _switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
-		self.accessoryView = _switchButton;
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
-    }
-    return self;
+		self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"paper.png"]];
+		self.detailTextLabel.backgroundColor = [UIColor clearColor];
+		self.detailTextLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:17];
+		self.textLabel.backgroundColor = [UIColor clearColor];
+		self.textLabel.font = [UIFont fontWithName:@"MarkerFelt-Thin" size:20];
+	}
+	return self;
 }
 
--(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state
-{
-	self.textLabel.text = text;
-	self.detailTextLabel.text = detailText;
-	_switchButton.on = state;
-}
 
 @end

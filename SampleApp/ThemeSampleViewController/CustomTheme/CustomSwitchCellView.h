@@ -6,11 +6,8 @@
 //
 //
 
-#import "CustomGeneralCellView.h"
+#import "TKDefaultSwitchCellView.h"
 
-@interface CustomSwitchCellView : CustomGeneralCellView <TKSwitchCellViewProtocol>
-
-@property (nonatomic, readonly) UISwitch* switchButton;
--(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
+@interface CustomSwitchCellView : TKDefaultSwitchCellView
 
 @end

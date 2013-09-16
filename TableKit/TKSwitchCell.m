@@ -33,17 +33,17 @@
 
 +(id) cellWithText:(NSString*)text state:(BOOL)state
 {
-    return [[self alloc] initWithText:text state:state target:nil action:NULL];
+	return [[self alloc] initWithText:text state:state target:nil action:NULL];
 }
 
 +(id) cellWithText:(NSString*)text state:(BOOL)state target:(id)target action:(SEL)selector
 {
-    return [[self alloc] initWithText:text state:state target:target action:selector];
+	return [[self alloc] initWithText:text state:state target:target action:selector];
 }
 
 +(id) cellWithText:(NSString*)text state:(BOOL)state handler:(void(^)(id cell))handler
 {
-    return [[self alloc] initWithText:text state:state handler:handler];
+	return [[self alloc] initWithText:text state:state handler:handler];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText state:(BOOL)aState
@@ -58,32 +58,32 @@
 
 -(id) initWithText:(NSString*)aText state:(BOOL)aState target:(id)aTarget action:(SEL)selector
 {
-    self = [super initWithText:aText target:aTarget action:selector];
-    if(self)
+	self = [super initWithText:aText target:aTarget action:selector];
+	if(self)
 	{
-        _state = aState;
-    }
-    return self;
+		_state = aState;
+	}
+	return self;
 }
 
 -(id) initWithText:(NSString*)aText state:(BOOL)aState handler:(void(^)(id cell))handler
 {
-    self = [super initWithText:aText handler:handler];
-    if(self)
+	self = [super initWithText:aText handler:handler];
+	if(self)
 	{
-        _state = aState;
-    }
-    return self;
+		_state = aState;
+	}
+	return self;
 }
 
 -(id) initWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText state:(BOOL)aState;
 {
-    self = [super initWithStyle:aCellStyle text:aText detailText:aDetailText];
-    if(self)
+	self = [super initWithStyle:aCellStyle text:aText detailText:aDetailText];
+	if(self)
 	{
-        _state = aState;
-    }
-    return self;
+		_state = aState;
+	}
+	return self;
 }
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
@@ -94,18 +94,16 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKSwitchCellView* cellView = [tableView.theme switchCellViewWithStyle:cellStyle];
-	cellView.owner = self;
-	[cellView.switchButton removeTarget:nil action:NULL forControlEvents:UIControlEventAllEvents];
-	[cellView.switchButton addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];
+	TKSwitchCellView* cellView = [tableView.theme switchCellViewWithStyle:cellStyle];
+	cellView.cellRef = (id)self;
 	[cellView updateWithText:text detailText:detailText state:_state];
 	[self applyAttributesToCellView:cellView];
-    return cellView;
+	return cellView;
 }
 
--(void) onSwitchBtn:(UISwitch*)sender
+-(void) onCellViewDidUpdate:(TKSwitchCellView*)cellView
 {
-    _state = [sender isOn];
+	_state = [cellView.switchButton isOn];
 	[self performCellAction];
 }
 

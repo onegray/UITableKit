@@ -38,7 +38,7 @@
 
 +(id) cellWithText:(NSString*)aText
 {
-    return [[self alloc] initWithText:aText];
+	return [[self alloc] initWithText:aText];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)cellStyle text:(NSString*)text detailText:(NSString*)detailText
@@ -48,25 +48,25 @@
 
 -(id) initWithText:(NSString*)aText
 {
-    self = [super init];
-    if(self)
+	self = [super init];
+	if(self)
 	{
-        self.text = aText;
+		self.text = aText;
 		cellStyle = UITableViewCellStyleDefault;
-    }
-    return self;
+	}
+	return self;
 }
 
 -(id) initWithStyle:(UITableViewCellStyle)aCellStyle text:(NSString*)aText detailText:(NSString*)aDetailText
 {
-    self = [super init];
-    if(self)
+	self = [super init];
+	if(self)
 	{
-        self.text = aText;
+		self.text = aText;
 		self.detailText = aDetailText;
 		cellStyle = aCellStyle;
-    }
-    return self;
+	}
+	return self;
 }
 
 -(void) updateCellViewInTableView:(UITableView*)tableView
@@ -77,11 +77,11 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKGeneralCellView* cellView = [tableView.theme generalCellViewWithStyle:cellStyle];
-	cellView.owner = self;
+	TKGeneralCellView* cellView = [tableView.theme generalCellViewWithStyle:cellStyle];
+	cellView.cellRef = (id)self;
 	[cellView updateWithText:text detailText:detailText];
 	[self applyAttributesToCellView:cellView];
-    return cellView;
+	return cellView;
 }
 
 -(TKAttrLabelProxyInterface*) textLabel

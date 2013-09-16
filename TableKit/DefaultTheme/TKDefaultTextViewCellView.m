@@ -41,18 +41,22 @@
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
-    self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) 
+	self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
+	if (self)
 	{
-        _textView = [[TKTextView alloc] initWithFrame:CGRectZero];
+		_textView = [[TKTextView alloc] initWithFrame:CGRectZero];
 		_textView.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:) name:UITextViewTextDidBeginEditingNotification object:_textView];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:) name:UITextViewTextDidEndEditingNotification object:_textView];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:)
+													 name:UITextViewTextDidBeginEditingNotification object:_textView];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:)
+													 name:UITextViewTextDidEndEditingNotification object:_textView];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChange:)
+													 name:UITextViewTextDidChangeNotification object:_textView];
 		_textView.delegate = (id)self;
-        [self.contentView addSubview:_textView];
-    }
-    return self;
+		[self.contentView addSubview:_textView];
+	}
+	return self;
 }
 
 -(void) dealloc
@@ -62,12 +66,12 @@
 
 - (BOOL)textView:(UITextView *)tw shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)replacementText
 {
-    if ([replacementText isEqualToString:@"\n"])
+	if ([replacementText isEqualToString:@"\n"])
 	{
-        [tw resignFirstResponder];
-        return FALSE;
-    }
-    return TRUE;    
+		[tw resignFirstResponder];
+		return NO;
+	}
+	return YES;
 }
 
 -(void) textViewTextDidBeginEditing:(NSNotification*)notification
@@ -85,6 +89,13 @@
 	{
 		_textView.textColor = [UIColor lightGrayColor];
 		_textView.text = _placeholder;
+	}
+}
+
+-(void) textViewTextDidChange:(NSNotification*)notification
+{
+	if([self.cellRef respondsToSelector:@selector(onCellViewDidUpdate:)]) {
+		[self.cellRef onCellViewDidUpdate:self];
 	}
 }
 

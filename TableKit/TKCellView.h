@@ -26,10 +26,16 @@
 #import <UIKit/UIKit.h>
 #import "TKCellProtocol.h"
 
-@class TKRollbackArribute;
+@class TKCellView;
+@protocol TKCellUpdateProtocol <NSObject>
+@optional
+-(void) onCellViewDidUpdate:(TKCellView*)cellView;
+@end
+
+@class TKCell, TKRollbackArribute;
 @interface TKCellView : UITableViewCell
 
-@property (nonatomic, assign) id owner;
+@property (nonatomic, weak) id<TKCellUpdateProtocol> cellRef;
 @property (nonatomic, assign) BOOL preventEditing;
 @property (nonatomic, copy) NSString* reuseIdentifier;
 @property (nonatomic, strong) TKRollbackArribute* rollbackArribute;
@@ -56,7 +62,7 @@
 
 @protocol TKSwitchCellViewProtocol <NSObject>
 @required
--(UIControl*) switchButton;
+-(UISwitch*) switchButton;
 -(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state;
 @end
 

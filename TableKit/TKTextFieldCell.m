@@ -38,7 +38,7 @@
 
 +(TKTextFieldCell*) cellWithText:(NSString*)text placeholder:(NSString*)placeholder
 {
-    return [[self alloc] initWithText:text placeholder:placeholder];
+	return [[self alloc] initWithText:text placeholder:placeholder];
 }
 
 +(id) cellWithStyle:(UITableViewCellStyle)style title:(NSString*)title placeholder:(NSString*)placeholder
@@ -53,25 +53,25 @@
 
 -(id) initWithText:(NSString*)aText placeholder:(NSString*)aPlaceholder
 {
-    return [self initWithStyle:UITableViewCellStyleDefault title:nil text:aText placeholder:aPlaceholder];
+	return [self initWithStyle:UITableViewCellStyleDefault title:nil text:aText placeholder:aPlaceholder];
 }
 
 -(id) initWithStyle:(UITableViewCellStyle)aStyle title:(NSString*)aTitle placeholder:(NSString*)aPlaceholder
 {
-    return [self initWithStyle:aStyle title:aTitle text:nil placeholder:aPlaceholder];	
+	return [self initWithStyle:aStyle title:aTitle text:nil placeholder:aPlaceholder];	
 }
 
 -(id) initWithStyle:(UITableViewCellStyle)aStyle title:(NSString*)aTitle text:(NSString*)aText placeholder:(NSString*)aPlaceholder
 {
-    self = [super init];
-    if(self)
+	self = [super init];
+	if(self)
 	{
 		cellStyle = aStyle;
-        self.title = aTitle; 
-        self.text = aText; 
-        self.placeholder = aPlaceholder;
-    }
-    return self;	
+		self.title = aTitle; 
+		self.text = aText; 
+		self.placeholder = aPlaceholder;
+	}
+	return self;	
 }
 
 -(void) dealloc
@@ -87,21 +87,16 @@
 
 -(UITableViewCell*) cellForTableView:(UITableView*)tableView
 {
-    TKTextFieldCellView* cellView = [tableView.theme textFieldCellViewWithStyle:cellStyle];
-	cellView.owner = self;
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:) 
-												 name:UITextFieldTextDidChangeNotification object:cellView.textField];
-	
+	TKTextFieldCellView* cellView = [tableView.theme textFieldCellViewWithStyle:cellStyle];
+	cellView.cellRef = (id)self;
 	[cellView updateWithTitle:title text:text placeholder:placeholder];
-
 	[self applyAttributesToCellView:cellView];
-    return cellView;
+	return cellView;
 }
 
--(void) textFieldTextDidChange:(NSNotification*)notification
+-(void) onCellViewDidUpdate:(TKTextFieldCellView*)cellView
 {
-    self.text = [[notification object] text];
+	self.text = cellView.textField.text;
 }
 
 -(TKAttrTextFieldProxyInterface*) textField

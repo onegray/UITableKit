@@ -32,13 +32,27 @@
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
-    if (self) 
+    if (self)
 	{
-        switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
+		switchButton = [[UISwitch alloc] initWithFrame:CGRectZero];
 		self.accessoryView = switchButton;
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
+
+		[switchButton addTarget:self action:@selector(onSwitchBtn:) forControlEvents:UIControlEventValueChanged];
     }
     return self;
+}
+
+- (void)dealloc
+{
+	[switchButton removeTarget:self action:NULL forControlEvents:UIControlEventValueChanged];
+}
+
+-(void) onSwitchBtn:(UISwitch*)sender
+{
+	if([self.cellRef respondsToSelector:@selector(onCellViewDidUpdate:)]) {
+		[self.cellRef onCellViewDidUpdate:self];
+	}
 }
 
 -(void) updateWithText:(NSString*)text detailText:(NSString*)detailText state:(BOOL)state
@@ -47,6 +61,5 @@
 	self.detailTextLabel.text = detailText;
 	switchButton.on = state;
 }
-
 
 @end
