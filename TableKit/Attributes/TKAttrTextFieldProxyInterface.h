@@ -61,4 +61,9 @@
 @property(nonatomic, assign, writeonly) BOOL enablesReturnKeyAutomatically;
 @property(nonatomic, assign, writeonly) BOOL secureTextEntry;
 
+@property(nonatomic, strong, writeonly) void (^onDidChangeHandler)(UITextField* textField);
+@property(nonatomic, strong, writeonly) void (^onDidBeginEditingHandler)(UITextField* textField);
+@property(nonatomic, strong, writeonly) void (^onDidEndEditingHandler)(UITextField* textField);
+
+
 @end

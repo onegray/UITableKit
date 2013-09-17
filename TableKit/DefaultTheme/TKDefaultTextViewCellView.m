@@ -26,6 +26,12 @@
 
 #import "TKDefaultTextViewCellView.h"
 
+@interface UITextView()
+@property(nonatomic, strong) void (^onDidChangeHandler)(UITextView* textView);
+@property(nonatomic, strong) void (^onDidBeginEditingHandler)(UITextView* textView);
+@property(nonatomic, strong) void (^onDidEndEditingHandler)(UITextView* textView);
+@end
+
 // TKTextView is a workaround to fix scrolling on iOS 4.x
 @interface TKTextView : UITextView
 @end
@@ -47,6 +53,7 @@
 		_textView = [[TKTextView alloc] initWithFrame:CGRectZero];
 		_textView.backgroundColor = [UIColor clearColor];
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
+
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidBeginEditing:)
 													 name:UITextViewTextDidBeginEditingNotification object:_textView];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidEndEditing:)
@@ -81,6 +88,10 @@
 		_textView.textColor = [UIColor blackColor];
 		_textView.text = nil;
 	}
+
+	if(_textView.onDidBeginEditingHandler) {
+		_textView.onDidBeginEditingHandler(_textView);
+	}
 }
 
 -(void) textViewTextDidEndEditing:(NSNotification*)notification
@@ -90,12 +101,20 @@
 		_textView.textColor = [UIColor lightGrayColor];
 		_textView.text = _placeholder;
 	}
+
+	if(_textView.onDidEndEditingHandler) {
+		_textView.onDidEndEditingHandler(_textView);
+	}
 }
 
 -(void) textViewTextDidChange:(NSNotification*)notification
 {
 	if([self.cellRef respondsToSelector:@selector(onCellViewDidUpdate:)]) {
 		[self.cellRef onCellViewDidUpdate:self];
+	}
+
+	if(_textView.onDidChangeHandler) {
+		_textView.onDidChangeHandler(_textView);
 	}
 }
 

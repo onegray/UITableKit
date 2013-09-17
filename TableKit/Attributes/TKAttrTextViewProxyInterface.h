@@ -46,4 +46,8 @@
 @property(nonatomic, assign, writeonly) UIReturnKeyType returnKeyType;
 @property(nonatomic, assign, writeonly) BOOL enablesReturnKeyAutomatically;
 
+@property(nonatomic, strong, writeonly) void (^onDidChangeHandler)(UITextView* textView);
+@property(nonatomic, strong, writeonly) void (^onDidBeginEditingHandler)(UITextView* textView);
+@property(nonatomic, strong, writeonly) void (^onDidEndEditingHandler)(UITextView* textView);
+
 @end

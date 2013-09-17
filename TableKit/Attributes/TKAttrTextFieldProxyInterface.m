@@ -80,6 +80,10 @@
 @dynamic enablesReturnKeyAutomatically;
 @dynamic secureTextEntry;
 
+@dynamic onDidBeginEditingHandler;
+@dynamic onDidEndEditingHandler;
+@dynamic onDidChangeHandler;
+
 @end
 
 
@@ -106,3 +110,43 @@
 }
 
 @end
+
+
+#import <objc/runtime.h>
+
+@implementation UITextField(handlers)
+
+-(void) setOnDidBeginEditingHandler:(id)handler
+{
+	objc_setAssociatedObject(self, @selector(onDidBeginEditingHandler), handler, OBJC_ASSOCIATION_RETAIN);
+}
+
+-(id) onDidBeginEditingHandler
+{
+	return objc_getAssociatedObject(self, @selector(onDidBeginEditingHandler));
+}
+
+-(void) setOnDidEndEditingHandler:(id)handler
+{
+	objc_setAssociatedObject(self, @selector(onDidEndEditingHandler), handler, OBJC_ASSOCIATION_RETAIN);
+}
+
+-(id) onDidEndEditingHandler
+{
+	return objc_getAssociatedObject(self, @selector(onDidEndEditingHandler));
+}
+
+-(void) setOnDidChangeHandler:(id)handler
+{
+	objc_setAssociatedObject(self, @selector(onDidChangeHandler), handler, OBJC_ASSOCIATION_RETAIN);
+}
+
+-(id) onDidChangeHandler
+{
+	return objc_getAssociatedObject(self, @selector(onDidChangeHandler));
+}
+
+@end
+
+
+

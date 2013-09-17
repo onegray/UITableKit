@@ -27,6 +27,12 @@
 #import <UIKit/UIKit.h>
 #import "TKDefaultTextFieldCellView.h"
 
+@interface UITextField()
+@property(nonatomic, strong) void (^onDidChangeHandler)(UITextField* textField);
+@property(nonatomic, strong) void (^onDidBeginEditingHandler)(UITextField* textField);
+@property(nonatomic, strong) void (^onDidEndEditingHandler)(UITextField* textField);
+@end
+
 @interface TKDefaultTextFieldCellView ()
 {
 	UITableViewCellStyle _cellStyle;
@@ -45,12 +51,15 @@
 		_textField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
 		_textField.textAlignment = style==UITableViewCellStyleValue1 ? UITextAlignmentRight : UITextAlignmentLeft;
 		self.selectionStyle = UITableViewCellSelectionStyleNone;
-		_textField.delegate = (id)self;
-		[self.contentView addSubview:_textField];
 
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidBeginEditing:)
+													 name:UITextFieldTextDidBeginEditingNotification object:_textField];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidEndEditing:)
+													 name:UITextFieldTextDidEndEditingNotification object:_textField];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldTextDidChange:)
 													 name:UITextFieldTextDidChangeNotification object:_textField];
-
+		_textField.delegate = (id)self;
+		[self.contentView addSubview:_textField];
 	}
 	return self;
 }
@@ -66,10 +75,28 @@
 	return YES;
 }
 
+-(void) textFieldTextDidBeginEditing:(NSNotification*)notification
+{
+	if(_textField.onDidBeginEditingHandler) {
+		_textField.onDidBeginEditingHandler(_textField);
+	}
+}
+
+-(void) textFieldTextDidEndEditing:(NSNotification*)notification
+{
+	if(_textField.onDidEndEditingHandler) {
+		_textField.onDidEndEditingHandler(_textField);
+	}
+}
+
 -(void) textFieldTextDidChange:(NSNotification*)notification
 {
 	if([self.cellRef respondsToSelector:@selector(onCellViewDidUpdate:)]) {
 		[self.cellRef onCellViewDidUpdate:self];
+	}
+
+	if(_textField.onDidChangeHandler) {
+		_textField.onDidChangeHandler(_textField);
 	}
 }
 
